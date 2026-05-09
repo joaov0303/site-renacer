@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jovens - Igreja Renascer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- 1. Cabeçalho (Header) -->
+    <header class="bg-white shadow-sm w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <!-- Substitua pelo nome do arquivo da sua logo em PNG -->
+                    <a href="index.html">
+                        <img src="logo.png" alt="Igreja Renascer" class="h-12 w-auto">
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Início</a>
+                    <a href="quem-somos.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Quem Somos</a>
+                    <a href="programacao.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Programação</a>
+                    <a href="nossos-grupos.html" class="text-blue-600 font-bold transition">Grupos</a>
+                </nav>
+                <div>
+                    <a href="contribua.html" class="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">Contribua</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Conteúdo Principal -->
+    <main class="flex-grow">
+        <!-- Hero Interno -->
+        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <!-- Imagem com clima jovem/worship -->
+                <img src="https://images.unsplash.com/photo-1523580494112-071d16940d14?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Jovens Renascer" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto text-center">
+                <span class="text-blue-400 font-bold tracking-widest uppercase text-sm mb-4 block">Rede de Jovens</span>
+                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Jovens Renascer</h1>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Uma geração apaixonada por Jesus. Conecte-se com a nossa juventude através dos nossos canais oficiais abaixo.</p>
+            </div>
+        </section>
+
+        <!-- Seção de Links e QR Codes -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto -mt-16 relative z-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                
+                <!-- Cartão 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-2xl border-t-4 border-blue-600 flex flex-col items-center text-center hover:-translate-y-2 transition duration-300">
+                    <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-4 text-3xl">
+                        💬
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Grupo do WhatsApp</h2>
+                    <p class="text-gray-500 mb-6 text-sm">Fique por dentro de todos os avisos, devocionais e resenhas da nossa rede de jovens.</p>
+                    
+                    <!-- QR Code 1 -->
+                    <div class="bg-gray-100 p-4 rounded-2xl mb-8">
+                        <!-- Para gerar seu próprio QR Code, você pode usar sites gratuitos ou trocar a imagem abaixo pela foto do seu QR Code salvo no PC -->
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SUA_URL_DO_WHATSAPP_AQUI" alt="QR Code WhatsApp" class="w-40 h-40 mix-blend-multiply">
+                    </div>
+
+                    <!-- Link/Botão 1 -->
+                    <!-- Coloque o link real dentro do href="#" -->
+                    <a href="#" target="_blank" class="w-full bg-blue-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2">
+                        Entrar no Grupo
+                    </a>
+                </div>
+
+                <!-- Cartão 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-2xl border-t-4 border-purple-600 flex flex-col items-center text-center hover:-translate-y-2 transition duration-300">
+                    <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mb-4 text-3xl">
+                        📸
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Nosso Instagram</h2>
+                    <p class="text-gray-500 mb-6 text-sm">Acompanhe as fotos dos nossos encontros, vídeos inspiradores e nossa agenda oficial.</p>
+                    
+                    <!-- QR Code 2 -->
+                    <div class="bg-gray-100 p-4 rounded-2xl mb-8">
+                        <!-- Troque a imagem abaixo pela foto do seu QR Code 2 salvo no PC -->
+                        <img src="qrcode_insta.png" alt="QR Code Instagram" class="w-40 h-40 mix-blend-multiply">
+                    </div>
+
+                    <!-- Link/Botão 2 -->
+                    <!-- Coloque o link real dentro do href="#" -->
+                    <a href="#" target="_blank" class="w-full bg-purple-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-purple-700 transition shadow-lg flex items-center justify-center gap-2">
+                        Seguir no Instagram
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- 3. Rodapé (Footer) -->
+    <footer class="bg-gray-900 text-white py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Substitua pelo nome do arquivo da sua logo em PNG se tiver uma versão branca, ou use a normal -->
+            <img src="logo.png" alt="Igreja Renascer" class="h-12 w-auto mx-auto mb-4">
+            <p class="text-gray-400 text-sm">&copy; 2026 Igreja Renascer. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
