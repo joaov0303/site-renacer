@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos de Oração - Igreja.</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- 1. Cabeçalho (Header) -->
+    <header class="bg-white shadow-sm w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="font-bold text-2xl tracking-tighter text-gray-900">IGREJA <span class="text-blue-600">RENASCER.</span></a>
+                    <img src="logo.png" alt="Igreja Renascer" class="h-12 w-auto">
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Início</a>
+                    <a href="index.html#quem-somos" class="text-gray-600 hover:text-blue-600 font-medium transition">Quem Somos</a>
+                    <a href="index.html#programacao" class="text-gray-600 hover:text-blue-600 font-medium transition">Programação</a>
+                    <a href="index.html#grupos" class="text-gray-600 hover:text-blue-600 font-medium transition">Grupos</a>
+                </nav>
+                <div>
+                    <a href="#" class="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">Contribua</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Conteúdo Principal: Pedidos de Oração -->
+    <main class="flex-grow">
+        <!-- Hero Interno -->
+        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <!-- Imagem serena e reflexiva -->
+                <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Momento de Oração" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto text-center">
+                <span class="text-blue-400 font-bold tracking-widest uppercase text-sm mb-4 block">Nós nos importamos com você</span>
+                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Como podemos orar?</h1>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Acreditamos no poder da oração e na força da comunidade. Compartilhe seu pedido conosco e nossa equipe estará intercedendo por você.</p>
+            </div>
+        </section>
+
+        <!-- Formulário -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
+            <div class="bg-white p-8 md:p-10 rounded-3xl shadow-2xl border border-gray-100 -mt-20 relative z-20">
+                
+                <form id="form-oracao" class="space-y-6">
+                    <div>
+                        <label for="nome" class="block text-sm font-bold text-gray-700 mb-1">Seu Nome (Opcional)</label>
+                        <input type="text" id="nome" placeholder="Pode deixar em branco se preferir" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    </div>
+
+                    <div>
+                        <label for="motivo" class="block text-sm font-bold text-gray-700 mb-1">Seu Pedido de Oração</label>
+                        <textarea id="motivo" required rows="5" placeholder="Escreva aqui o que está em seu coração..." class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"></textarea>
+                    </div>
+
+                    <div class="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                        <label class="block text-sm font-bold text-gray-900 mb-3">Privacidade do seu pedido:</label>
+                        <div class="space-y-3">
+                            <label class="flex items-start cursor-pointer">
+                                <input type="radio" name="privacidade" value="privado" checked class="mt-1 w-4 h-4 text-blue-600 bg-white border-gray-300 focus:ring-blue-500">
+                                <span class="ml-3">
+                                    <span class="block text-sm font-medium text-gray-900">Manter em sigilo (Apenas Equipe Pastoral)</span>
+                                    <span class="block text-xs text-gray-500 mt-0.5">Seu pedido será lido e orado apenas pelos pastores.</span>
+                                </span>
+                            </label>
+                            <label class="flex items-start cursor-pointer">
+                                <input type="radio" name="privacidade" value="publico" class="mt-1 w-4 h-4 text-blue-600 bg-white border-gray-300 focus:ring-blue-500">
+                                <span class="ml-3">
+                                    <span class="block text-sm font-medium text-gray-900">Compartilhar com a Igreja</span>
+                                    <span class="block text-xs text-gray-500 mt-0.5">O pedido poderá ser compartilhado no painel de intercessão da comunidade.</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2 mt-4">
+                        Enviar Pedido
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- 3. Rodapé (Footer) -->
+    <footer class="bg-gray-900 text-white py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="font-bold text-2xl tracking-tighter text-white">IGREJA<span class="text-blue-500">.</span></span>
+            <p class="mt-4 text-gray-400 text-sm">&copy; 2026 Igreja. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- 4. Script do Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+            authDomain: "site-renascer-eef39.firebaseapp.com",
+            projectId: "site-renascer-eef39",
+            storageBucket: "site-renascer-eef39.firebasestorage.app",
+            messagingSenderId: "1043023040737",
+            appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const formOracao = document.getElementById('form-oracao');
+        
+        if(formOracao) {
+            formOracao.addEventListener('submit', async (e) => {
+                e.preventDefault(); 
+                
+                // Pega os valores. Se o nome estiver vazio, envia como "Anônimo"
+                let nome = document.getElementById('nome').value.trim();
+                if (nome === "") {
+                    nome = "Anônimo";
+                }
+                
+                const motivo = document.getElementById('motivo').value;
+                
+                // Verifica qual botão de rádio está selecionado
+                const privacidadeSelecionada = document.querySelector('input[name="privacidade"]:checked').value;
+                const pedidoPublico = (privacidadeSelecionada === "publico");
+
+                const botaoSubmit = formOracao.querySelector('button');
+                const textoOriginal = botaoSubmit.innerText;
+                
+                botaoSubmit.innerText = "Enviando pedido...";
+                botaoSubmit.disabled = true;
+                botaoSubmit.classList.add('opacity-75');
+
+                try {
+                    await addDoc(collection(db, "pedidos_oracao"), {
+                        nome_solicitante: nome,
+                        motivo: motivo,
+                        pedido_publico: pedidoPublico,
+                        data_envio: new Date().toISOString(),
+                        status: "recebido"
+                    });
+                    
+                    alert("Seu pedido foi recebido. Estaremos orando por você!");
+                    formOracao.reset();
+                } catch (error) {
+                    console.error("Erro ao salvar: ", error);
+                    alert("Houve um erro ao enviar seu pedido. Por favor, tente novamente.");
+                } finally {
+                    botaoSubmit.innerText = textoOriginal;
+                    botaoSubmit.disabled = false;
+                    botaoSubmit.classList.remove('opacity-75');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

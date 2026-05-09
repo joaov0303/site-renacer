@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontre um Grupo - Igreja.</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- 1. Cabeçalho (Header) -->
+    <header class="bg-white shadow-sm w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+<a href="index.html" class="font-bold text-2xl tracking-tighter text-gray-900">IGREJA <span class="text-blue-600">RENASCER.</span></a>
+                    <img src="logo.png" alt="Igreja Renascer" class="h-12 w-auto">
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Início</a>
+                    <a href="index.html#quem-somos" class="text-gray-600 hover:text-blue-600 font-medium transition">Quem Somos</a>
+                    <a href="index.html#programacao" class="text-gray-600 hover:text-blue-600 font-medium transition">Programação</a>
+                    <a href="index.html#grupos" class="text-gray-600 hover:text-blue-600 font-medium transition">Grupos</a>
+                </nav>
+                <div>
+                    <a href="#" class="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">Contribua</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Conteúdo Principal: Grupos -->
+    <main class="flex-grow">
+        <!-- Hero Interno -->
+        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <!-- Imagem de comunhão/amigos -->
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Comunhão" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto text-center">
+                <span class="text-blue-400 font-bold tracking-widest uppercase text-sm mb-4 block">Comunidade e Relacionamento</span>
+                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Faça a vida junto</h1>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Nós somos grandes para servir e pequenos para nos importar. Os grupos são o melhor lugar para você crescer espiritualmente, fazer amigos e ser cuidado.</p>
+            </div>
+        </section>
+
+        <!-- Vitrine de Grupos e Formulário -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Explicação e Tipos de Grupos (Lado Esquerdo) -->
+            <div class="lg:col-span-7 space-y-10">
+                <div>
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Um grupo para cada fase da vida</h3>
+                    <p class="text-gray-600 leading-relaxed">Nossos encontros acontecem semanalmente nas casas de nossos membros ou nas dependências da igreja. Não importa sua idade ou momento de vida, temos um lugar para você.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Card Tipo 1 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 transition">
+                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4 text-xl">👨‍👩‍👧‍👦</div>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Famílias</h4>
+                        <p class="text-gray-500 text-sm">Casais com ou sem filhos compartilhando os desafios e alegrias do lar.</p>
+                    </div>
+
+                    <!-- Card Tipo 2 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 transition">
+                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4 text-xl">⚡</div>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Jovens e Teens</h4>
+                        <p class="text-gray-500 text-sm">Adolescentes e jovens adultos buscando propósito, amizade e identidade.</p>
+                    </div>
+
+                    <!-- Card Tipo 3 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 transition">
+                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4 text-xl">👑</div>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Homens</h4>
+                        <p class="text-gray-500 text-sm">Encontros focados em formar homens fortes, líderes e tementes a Deus.</p>
+                    </div>
+
+                    <!-- Card Tipo 4 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 transition">
+                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4 text-xl">🌸</div>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Mulheres</h4>
+                        <p class="text-gray-500 text-sm">Um ambiente seguro de cura, encorajamento e crescimento feminino.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloco do Formulário (Lado Direito) -->
+            <div class="lg:col-span-5 bg-white p-8 md:p-10 rounded-3xl shadow-2xl border border-gray-100 -mt-20 relative z-20 h-fit">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Encontre seu Grupo</h3>
+                <p class="text-gray-500 mb-8 text-sm">Preencha os dados abaixo e nossa equipe encontrará o grupo ideal mais próximo da sua casa.</p>
+                
+                <form id="form-grupo" class="space-y-5">
+                    <div>
+                        <label for="nome" class="block text-sm font-bold text-gray-700 mb-1">Nome Completo</label>
+                        <input type="text" id="nome" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    </div>
+                    
+                    <div>
+                        <label for="telefone" class="block text-sm font-bold text-gray-700 mb-1">WhatsApp</label>
+                        <input type="tel" id="telefone" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    </div>
+
+                    <div>
+                        <label for="bairro" class="block text-sm font-bold text-gray-700 mb-1">Seu Bairro / Região</label>
+                        <input type="text" id="bairro" required placeholder="Ex: Centro, Vila Nova..." class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    </div>
+
+                    <div>
+                        <label for="perfil" class="block text-sm font-bold text-gray-700 mb-1">Perfil do Grupo</label>
+                        <select id="perfil" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transition appearance-none cursor-pointer">
+                            <option value="" disabled selected>Escolha o que melhor te atende...</option>
+                            <option value="Jovens">Jovens / Universitários</option>
+                            <option value="Familias">Famílias / Casais</option>
+                            <option value="Homens">Apenas Homens</option>
+                            <option value="Mulheres">Apenas Mulheres</option>
+                            <option value="Misto">Misto / Qualquer um</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2 mt-4">
+                        Quero Participar
+                    </button>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- 3. Rodapé (Footer) -->
+    <footer class="bg-gray-900 text-white py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-blue-500">RENASCER.</span></span>
+            <p class="mt-4 text-gray-400 text-sm">&copy; 2026 Igreja. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- 4. Script do Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+            authDomain: "site-renascer-eef39.firebaseapp.com",
+            projectId: "site-renascer-eef39",
+            storageBucket: "site-renascer-eef39.firebasestorage.app",
+            messagingSenderId: "1043023040737",
+            appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const formGrupo = document.getElementById('form-grupo');
+        
+        if(formGrupo) {
+            formGrupo.addEventListener('submit', async (e) => {
+                e.preventDefault(); 
+                
+                const nome = document.getElementById('nome').value;
+                const telefone = document.getElementById('telefone').value;
+                const bairro = document.getElementById('bairro').value;
+                const perfil = document.getElementById('perfil').value;
+                
+                const botaoSubmit = formGrupo.querySelector('button');
+                const textoOriginal = botaoSubmit.innerText;
+                
+                botaoSubmit.innerText = "Buscando grupos...";
+                botaoSubmit.disabled = true;
+                botaoSubmit.classList.add('opacity-75');
+
+                try {
+                    await addDoc(collection(db, "interesse_grupos"), {
+                        nome: nome,
+                        telefone: telefone,
+                        bairro: bairro,
+                        perfil_desejado: perfil,
+                        data_solicitacao: new Date().toISOString(),
+                        status: "pendente_contato"
+                    });
+                    
+                    alert("Recebemos seus dados! Um de nossos líderes entrará em contato em breve para te conectar ao grupo ideal.");
+                    formGrupo.reset();
+                } catch (error) {
+                    console.error("Erro ao salvar: ", error);
+                    alert("Houve um erro ao enviar seus dados. Por favor, tente novamente.");
+                } finally {
+                    botaoSubmit.innerText = textoOriginal;
+                    botaoSubmit.disabled = false;
+                    botaoSubmit.classList.remove('opacity-75');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
