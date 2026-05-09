@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homens - Igreja Renascer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- 1. Cabeçalho (Header) -->
+    <header class="bg-white shadow-sm w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="font-bold text-2xl tracking-tighter text-gray-900">IGREJA <span class="text-blue-600">RENASCER</span></a>
+                    <img src="logo.png" alt="Igreja Renascer" class="h-12 w-auto">
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Início</a>
+                    <a href="quem-somos.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Quem Somos</a>
+                    <a href="programacao.html" class="text-gray-600 hover:text-blue-600 font-medium transition">Programação</a>
+                    <a href="nossos-grupos.html" class="text-blue-600 font-bold transition">Grupos</a>
+                </nav>
+                <div>
+                    <a href="contribua.html" class="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition shadow-lg">Contribua</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Conteúdo Principal -->
+    <main class="flex-grow">
+        <!-- Hero Interno -->
+        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <!-- Imagem com clima masculino/forja -->
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Homens Renascer" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
+            </div>
+            <div class="relative z-10 max-w-4xl mx-auto text-center">
+                <span class="text-slate-400 font-bold tracking-widest uppercase text-sm mb-4 block">Ministério de Homens</span>
+                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Homens Renascer</h1>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Forjando caráter, liderança e responsabilidade. Um ambiente de crescimento e alinhamento à luz da Palavra.</p>
+            </div>
+        </section>
+
+        <!-- Seção de Link e QR Code Centralizado -->
+        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto -mt-16 relative z-20">
+            <div class="max-w-md mx-auto">
+                
+                <!-- Cartão Único (WhatsApp) -->
+                <div class="bg-white p-8 rounded-3xl shadow-2xl border-t-4 border-slate-800 flex flex-col items-center text-center hover:-translate-y-2 transition duration-300">
+                    <div class="w-16 h-16 bg-slate-100 text-slate-800 rounded-full flex items-center justify-center mb-4 text-3xl">
+                        👑
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">Grupo do WhatsApp</h2>
+                    <p class="text-gray-500 mb-6 text-sm">Faça parte da nossa rede. Receba devocionais, avisos sobre o Culto HERO e nossos encontros.</p>
+                    
+                    <!-- QR Code Único -->
+                    <div class="bg-gray-100 p-4 rounded-2xl mb-8">
+                        <!-- Substitua pelo QR Code do grupo dos homens -->
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SUA_URL_DO_WHATSAPP_HOMENS" alt="QR Code WhatsApp Homens" class="w-40 h-40 mix-blend-multiply">
+                    </div>
+
+                    <!-- Botão Único -->
+                    <!-- Coloque o link real dentro do href="#" -->
+                    <a href="#" target="_blank" class="w-full bg-slate-800 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-slate-900 transition shadow-lg flex items-center justify-center gap-2">
+                        Entrar no Grupo
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- 3. Rodapé (Footer) -->
+    <footer class="bg-gray-900 text-white py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <img src="nome-da-sua-logo.png" alt="Igreja Renascer" class="h-12 w-auto mx-auto mb-4">
+            <p class="text-gray-400 text-sm">&copy; 2026 Igreja Renascer. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
