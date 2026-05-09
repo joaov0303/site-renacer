@@ -53,102 +53,147 @@
         </section>
 
        <!-- Container do Carrossel (Adaptado para imagens horizontais) -->
-            <div id="carousel-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 sm:px-6 lg:px-8 pb-10 hide-scrollbar scroll-smooth">
-                
-                <!-- Grupo 1: Filhos de Sião -->
-                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white rounded-3xl overflow-hidden shadow-xl group border border-gray-100">
-                    <!-- Área da Imagem (Proporção 16:9) -->
-                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
-                        <!-- ATENÇÃO: Coloque o nome correto da sua imagem salva aqui no src -->
-                        <img src="gm-siao.jpeg" alt="Grupo Filhos de Sião" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <!-- Área de Texto Base -->
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-gray-900">Filhos de Sião</h3>
-                            <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
-                        </div>
-                        <div class="space-y-1 mt-4">
-                            <p class="text-gray-600 flex items-center gap-2 font-medium">
-                                <span>🕒</span> 19:30 Horas
-                            </p>
-                            <p class="text-gray-600 flex items-center gap-2 font-medium">
-                                <span>📍</span> Itapuã - Zé Pedro
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <section class="relative max-w-7xl mx-auto py-12">
+    <!-- Botão Anterior (Esquerda) -->
+    <button id="prevBtn" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 text-gray-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 border border-gray-200 focus:outline-none hidden sm:flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+    </button>
 
-                <!-- Grupo 2: Firmados na Rocha -->
-                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white rounded-3xl overflow-hidden shadow-xl group border border-gray-100">
-                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
-                        <img src="gm-rocha.jpeg" alt="Grupo Firmados na Rocha" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-gray-900">Firmados na Rocha</h3>
-                            <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
-                        </div>
-                        <div class="space-y-1 mt-4">
-                            <p class="text-gray-600 flex items-center gap-2 font-medium">
-                                <span>🕒</span> 20:00 Horas
-                            </p>
-                            <p class="text-gray-600 flex items-center gap-2 font-medium">
-                                <span>📍</span> Riviera Park
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Grupo 3: Arca da Aliança -->
-                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white rounded-3xl overflow-hidden shadow-xl group border border-gray-100">
-                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
-                        <img src="gm-arca.jpeg" alt="Grupo Arca da Aliança" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-gray-900">Arca da Aliança</h3>
-                            <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
-                        </div>
-                        <div class="space-y-1 mt-4">
-                            <p class="text-gray-600 flex items-center gap-2 font-medium">
-                                <span>🕒</span> 20:00 Horas
-                            </p>
-                            <p class="text-gray-600 flex items-center gap-2 font-medium">
-                                <span>📍</span> Iuna
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Grupo 4: Guerreiros de Yeshua -->
-                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white rounded-3xl overflow-hidden shadow-xl group border border-gray-100">
-                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
-                        <img src="gm-yeshua.jpeg" alt="Grupo Guerreiros de Yeshua" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-gray-900">Guerreiros de Yeshua</h3>
-                            <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
-                        </div>
-                        <div class="space-y-1 mt-4">
-                            <p class="text-gray-600 flex items-center gap-2 font-medium">
-                                <span>🕒</span> 19:00 Horas
-                            </p>
-                            <p class="text-gray-600 flex items-center gap-2 font-medium">
-                                <span>📍</span> Centro
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Espaço vazio no final para não colar na borda direita -->
-                <div class="shrink-0 w-4 sm:w-8"></div>
+    <!-- Contêiner do Carrossel -->
+    <div id="carousel-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 sm:px-6 lg:px-8 pb-10 hide-scrollbar scroll-smooth">
+        
+        <!-- Grupo 1: Filhos de Sião -->
+        <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white rounded-3xl overflow-hidden shadow-xl group border border-gray-100">
+            <!-- Área da Imagem (Proporção 16:9) -->
+            <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
+                <!-- ATENÇÃO: Coloque o nome correto da sua imagem salva aqui no src -->
+                <img src="gm-siao.jpeg" alt="Grupo Filhos de Sião" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             </div>
-                <!-- Espaço vazio no final para não colar na borda direita -->
-                <div class="shrink-0 w-4 sm:w-8"></div>
+            <!-- Área de Texto Base -->
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-2xl font-bold text-gray-900">Filhos de Sião</h3>
+                    <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
+                </div>
+                <div class="space-y-1 mt-4">
+                    <p class="text-gray-600 flex items-center gap-2 font-medium">
+                        <span>🕒</span> 19:30 Horas
+                    </p>
+                    <p class="text-gray-600 flex items-center gap-2 font-medium">
+                        <span>📍</span> Itapuã - Zé Pedro
+                    </p>
+                </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Grupo 2: Firmados na Rocha -->
+        <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white rounded-3xl overflow-hidden shadow-xl group border border-gray-100">
+            <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
+                <img src="gm-rocha.jpeg" alt="Grupo Firmados na Rocha" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-2xl font-bold text-gray-900">Firmados na Rocha</h3>
+                    <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
+                </div>
+                <div class="space-y-1 mt-4">
+                    <p class="text-gray-600 flex items-center gap-2 font-medium">
+                        <span>🕒</span> 20:00 Horas
+                    </p>
+                    <p class="text-gray-600 flex items-center gap-2 font-medium">
+                        <span>📍</span> Riviera Park
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grupo 3: Arca da Aliança -->
+        <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white rounded-3xl overflow-hidden shadow-xl group border border-gray-100">
+            <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
+                <img src="gm-arca.jpeg" alt="Grupo Arca da Aliança" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-2xl font-bold text-gray-900">Arca da Aliança</h3>
+                    <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
+                </div>
+                <div class="space-y-1 mt-4">
+                    <p class="text-gray-600 flex items-center gap-2 font-medium">
+                        <span>🕒</span> 20:00 Horas
+                    </p>
+                    <p class="text-gray-600 flex items-center gap-2 font-medium">
+                        <span>📍</span> Iuna
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grupo 4: Guerreiros de Yeshua -->
+        <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white rounded-3xl overflow-hidden shadow-xl group border border-gray-100">
+            <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100">
+                <img src="gm-yeshua.jpeg" alt="Grupo Guerreiros de Yeshua" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            </div>
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="text-2xl font-bold text-gray-900">Guerreiros de Yeshua</h3>
+                    <span class="bg-orange-100 text-orange-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
+                </div>
+                <div class="space-y-1 mt-4">
+                    <p class="text-gray-600 flex items-center gap-2 font-medium">
+                        <span>🕒</span> 19:00 Horas
+                    </p>
+                    <p class="text-gray-600 flex items-center gap-2 font-medium">
+                        <span>📍</span> Centro
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Espaço vazio no final para não colar na borda direita -->
+        <div class="shrink-0 w-4 sm:w-8"></div>
+    </div>
+
+    <!-- Botão Próximo (Direita) -->
+    <button id="nextBtn" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 text-gray-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300 border border-gray-200 focus:outline-none hidden sm:flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+    </button>
+</section>
+
+<!-- Script para a funcionalidade de rolagem -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const carousel = document.getElementById('carousel-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Define a quantidade de pixels a rolar por clique. 
+        // 550 é a largura de cada card no desktop, ajustado para mais as margens.
+        const scrollAmount = 574; 
+
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+    });
+</script>
+
+<!-- Se a classe hide-scrollbar não estiver no seu CSS, adicione isto para esconder a barra de rolagem padrão nativa -->
+<style>
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
 
         <!-- 4. Call to Action (Chamada para o formulário) -->
         <section class="py-16 bg-blue-600 text-center px-4 sm:px-6 lg:px-8">
