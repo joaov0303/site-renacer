@@ -1,89 +1,207 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Igreja Renascer - Bem-vindo</title>
+    <!-- Tailwind CSS para estilização rápida e limpa -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.13.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.13.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.13.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.13.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.13.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.13.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.13.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.13.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.13.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.13.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <!-- 1. Cabeçalho (Header) -->
+    <header class="bg-white shadow-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <!-- Substitua "nome-da-sua-logo.png" pelo nome exato do seu arquivo -->
+                    <a href="index.html" class="font-bold text-2xl tracking-tighter text-gray-900">IGREJA <span class="text-green-600">RENASCER</span></a>
+<img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto">
+                </div>
+<nav class="hidden md:flex space-x-8">
+    <a href="#" class="text-gray-600 hover:text-green-600 font-medium transition">Início</a>
+    <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium transition">Quem Somos</a>
+    <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium transition">Programação</a></nav>
+                </nav>
+                <div>
+                   <a href="/site_igreja/generosidade.html" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
+            </div>
+        </div>  
+    </header>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    <!-- 2. Seção Hero -->
+    <section class="relative bg-gray-900 h-[80vh] flex items-center justify-center pt-20">
+        <div class="absolute inset-0 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto" class="w-full h-full object-cover opacity-30">
+        </div>
+        <div class="relative z-10 text-center px-4 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">Igreja Renascer</h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10">Somos família <br/> Um lugar para você Renascer.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="/site_igreja/novo-aqui.html" class="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg">Sou Novo Aqui</a>
+                <a href="/site_igreja/nossos-grupos.html" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition">Grupos de Mesa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Acesso Rápido (Cards Interativos) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            
+            <a href="/site_igreja/quero-batizar.html" class="block">
+    <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">💧</div>
+        <h3 class="font-bold text-lg">Quero me Batizar</h3>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+</a>
+<a href="/site_igreja/seja-voluntario.html" class="block">
+    <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🤝</div>
+        <h3 class="font-bold text-lg">Seja Voluntário</h3>
+    </div>
+</a>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+<a href="/site_igreja/pedidos-oracao.html" class="block">
+    <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🙏</div>
+        <h3 class="font-bold text-lg">Pedidos de Oração</h3>
+    </div>
+</a>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+<a href="/site_igreja/encontre-um-grupo.html" class="block">
+    <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">👥</div>
+        <h3 class="font-bold text-lg">Encontre um Grupo</h3>
+    </div>
+</a>
+        </div>
+    </section>
+
+    <!-- 4. Seção "Quem Somos" -->
+    <section id="quem-somos" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Nossa Missão</h2>
+                <p class="text-lg text-gray-600 mb-6 leading-relaxed">Somos uma igreja grande para servir e pequena para se importar. Nosso foco é amar a Deus sobre todas as coisas e amar as pessoas através de ações práticas e relacionamento verdadeiro.</p>
+                <a href="/site_igreja/quem-somos.html" class="text-green-600 font-bold hover:text-green-800 flex items-center gap-2">Leia nossa história completa <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="bg-gray-200 rounded-3xl h-80 w-full object-cover shadow-lg flex items-center justify-center overflow-hidden">
+                 <img src="/img/jesus.jpeg"alt="Comunidade" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Agenda da Semana (Programação) -->
+    <section id="programacao" class="bg-gray-100 py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900">Nossa Programação</h2>
+                <p class="text-gray-600 mt-4 text-lg">Junte-se a nós durante a semana.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Item de Agenda -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-l-4 border-green-600">
+                    <span class="text-sm font-bold text-green-600 uppercase tracking-wider">Domingo</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-2">Culto de Celebração</h3>
+                    <p class="text-gray-600">Horários: 10h e 18h</p>
+                </div>
+                <!-- Item de Agenda -->
+                <div class="bg-white p-8 rounded-2xl shadow-md border-l-4 border-gray-400">
+                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Quarta-feira</span>
+                    <h3 class="text-2xl font-bold mt-2 mb-2">Culto Fé e Ensino</h3>
+                    <p class="text-gray-600">Horário: 20h</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Rodapé (Footer) -->
+  <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+               <a href="/index.html" class="font-bold text-2xl tracking-tighter text-White-900">IGREJA <span class="text-green-600">RENASCER</span></a>
+                <p class="mt-4 text-gray-400">▪️NÓS SOMOS FAMÍLIA! <br/>
+▪️UM LUGAR PARA VOCÊ RENASCER!</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-4">Contatos</h4>
+                <p class="mt-4 text-gray-400"></p> <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500">Av. São João, 805;-Capim Branco II</a></p>
+               <p class="mt-4 text-gray-400"></p>  <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500">contato: (38)9.99956-9758</a></p>
+               <p class="mt-4 text-gray-400"></p>  <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500">Instagram: @igrejarenascerunai</a></p>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-4">Fique por dentro</h4>
+                <form id="form-newsletter" class="flex gap-2">
+                    <input type="email" id="email-newsletter" placeholder="Seu melhor e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    <button type="submit" class="bg-green-600 px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition">Assinar</button>
+                </form>
+            </div>
+        </div>
+        <div class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+            &copy; 2026 Igreja Renascer <br/> Todos os direitos reservados.
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+    <!-- Script do Firebase como Módulo -->
+    <script type="module">
+        // 1. Importando os módulos necessários do Firebase (Versão Web)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // 2. Configuração do seu App
+        const firebaseConfig = {
+          apiKey: "AIzaSyC4fJ2VP3zOiBr6wb7WGjA_1CGtxSDAUQs",
+    authDomain: "site-renascer-unai.firebaseapp.com",
+    projectId: "site-renascer-unai",
+    storageBucket: "site-renascer-unai.firebasestorage.app",
+    messagingSenderId: "943282524238",
+    appId: "1:943282524238:web:b5946d5b3d8e1e8ed6f31f",
+    measurementId: "G-07L5GXNQRG"
+  };
+        
+
+        // 3. Inicializando o App e o Banco de Dados (Firestore)
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 4. Lógica de salvamento do e-mail no Firestore
+        const formNewsletter = document.getElementById('form-newsletter');
+        
+        if(formNewsletter) {
+            formNewsletter.addEventListener('submit', async (e) => {
+                e.preventDefault(); 
+                
+                const emailInput = document.getElementById('email-newsletter').value;
+                const botaoSubmit = formNewsletter.querySelector('button');
+                const textoOriginal = botaoSubmit.innerText;
+                
+                // Feedback visual de carregamento
+                botaoSubmit.innerText = "Salvando...";
+                botaoSubmit.disabled = true;
+
+                try {
+                    // Adicionando os dados na coleção "membros_newsletter"
+                    const docRef = await addDoc(collection(db, "membros_newsletter"), {
+                        email: emailInput,
+                        data_cadastro: new Date().toISOString()
+                    });
+                    
+                    alert("E-mail cadastrado com sucesso!");
+                    formNewsletter.reset();
+                } catch (error) {
+                    console.error("Erro ao salvar o e-mail: ", error);
+                    alert("Ocorreu um erro ao salvar seu e-mail. Tente novamente mais tarde.");
+                } finally {
+                    // Restaura o botão ao estado original
+                    botaoSubmit.innerText = textoOriginal;
+                    botaoSubmit.disabled = false;
+                }
+            });
         }
-      });
     </script>
-  </body>
+</body>
 </html>
