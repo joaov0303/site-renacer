@@ -103,51 +103,69 @@
 
         <!-- Destaques / Eventos Especiais -->
         <section class="py-24 bg-white border-t border-gray-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-900">Eventos Especiais</h2>
-                        <p class="text-gray-600 mt-2">Fique por dentro das datas importantes deste mês.</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900">Eventos Especiais do Mês</h2>
+            <p class="text-gray-600 mt-2">Fique por dentro das datas importantes.</p>
+        </div>
+
+        <div id="container-eventos-dinamicos" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <p class="text-gray-400">Carregando eventos...</p>
+        </div>
+    </div>
+</section>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+        authDomain: "site-renascer-eef39.firebaseapp.com",
+        projectId: "site-renascer-eef39",
+        storageBucket: "site-renascer-eef39.firebasestorage.app",
+        messagingSenderId: "1043023040737",
+        appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const container = document.getElementById('container-eventos-dinamicos');
+
+    // Escuta mudanças na coleção 'agenda_eventos' em tempo real
+    const q = query(collection(db, "agenda_eventos"), orderBy("data_evento", "asc"));
+    
+    onSnapshot(q, (snapshot) => {
+        container.innerHTML = ''; // Limpa o "Carregando..."
+        
+        if (snapshot.empty) {
+            container.innerHTML = '<p class="text-gray-500 italic">Nenhum evento especial agendado para este mês.</p>';
+            return;
+        }
+
+        snapshot.forEach((doc) => {
+            const evento = doc.data();
+            // Criando o HTML do card dinamicamente
+            const card = `
+                <div class="flex flex-col sm:flex-row bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-200">
+                    <div class="sm:w-2/5 bg-gray-900 relative min-h-[200px]">
+                        <img src="${evento.imagem_url || 'https://via.placeholder.com/400x300'}" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <span class="bg-blue-600 text-xs font-bold px-2 py-1 rounded-md uppercase">${evento.data_texto}</span>
+                        </div>
+                    </div>
+                    <div class="p-6 sm:w-3/5 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">${evento.titulo}</h3>
+                        <p class="text-gray-600 text-sm mb-4">${evento.descricao}</p>
+                        <span class="text-gray-900 font-bold text-sm">📍 ${evento.local} • ${evento.horario}</span>
                     </div>
                 </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Evento 1 -->
-                    <div class="flex flex-col sm:flex-row bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-200">
-                        <div class="sm:w-2/5 bg-gray-900 relative min-h-[200px]">
-                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Homens" class="w-full h-full object-cover opacity-80">
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-green-600 text-xs font-bold px-2 py-1 rounded-md uppercase">05 de Junho</span>
-                            </div>
-                        </div>
-                        <div class="p-6 sm:w-3/5 flex flex-col justify-center">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Homens Posicionados (Homens)</h3>
-                            <p class="text-gray-600 text-sm mb-4">Todo primeiro sábado do mês, os homens da nossa igreja se reúnem para um tempo de forja, palavra e alinhamento.</p>
-                            <span class="text-gray-900 font-bold text-sm">📍 Templo Principal • 19h30</span>
-                        </div>
-                    </div>
-
-                    <!-- Evento 2 -->
-                    <div class="flex flex-col sm:flex-row bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-200">
-                        <div class="sm:w-2/5 bg-gray-900 relative min-h-[200px]">
-                            <img src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mulheres" class="w-full h-full object-cover opacity-80">
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-green-600 text-xs font-bold px-2 py-1 rounded-md uppercase">12 de Junho</span>
-                            </div>
-                        </div>
-                        <div class="p-6 sm:w-3/5 flex flex-col justify-center">
-                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Culto SHINE (Mulheres)</h3>
-                            <p class="text-gray-600 text-sm mb-4">Um encontro desenhado especialmente para as mulheres. Uma noite de cura, beleza, amizade e adoração profunda.</p>
-                            <span class="text-gray-900 font-bold text-sm">📍 Templo Principal • 19h30</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
+            `;
+            container.innerHTML += card;
+        });
+    });
+</script>
     <!-- 6. Rodapé (Footer) -->
  <footer class="bg-gray-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
