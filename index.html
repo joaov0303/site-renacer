@@ -4,32 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Igreja Renascer - Bem-vindo</title>
-    <!-- Tailwind CSS para estilização rápida e limpa -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-    <!-- 1. Cabeçalho (Header) -->
     <header class="bg-white shadow-sm fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
+                
                 <div class="flex-shrink-0 flex items-center">
-                    <!-- Substitua "nome-da-sua-logo.png" pelo nome exato do seu arquivo -->
-                    <a href="index.html" class="font-bold text-2xl tracking-tighter text-gray-900">IGREJA <span class="text-green-600">RENASCER</span></a>
-<img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto">
+                    <a href="index.html" class="font-bold text-2xl tracking-tighter text-gray-900 mr-2">IGREJA <span class="text-green-600">RENASCER</span></a>
+                    <img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto">
                 </div>
-<nav class="hidden md:flex space-x-8">
-    <a href="#" class="text-gray-600 hover:text-green-600 font-medium transition">Início</a>
-    <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium transition">Quem Somos</a>
-    <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium transition">Programação</a></nav>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-green-600 font-medium transition">Início</a>
+                    <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium transition">Quem Somos</a>
+                    <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium transition">Programação</a>
                 </nav>
-                <div>
-                   <a href="/site_igreja/generosidade.html" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
+
+                <div class="hidden md:block">
+                    <a href="/site_igreja/generosidade.html" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="btn-menu" class="text-gray-600 hover:text-green-600 focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+
             </div>
         </div>  
+
+        <div id="menu-mobile" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 flex flex-col py-4 px-6 space-y-4">
+            <a href="#" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Início</a>
+            <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Quem Somos</a>
+            <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Programação</a>
+            <div class="pt-2">
+                <a href="/site_igreja/generosidade.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
+            </div>
+        </div>
     </header>
 
-    <!-- 2. Seção Hero -->
     <section class="relative bg-gray-900 h-[80vh] flex items-center justify-center pt-20">
         <div class="absolute inset-0 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto" class="w-full h-full object-cover opacity-30">
@@ -44,54 +62,48 @@
         </div>
     </section>
 
-    <!-- 3. Acesso Rápido (Cards Interativos) -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-16">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            
             <a href="/site_igreja/quero-batizar.html" class="block">
-    <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">💧</div>
-        <h3 class="font-bold text-lg">Quero me Batizar</h3>
-    </div>
-</a>
-<a href="/site_igreja/seja-voluntario.html" class="block">
-    <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🤝</div>
-        <h3 class="font-bold text-lg">Seja Voluntário</h3>
-    </div>
-</a>
-
-<a href="/site_igreja/pedidos-oracao.html" class="block">
-    <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🙏</div>
-        <h3 class="font-bold text-lg">Pedidos de Oração</h3>
-    </div>
-</a>
-
-<a href="/site_igreja/encontre-um-grupo.html" class="block">
-    <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">👥</div>
-        <h3 class="font-bold text-lg">Encontre um Grupo</h3>
-    </div>
-</a>
+                <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">💧</div>
+                    <h3 class="font-bold text-lg">Quero me Batizar</h3>
+                </div>
+            </a>
+            <a href="/site_igreja/seja-voluntario.html" class="block">
+                <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🤝</div>
+                    <h3 class="font-bold text-lg">Seja Voluntário</h3>
+                </div>
+            </a>
+            <a href="/site_igreja/pedidos-oracao.html" class="block">
+                <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🙏</div>
+                    <h3 class="font-bold text-lg">Pedidos de Oração</h3>
+                </div>
+            </a>
+            <a href="/site_igreja/encontre-um-grupo.html" class="block">
+                <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">👥</div>
+                    <h3 class="font-bold text-lg">Encontre um Grupo</h3>
+                </div>
+            </a>
         </div>
     </section>
 
-    <!-- 4. Seção "Quem Somos" -->
     <section id="quem-somos" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
                 <h2 class="text-4xl font-bold text-gray-900 mb-6">Nossa Missão</h2>
                 <p class="text-lg text-gray-600 mb-6 leading-relaxed">Somos uma igreja grande para servir e pequena para se importar. Nosso foco é amar a Deus sobre todas as coisas e amar as pessoas através de ações práticas e relacionamento verdadeiro.</p>
-                <a href="/site_igreja/quem-somos.html" class="text-green-600 font-bold hover:text-green-800 flex items-center gap-2">Leia nossa história completa <span aria-hidden="true">&rarr;</span></a>
+                <a href="/site_igreja/quem-somos.html" class="text-green-600 font-bold hover:text-green-800 flex items-center gap-2">Leia nossa história completa <span aria-hidden="true">→</span></a>
             </div>
             <div class="bg-gray-200 rounded-3xl h-80 w-full object-cover shadow-lg flex items-center justify-center overflow-hidden">
-                 <img src="/img/jesus.jpeg"alt="Comunidade" class="w-full h-full object-cover">
+                 <img src="/img/jesus.jpeg" alt="Comunidade" class="w-full h-full object-cover">
             </div>
         </div>
     </section>
 
-    <!-- 5. Agenda da Semana (Programação) -->
     <section id="programacao" class="bg-gray-100 py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -99,13 +111,11 @@
                 <p class="text-gray-600 mt-4 text-lg">Junte-se a nós durante a semana.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Item de Agenda -->
                 <div class="bg-white p-8 rounded-2xl shadow-md border-l-4 border-green-600">
                     <span class="text-sm font-bold text-green-600 uppercase tracking-wider">Domingo</span>
                     <h3 class="text-2xl font-bold mt-2 mb-2">Culto de Celebração</h3>
                     <p class="text-gray-600">Horários: 18h</p>
                 </div>
-                <!-- Item de Agenda -->
                 <div class="bg-white p-8 rounded-2xl shadow-md border-l-4 border-gray-400">
                     <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Quarta-feira</span>
                     <h3 class="text-2xl font-bold mt-2 mb-2">Culto Fé e Ensino</h3>
@@ -115,19 +125,24 @@
         </div>
     </section>
 
-    <!-- 6. Rodapé (Footer) -->
-  <footer class="bg-gray-900 text-white py-16">
+    <footer class="bg-gray-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-               <a href="/index.html" class="font-bold text-2xl tracking-tighter text-White-900">IGREJA <span class="text-green-600">RENASCER</span></a>
+               <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600">RENASCER</span></a>
                 <p class="mt-4 text-gray-400">▪️NÓS SOMOS FAMÍLIA! <br/>
 ▪️UM LUGAR PARA VOCÊ RENASCER!</p>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Contatos</h4>
-                <p class="mt-4 text-gray-400"></p> <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500">Av. São João, 805;-Capim Branco II</a></p>
-               <p class="mt-4 text-gray-400"></p>  <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500">contato: (38)9.99956-9758</a></p>
-               <p class="mt-4 text-gray-400"></p>  <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500">Instagram: @igrejarenascerunai</a></p>
+                <p class="mt-4 text-gray-400">
+                    <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500">Av. São João, 805 - Capim Branco II</a>
+                </p>
+                <p class="mt-4 text-gray-400">  
+                    <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500">contato: (38) 99995-6975</a>
+                </p>
+                <p class="mt-4 text-gray-400">  
+                    <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500">Instagram: @igrejarenascerunai</a>
+                </p>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Fique por dentro</h4>
@@ -138,15 +153,19 @@
             </div>
         </div>
         <div class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            &copy; 2026 Igreja Renascer <br/> Todos os direitos reservados.
+            © 2026 Igreja Renascer <br/> Todos os direitos reservados.
         </div>
     </footer>
 
-</body>
+    <script>
+        const btnMenu = document.getElementById('btn-menu');
+        const menuMobile = document.getElementById('menu-mobile');
 
-</html>
+        btnMenu.addEventListener('click', () => {
+            menuMobile.classList.toggle('hidden');
+        });
+    </script>
 
-    <!-- Script do Firebase como Módulo -->
     <script type="module">
         // 1. Importando os módulos necessários do Firebase (Versão Web)
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
@@ -154,15 +173,14 @@
 
         // 2. Configuração do seu App
         const firebaseConfig = {
-          apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
             authDomain: "site-renascer-eef39.firebaseapp.com",
             projectId: "site-renascer-eef39",
             storageBucket: "site-renascer-eef39.firebasestorage.app",
             messagingSenderId: "1043023040737",
             appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
-  };
+        };
         
-
         // 3. Inicializando o App e o Banco de Dados (Firestore)
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -202,45 +220,40 @@
             });
         }
     </script>
+    
     <style>
-/* --------------------------------------
-   ESTILOS BASE (Geralmente focados no Mobile First - celulares)
------------------------------------------ */
-.container {
-  display: flex;
-  flex-direction: column; /* Em telas pequenas, empilha os itens verticalmente */
-  gap: 20px;
-  padding: 15px;
-}
+        /* --------------------------------------
+           ESTILOS BASE (Seus estilos CSS personalizados)
+        ----------------------------------------- */
+        .container {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          padding: 15px;
+        }
 
-.item {
-  width: 100%; /* Ocupa toda a largura no celular */
-  background-color: #f0f0f0;
-  padding: 20px;
-}
+        .item {
+          width: 100%;
+          background-color: #f0f0f0;
+          padding: 20px;
+        }
 
-/* --------------------------------------
-   TABLETS (Telas maiores que 600px)
------------------------------------------ */
-@media screen and (min-width: 600px) {
-  .container {
-    flex-direction: row;
-    flex-wrap: wrap; /* Permite que os itens quebrem a linha */
-  }
-  
-  .item {
-    width: calc(50% - 10px); /* Ocupa metade da tela (2 colunas) */
-  }
-}
+        @media screen and (min-width: 600px) {
+          .container {
+            flex-direction: row;
+            flex-wrap: wrap; 
+          }
+          
+          .item {
+            width: calc(50% - 10px); 
+          }
+        }
 
-/* --------------------------------------
-   DESKTOPS (Telas maiores que 992px)
------------------------------------------ */
-@media screen and (min-width: 992px) {
-  .item {
-    width: calc(33.33% - 14px); /* Ocupa um terço da tela (3 colunas) */
-  }
-}
+        @media screen and (min-width: 992px) {
+          .item {
+            width: calc(33.33% - 14px); 
+          }
+        }
     </style>
 </body>
 </html>
