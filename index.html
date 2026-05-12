@@ -202,5 +202,45 @@
             });
         }
     </script>
+    <style>
+/* --------------------------------------
+   ESTILOS BASE (Geralmente focados no Mobile First - celulares)
+----------------------------------------- */
+.container {
+  display: flex;
+  flex-direction: column; /* Em telas pequenas, empilha os itens verticalmente */
+  gap: 20px;
+  padding: 15px;
+}
+
+.item {
+  width: 100%; /* Ocupa toda a largura no celular */
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+/* --------------------------------------
+   TABLETS (Telas maiores que 600px)
+----------------------------------------- */
+@media screen and (min-width: 600px) {
+  .container {
+    flex-direction: row;
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+  }
+  
+  .item {
+    width: calc(50% - 10px); /* Ocupa metade da tela (2 colunas) */
+  }
+}
+
+/* --------------------------------------
+   DESKTOPS (Telas maiores que 992px)
+----------------------------------------- */
+@media screen and (min-width: 992px) {
+  .item {
+    width: calc(33.33% - 14px); /* Ocupa um terço da tela (3 colunas) */
+  }
+}
+    </style>
 </body>
 </html>
