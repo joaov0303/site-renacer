@@ -10,22 +10,42 @@
 <body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
 
     <!-- 1. Cabeçalho (Header) -->
-    <header class="bg-white shadow-sm w-full z-50">
+   <header class="bg-white shadow-sm fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
+                
                 <div class="flex-shrink-0 flex items-center">
-<a href="/index.html" class="font-bold text-2xl tracking-tighter text-gray-900">IGREJA <span class="text-green-600">RENASCER</span></a>
+                    <a href="index.html" class="font-bold text-2xl tracking-tighter text-gray-900 mr-2">IGREJA <span class="text-green-600">RENASCER</span></a>
                     <img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto">
                 </div>
+
                 <nav class="hidden md:flex space-x-8">
-                    <a href="/index.html" class="text-gray-600 hover:text-green-600 font-medium transition">Início</a>
+                    <a href="#" class="text-gray-600 hover:text-green-600 font-medium transition">Início</a>
                     <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium transition">Quem Somos</a>
                     <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium transition">Programação</a>
-                    <a href="/site_igreja/nossos-grupos.html" class="text-gray-600 hover:text-green-600 font-medium transition">Grupos de Mesa</a>
                 </nav>
-                <div>
+
+                <div class="hidden md:block">
                     <a href="/site_igreja/generosidade.html" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
                 </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="btn-menu" class="text-gray-600 hover:text-green-600 focus:outline-none">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </div>  
+
+        <div id="menu-mobile" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 flex flex-col py-4 px-6 space-y-4">
+            <a href="#" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Início</a>
+            <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Quem Somos</a>
+            <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Programação</a>
+            <div class="pt-2">
+                <a href="/site_igreja/generosidade.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
             </div>
         </div>
     </header>
@@ -161,6 +181,14 @@
             &copy; 2026 Igreja Renascer <br/> Todos os direitos reservados.
         </div>
     </footer>
+ <script>
+        const btnMenu = document.getElementById('btn-menu');
+        const menuMobile = document.getElementById('menu-mobile');
+
+        btnMenu.addEventListener('click', () => {
+            menuMobile.classList.toggle('hidden');
+        });
+    </script>
 
 
     <!-- 4. Script do Firebase -->
