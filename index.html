@@ -169,58 +169,27 @@ UM LUGAR PARA VOCÊ RENASCER!</p>
     </script>
 
     <script type="module">
-        // 1. Importando os módulos necessários do Firebase (Versão Web)
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-        // 2. Configuração do seu App
-        const firebaseConfig = {
-            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
-            authDomain: "site-renascer-eef39.firebaseapp.com",
-            projectId: "site-renascer-eef39",
-            storageBucket: "site-renascer-eef39.firebasestorage.app",
-            messagingSenderId: "1043023040737",
-            appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
-        };
-        
-        // 3. Inicializando o App e o Banco de Dados (Firestore)
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDvxbMX3ePr0xxZVgUWYvntfYmWZXgENp8",
+  authDomain: "dados-renascer.firebaseapp.com",
+  projectId: "dados-renascer",
+  storageBucket: "dados-renascer.firebasestorage.app",
+  messagingSenderId: "596829231608",
+  appId: "1:596829231608:web:7d98d0f5604ae081669e0d",
+  measurementId: "G-C07KREHMT4"
+};
 
-        // 4. Lógica de salvamento do e-mail no Firestore
-        const formNewsletter = document.getElementById('form-newsletter');
-        
-        if(formNewsletter) {
-            formNewsletter.addEventListener('submit', async (e) => {
-                e.preventDefault(); 
-                
-                const emailInput = document.getElementById('email-newsletter').value;
-                const botaoSubmit = formNewsletter.querySelector('button');
-                const textoOriginal = botaoSubmit.innerText;
-                
-                // Feedback visual de carregamento
-                botaoSubmit.innerText = "Salvando...";
-                botaoSubmit.disabled = true;
-
-                try {
-                    // Adicionando os dados na coleção "membros_newsletter"
-                    const docRef = await addDoc(collection(db, "membros_newsletter"), {
-                        email: emailInput,
-                        data_cadastro: new Date().toISOString()
-                    });
-                    
-                    alert("E-mail cadastrado com sucesso!");
-                    formNewsletter.reset();
-                } catch (error) {
-                    console.error("Erro ao salvar o e-mail: ", error);
-                    alert("Ocorreu um erro ao salvar seu e-mail. Tente novamente mais tarde.");
-                } finally {
-                    // Restaura o botão ao estado original
-                    botaoSubmit.innerText = textoOriginal;
-                    botaoSubmit.disabled = false;
-                }
-            });
-        }
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
     </script>
     
     <style>
