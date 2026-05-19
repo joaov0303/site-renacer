@@ -2,9 +2,11 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <!-- ESSENCIAL: Esta tag avisa aos navegadores móveis para respeitarem o tamanho da tela -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-<link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">   
- <title>Igreja Renascer - Bem-vindo</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png">   
+    <title>Igreja Renascer - Bem-vindo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
@@ -14,8 +16,8 @@
             <div class="flex justify-between items-center h-20">
                 
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="/index.html" class="font-bold text-2xl tracking-tighter text-gray-900 mr-2">IGREJA <span class="text-green-600">RENASCER</span></a>
-                    <img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto">
+                    <a href="/index.html" class="font-bold text-xl sm:text-2xl tracking-tighter text-gray-900 mr-2">IGREJA <span class="text-green-600">RENASCER</span></a>
+                    <img src="/img/logo.png" alt="Igreja Renascer" class="h-10 sm:h-12 w-auto">
                 </div>
 
                 <nav class="hidden md:flex space-x-8">
@@ -40,12 +42,16 @@
             </div>
         </div>  
 
-        <div id="menu-mobile" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 flex flex-col py-4 px-6 space-y-4">
+        <!-- AJUSTE: Adicionado top-20 e z-40 para o menu não ficar escondido atrás de outros elementos -->
+        <div id="menu-mobile" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 top-20 z-40 flex flex-col py-4 px-6 space-y-4">
             <a href="/index.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Início</a>
             <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Quem Somos</a>
             <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Programação</a>
             <div class="pt-2">
                 <a href="/site_igreja/generosidade.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
+            </div>
+            <div class="pt-2 border-t mt-2">
+                <a href="https://admin-renascer.netlify.app/" class="inline-block text-green-600 font-semibold hover:text-green-700 transition">Login (Admin)</a>
             </div>
         </div>
     </header>
@@ -54,18 +60,18 @@
         <div class="absolute inset-0 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto" class="w-full h-full object-cover opacity-30">
         </div>
-        <div class="relative z-10 text-center px-4 max-w-4xl">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">Igreja Renascer</h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-10">Somos família <br/> Um lugar para você Renascer.</p>
+        <div class="relative z-10 text-center px-4 max-w-4xl mt-10 sm:mt-0">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">Igreja Renascer</h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-10">Somos família <br/> Um lugar para você Renascer.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="/site_igreja/novo-aqui.html" class="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg">Sou Novo Aqui</a>
-                <a href="/site_igreja/nossos-grupos.html" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition">Grupos de Mesa</a>
+                <a href="/site_igreja/novo-aqui.html" class="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg w-full sm:w-auto">Sou Novo Aqui</a>
+                <a href="/site_igreja/nossos-grupos.html" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition w-full sm:w-auto">Grupos de Mesa</a>
             </div>
         </div>
     </section>
 
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-16">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <a href="/site_igreja/quero-batizar.html" class="block">
                 <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
                     <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">💧</div>
@@ -96,11 +102,11 @@
     <section id="quem-somos" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-                <h2 class="text-4xl font-bold text-gray-900 mb-6">Nossa Missão</h2>
-                <p class="text-lg text-gray-600 mb-6 leading-relaxed">Somos uma igreja grande para servir e pequena para se importar. Nosso foco é amar a Deus sobre todas as coisas e amar as pessoas através de ações práticas e relacionamento verdadeiro.</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Nossa Missão</h2>
+                <p class="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed">Somos uma igreja grande para servir e pequena para se importar. Nosso foco é amar a Deus sobre todas as coisas e amar as pessoas através de ações práticas e relacionamento verdadeiro.</p>
                 <a href="/site_igreja/quem-somos.html" class="text-green-600 font-bold hover:text-green-800 flex items-center gap-2">Leia nossa história completa <span aria-hidden="true">→</span></a>
             </div>
-            <div class="bg-gray-200 rounded-3xl h-80 w-full object-cover shadow-lg flex items-center justify-center overflow-hidden">
+            <div class="bg-gray-200 rounded-3xl h-64 sm:h-80 w-full object-cover shadow-lg flex items-center justify-center overflow-hidden">
                  <img src="/img/jesus.jpeg" alt="Comunidade" class="w-full h-full object-cover">
             </div>
         </div>
@@ -109,18 +115,18 @@
     <section id="programacao" class="bg-gray-100 py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900">Nossa Programação</h2>
-                <p class="text-gray-600 mt-4 text-lg">Junte-se a nós durante a semana.</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Nossa Programação</h2>
+                <p class="text-gray-600 mt-4 text-base sm:text-lg">Junte-se a nós durante a semana.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-md border-l-4 border-green-600">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border-l-4 border-green-600">
                     <span class="text-sm font-bold text-green-600 uppercase tracking-wider">Domingo</span>
-                    <h3 class="text-2xl font-bold mt-2 mb-2">Culto de Celebração</h3>
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-2">Culto de Celebração</h3>
                     <p class="text-gray-600">Horários: 18h</p>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-md border-l-4 border-gray-400">
+                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border-l-4 border-gray-400">
                     <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Quarta-feira</span>
-                    <h3 class="text-2xl font-bold mt-2 mb-2">Culto Fé e Ensino</h3>
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-2">Culto Fé e Ensino</h3>
                     <p class="text-gray-600">Horário: 20h</p>
                 </div>
             </div>
@@ -130,27 +136,26 @@
     <footer class="bg-gray-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-               <a href="//index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600">RENASCER</span></a>
-                <p class="mt-4 text-gray-400">NÓS SOMOS FAMÍLIA! <br/>
-UM LUGAR PARA VOCÊ RENASCER!</p>
+               <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600">RENASCER</span></a>
+                <p class="mt-4 text-gray-400 text-sm sm:text-base">NÓS SOMOS FAMÍLIA! <br/>UM LUGAR PARA VOCÊ RENASCER!</p>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Contatos</h4>
-                <p class="mt-4 text-gray-400">
+                <p class="mt-4 text-gray-400 text-sm sm:text-base">
                     <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500">Av. São João, 805 - Capim Branco II</a>
                 </p>
-                <p class="mt-4 text-gray-400">  
+                <p class="mt-4 text-gray-400 text-sm sm:text-base">  
                     <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500">contato: (38) 99995-6975</a>
                 </p>
-                <p class="mt-4 text-gray-400">  
+                <p class="mt-4 text-gray-400 text-sm sm:text-base">  
                     <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500">Instagram: @igrejarenascerunai</a>
                 </p>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Fique por dentro</h4>
-                <form id="form-newsletter" class="flex gap-2">
-                    <input type="email" id="email-newsletter" placeholder="Seu melhor e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500" required>
-                    <button type="submit" class="bg-green-600 px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition">Assinar</button>
+                <form id="form-newsletter" class="flex flex-col sm:flex-row gap-2">
+                    <input type="email" id="email-newsletter" placeholder="Seu e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    <button type="submit" class="bg-green-600 px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition w-full sm:w-auto">Assinar</button>
                 </form>
             </div>
         </div>
@@ -168,64 +173,23 @@ UM LUGAR PARA VOCÊ RENASCER!</p>
         });
     </script>
 
+    <!-- AJUSTE: Módulos do Firebase atualizados para importar via CDN diretamente no navegador -->
     <script type="module">
-    // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDvxbMX3ePr0xxZVgUWYvntfYmWZXgENp8",
-  authDomain: "dados-renascer.firebaseapp.com",
-  projectId: "dados-renascer",
-  storageBucket: "dados-renascer.firebasestorage.app",
-  messagingSenderId: "596829231608",
-  appId: "1:596829231608:web:7d98d0f5604ae081669e0d",
-  measurementId: "G-C07KREHMT4"
-};
+        const firebaseConfig = {
+          apiKey: "AIzaSyDvxbMX3ePr0xxZVgUWYvntfYmWZXgENp8",
+          authDomain: "dados-renascer.firebaseapp.com",
+          projectId: "dados-renascer",
+          storageBucket: "dados-renascer.firebasestorage.app",
+          messagingSenderId: "596829231608",
+          appId: "1:596829231608:web:7d98d0f5604ae081669e0d",
+          measurementId: "G-C07KREHMT4"
+        };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
     </script>
-    
-    <style>
-        /* --------------------------------------
-           ESTILOS BASE (Seus estilos CSS personalizados)
-        ----------------------------------------- */
-        .container {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          padding: 15px;
-        }
-
-        .item {
-          width: 100%;
-          background-color: #f0f0f0;
-          padding: 20px;
-        }
-
-        @media screen and (min-width: 600px) {
-          .container {
-            flex-direction: row;
-            flex-wrap: wrap; 
-          }
-          
-          .item {
-            width: calc(50% - 10px); 
-          }
-        }
-
-        @media screen and (min-width: 992px) {
-          .item {
-            width: calc(33.33% - 14px); 
-          }
-        }
-    </style>
-<script></script>
 </body>
 </html>
