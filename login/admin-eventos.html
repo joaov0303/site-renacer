@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Admin Renascer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .hide-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .hide-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .hide-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <header class="bg-gray-900 text-white shadow-md relative z-50">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-blue-500">RENASCER</span></h1>
+            
+            <nav class="hidden md:flex space-x-8 font-medium text-sm">
+                <a href="admin-dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
+                <a href="admin.html" class="text-gray-300 hover:text-white transition">Respostas do Site</a>
+                <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
+                <a href="admin-eventos.html" class="text-blue-400 border-b-2 border-blue-400 pb-1">Publicar Eventos</a>
+                <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
+            </nav>
+            
+             <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
+
+            <button id="btn-menu-mobile" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <div id="menu-mobile" class="hidden md:hidden bg-gray-800 border-t border-gray-700 absolute w-full left-0 shadow-2xl">
+            <nav class="flex flex-col px-6 py-4 space-y-5 font-medium text-base">
+                <a href="admin-dashboard.html" class="block text-gray-300 hover:text-white transition">Dashboard</a>
+                <a href="admin.html" class="block text-gray-300 hover:text-white transition">Respostas do Site</a>
+                <a href="admin-membros.html" class="block text-gray-300 hover:text-white transition">Membresia</a>
+                <a href="admin-eventos.html" class="block text-gray-300 hover:text-white transition">Publicar Eventos</a>
+                <a href="admin-perfil.html" class="block text-gray-300 hover:text-white transition">Meu Perfil</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <div class="lg:col-span-5">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden sticky top-8">
+                <div class="p-6 border-b border-gray-100 bg-blue-50 transition-colors" id="cabecalho-form">
+                    <h2 class="text-xl font-bold text-gray-800" id="titulo-form">Publicar Novo Evento</h2>
+                    <p class="text-sm text-gray-600 mt-1">Os dados aparecerão na aba "Programação".</p>
+                </div>
+                <div class="p-6 max-h-[75vh] overflow-y-auto hide-scrollbar">
+                    <form id="form-admin-evento" class="space-y-5">
+                        <div>
+                            <label class="block font-bold text-sm text-gray-700 mb-1">Título do Evento</label>
+                            <input type="text" id="evento_titulo" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block font-bold text-sm text-gray-700 mb-1">Data Escrita</label>
+                                <input type="text" id="evento_data_texto" placeholder="Ex: 15 de Junho" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-sm text-gray-700 mb-1">Data Real</label>
+                                <input type="date" id="evento_data_real" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required title="Define quando o evento expira e some do site">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block font-bold text-sm text-gray-700 mb-1">Horário</label>
+                                <input type="text" id="evento_horario" placeholder="Ex: 19h30" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-sm text-gray-700 mb-1">Local</label>
+                                <input type="text" id="evento_local" placeholder="Ex: Templo Principal" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-sm text-gray-700 mb-1">Link da Imagem (URL)</label>
+                            <input type="url" id="evento_imagem" placeholder="Cole o link da foto aqui..." class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-sm text-gray-700 mb-1">Descrição</label>
+                            <textarea id="evento_descricao" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="flex gap-3 pt-2">
+                            <button type="submit" id="btn-submit" class="w-full bg-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg">
+                                Publicar Evento
+                            </button>
+                            <button type="button" id="btn-cancelar" onclick="cancelarEdicao()" class="hidden bg-gray-300 text-gray-800 py-4 px-6 rounded-xl font-bold text-lg hover:bg-gray-400 transition shadow-lg">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-7">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+                <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800">Eventos Cadastrados</h2>
+                        <p class="text-xs text-gray-500 mt-1">Os eventos expiram no dia seguinte à Data Real.</p>
+                    </div>
+                    <span id="count-badge" class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-bold shrink-0">0 eventos</span>
+                </div>
+                
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full text-left">
+                        <thead class="bg-gray-50 border-b border-gray-200 text-gray-400 text-[10px] uppercase tracking-widest font-bold">
+                            <tr>
+                                <th class="p-4">Evento / Validade</th>
+                                <th class="p-4 hidden md:table-cell">Horário & Local</th>
+                                <th class="p-4 text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body" class="divide-y divide-gray-100">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="loading" class="p-10 text-center text-gray-400 font-medium">Buscando agenda...</div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        document.getElementById('btn-menu-mobile')?.addEventListener('click', function() {
+            document.getElementById('menu-mobile').classList.toggle('hidden');
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        // Importando ferramentas extras: deleteDoc, updateDoc, doc, onSnapshot, query, orderBy
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // Banco de Dados Oficial
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+            authDomain: "site-renascer-eef39.firebaseapp.com",
+            projectId: "site-renascer-eef39",
+            storageBucket: "site-renascer-eef39.firebasestorage.app",
+            messagingSenderId: "1043023040737",
+            appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Variáveis de controle
+        window.eventosAtuais = {};
+        window.eventoEditandoId = null;
+
+        // ==========================================
+        // 1. CARREGAR E EXIBIR A LISTA DE EVENTOS
+        // ==========================================
+        // Pegamos a data de hoje no formato YYYY-MM-DD para fazer a comparação do Time/Validade
+        const dataHoje = new Date().toISOString().split('T')[0];
+
+        onSnapshot(query(collection(db, "agenda_eventos"), orderBy('data_evento')), (snapshot) => {
+            const body = document.getElementById('table-body');
+            const loading = document.getElementById('loading');
+            
+            body.innerHTML = '';
+            if(loading) loading.style.display = 'none';
+            document.getElementById('count-badge').innerText = `${snapshot.size} eventos`;
+
+            snapshot.forEach((documento) => {
+                const docId = documento.id;
+                const data = documento.data();
+                window.eventosAtuais[docId] = data;
+                
+                // SISTEMA DE VALIDADE (TIME): Verifica se a data real do evento já passou
+                const isExpirado = data.data_evento < dataHoje;
+                
+                // Define as cores do selo de validade
+                const badgeClass = isExpirado ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700";
+                const badgeTexto = isExpirado ? "🔴 EXPIRADO" : "🟢 NO PRAZO";
+                const rowOpacidade = isExpirado ? "opacity-60 bg-gray-50" : "hover:bg-gray-50";
+
+                // Imagem de capa (ou ícone padrão se não tiver imagem)
+                const imagem = data.imagem_url && data.imagem_url !== "" 
+                    ? `<img src="${data.imagem_url}" class="w-12 h-12 rounded-lg object-cover border border-gray-200 shadow-sm shrink-0">`
+                    : `<div class="w-12 h-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xl shrink-0">📅</div>`;
+
+                body.innerHTML += `
+                <tr class="transition border-b border-gray-50 ${rowOpacidade}">
+                    <td class="p-4 flex items-center gap-4">
+                        ${imagem}
+                        <div>
+                            <div class="font-bold text-gray-900">${data.titulo}</div>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="${badgeClass} px-2 py-0.5 rounded text-[9px] font-bold tracking-widest">${badgeTexto}</span>
+                                <span class="text-xs text-blue-600 font-medium">${data.data_texto}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4 hidden md:table-cell">
+                        <div class="text-xs text-gray-700"><strong class="text-gray-900">Hora:</strong> ${data.horario}</div>
+                        <div class="text-[10px] text-gray-500 mt-1 line-clamp-1"><strong class="text-gray-900">Local:</strong> ${data.local}</div>
+                    </td>
+                    <td class="p-4 text-center">
+                        <div class="flex justify-center gap-2">
+                            <button onclick="editarEvento('${docId}')" class="bg-yellow-50 border border-yellow-200 text-yellow-700 px-3 py-2 rounded-lg text-xs font-bold hover:bg-yellow-100 transition shadow-sm" title="Editar Evento">✏️ Editar</button>
+                            <button onclick="excluirEvento('${docId}')" class="bg-red-50 text-red-700 border border-red-200 px-3 py-2 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition shadow-sm" title="Apagar Definitivamente">🗑️</button>
+                        </div>
+                    </td>
+                </tr>`;
+            });
+        });
+
+        // ==========================================
+        // 2. EXCLUIR EVENTO (Com Alerta de Segurança)
+        // ==========================================
+        window.excluirEvento = function(id) {
+            const evento = window.eventosAtuais[id];
+            if(!evento) return;
+
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: `Deseja excluir permanentemente o evento "${evento.titulo}"?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        await deleteDoc(doc(db, "agenda_eventos", id));
+                        Swal.fire('Excluído!', 'O evento foi removido da agenda.', 'success');
+                    } catch (error) {
+                        console.error("Erro ao excluir:", error);
+                        Swal.fire('Erro!', 'Não foi possível excluir o evento.', 'error');
+                    }
+                }
+            });
+        }
+
+        // ==========================================
+        // 3. EDITAR EVENTO (Preencher o formulário)
+        // ==========================================
+        window.editarEvento = function(id) {
+            const evento = window.eventosAtuais[id];
+            if(!evento) return;
+
+            window.eventoEditandoId = id; // Marca que o formulário está em modo de edição
+            
+            // Muda o visual do formulário para mostrar que está editando
+            document.getElementById('titulo-form').innerText = "Editando: " + evento.titulo;
+            document.getElementById('cabecalho-form').classList.replace('bg-blue-50', 'bg-yellow-50');
+            document.getElementById('btn-submit').innerText = "Atualizar Evento";
+            document.getElementById('btn-submit').classList.replace('bg-blue-600', 'bg-yellow-600');
+            document.getElementById('btn-submit').classList.replace('hover:bg-blue-700', 'hover:bg-yellow-700');
+            document.getElementById('btn-cancelar').classList.remove('hidden');
+
+            // Preenche os campos
+            document.getElementById('evento_titulo').value = evento.titulo || '';
+            document.getElementById('evento_data_texto').value = evento.data_texto || '';
+            document.getElementById('evento_data_real').value = evento.data_evento || '';
+            document.getElementById('evento_horario').value = evento.horario || '';
+            document.getElementById('evento_local').value = evento.local || '';
+            document.getElementById('evento_imagem').value = evento.imagem_url !== "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" ? evento.imagem_url : '';
+            document.getElementById('evento_descricao').value = evento.descricao || '';
+
+            // Rola a tela para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Cancela a edição e limpa os campos
+        window.cancelarEdicao = function() {
+            window.eventoEditandoId = null;
+            
+            document.getElementById('titulo-form').innerText = "Publicar Novo Evento";
+            document.getElementById('cabecalho-form').classList.replace('bg-yellow-50', 'bg-blue-50');
+            document.getElementById('btn-submit').innerText = "Publicar Evento";
+            document.getElementById('btn-submit').classList.replace('bg-yellow-600', 'bg-blue-600');
+            document.getElementById('btn-submit').classList.replace('hover:bg-yellow-700', 'hover:bg-blue-700');
+            document.getElementById('btn-cancelar').classList.add('hidden');
+            
+            document.getElementById('form-admin-evento').reset();
+        }
+
+        // ==========================================
+        // 4. SALVAR (Cadastrar Novo ou Atualizar Existente)
+        // ==========================================
+        document.getElementById('form-admin-evento').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true; 
+            btn.innerText = "Gravando...";
+            
+            const dados = {
+                titulo: document.getElementById('evento_titulo').value,
+                data_texto: document.getElementById('evento_data_texto').value,
+                data_evento: document.getElementById('evento_data_real').value,
+                horario: document.getElementById('evento_horario').value,
+                local: document.getElementById('evento_local').value,
+                imagem_url: document.getElementById('evento_imagem').value || "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                descricao: document.getElementById('evento_descricao').value
+            };
+
+            try {
+                if (window.eventoEditandoId) {
+                    // MODO ATUALIZAR
+                    dados.atualizado_em = new Date().toISOString();
+                    await updateDoc(doc(db, "agenda_eventos", window.eventoEditandoId), dados);
+                    Swal.fire({ title: 'Sucesso!', text: 'O Evento foi atualizado.', icon: 'success', timer: 2000, showConfirmButton: false });
+                } else {
+                    // MODO CADASTRAR NOVO
+                    dados.criado_em = new Date().toISOString();
+                    await addDoc(collection(db, "agenda_eventos"), dados);
+                    Swal.fire({ title: 'Sucesso!', text: 'Novo evento publicado no site!', icon: 'success', timer: 2000, showConfirmButton: false });
+                }
+                cancelarEdicao(); // Limpa o formulário e volta pro estado original
+            } catch (error) { 
+                console.error(error);
+                Swal.fire('Erro!', 'Ocorreu um erro ao gravar o evento.', 'error');
+            } finally { 
+                btn.disabled = false; 
+                btn.innerText = window.eventoEditandoId ? "Atualizar Evento" : "Publicar Evento"; 
+            }
+        });
+    </script>
+</body>
+</html>

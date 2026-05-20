@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respostas do Site - Admin Renascer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <header class="bg-gray-900 text-white shadow-md relative z-50">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-blue-500">RENASCER</span></h1>
+            
+            <nav class="hidden md:flex space-x-8 font-medium text-sm">
+                <a href="admin-dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
+                <a href="admin.html" class="text-blue-400 border-b-2 border-blue-400 pb-1">Respostas do Site</a>
+                <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
+                <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
+                <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
+            </nav>
+            
+           <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
+            
+            <button id="btn-menu-mobile" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button> 
+        </div>
+
+        <div id="menu-mobile" class="hidden md:hidden bg-gray-800 border-t border-gray-700 absolute w-full left-0 shadow-2xl">
+            <nav class="flex flex-col px-6 py-4 space-y-5 font-medium text-base">
+                <a href="admin-dashboard.html" class="block text-gray-300 hover:text-white transition">Dashboard</a>
+                <a href="admin.html" class="block text-gray-300 hover:text-white transition">Respostas do Site</a>
+                <a href="admin-membros.html" class="block text-gray-300 hover:text-white transition">Membresia</a>
+                <a href="admin-eventos.html" class="block text-gray-300 hover:text-white transition">Publicar Eventos</a>
+                <a href="admin-perfil.html" class="block text-gray-300 hover:text-white transition">Meu Perfil</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-10">
+        <div class="flex overflow-x-auto bg-white rounded-xl shadow-sm mb-8 text-sm hide-scrollbar">
+            <button onclick="switchTab('conexoes_novos_membros', this)" class="tab-btn px-5 py-4 whitespace-nowrap active-tab">Novos Contatos</button>
+            <button onclick="switchTab('inscricoes_batismo', this)" class="tab-btn px-5 py-4 whitespace-nowrap border-b-2 border-transparent">Batismo</button>
+            <button onclick="switchTab('inscricoes_voluntarios', this)" class="tab-btn px-5 py-4 whitespace-nowrap border-b-2 border-transparent">Voluntários</button>
+            <button onclick="switchTab('pedidos_oracao', this)" class="tab-btn px-5 py-4 whitespace-nowrap border-b-2 border-transparent">Pedidos de Oração</button>
+            <button onclick="switchTab('interesse_grupos', this)" class="tab-btn px-5 py-4 whitespace-nowrap border-b-2 border-transparent">Interesse Grupos</button>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                <h2 id="tab-title" class="text-xl font-bold text-gray-800">Novos Contatos</h2>
+                <span id="count-badge" class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-bold">0 registros</span>
+            </div>
+            <div class="overflow-x-auto w-full">
+                <table class="w-full text-left">
+                    <thead id="table-head" class="bg-gray-50 border-b border-gray-200 text-gray-400 text-[10px] uppercase tracking-widest font-bold">
+                    </thead>
+                    <tbody id="table-body" class="divide-y divide-gray-100">
+                    </tbody>
+                </table>
+            </div>
+            <div id="loading" class="p-20 text-center text-gray-400 font-medium">Carregando dados...</div>
+        </div>
+    </main>
+
+    <div id="modal-pedido" class="fixed inset-0 bg-black bg-opacity-70 hidden flex justify-center items-center z-[100] p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-xl relative my-auto">
+            <button onclick="fecharPedido()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 font-bold text-3xl leading-none">&times;</button>
+            <div class="flex items-center gap-4 mb-6 border-b border-gray-100 pb-6">
+                <div class="w-14 h-14 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-3xl shrink-0">🙏</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900" id="pedido-nome">Nome do Solicitante</h2>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mt-1" id="pedido-tipo">Público</p>
+                </div>
+            </div>
+            <div class="mb-2"><p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Motivo do Pedido:</p></div>
+            <div class="bg-gray-50 p-6 rounded-2xl border-gray-200 mb-8 max-h-64 overflow-y-auto hide-scrollbar">
+                <p class="text-gray-800 text-base leading-relaxed whitespace-pre-wrap" id="pedido-texto"></p>
+            </div>
+            <div class="flex flex-col sm:flex-row justify-end gap-3">
+                <a id="pedido-whats" href="#" target="_blank" class="bg-gray-100 text-gray-700 border border-gray-200 px-5 py-3 rounded-xl font-bold hover:bg-green-50 hover:text-green-700 transition text-center flex items-center justify-center gap-2">
+                    <span class="text-xl">💬</span> Chamar no WhatsApp
+                </a>
+                <button id="btn-concluir-pedido" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2">
+                    ✓ Marcar Oração Realizada
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="menu.js"></script>
+
+    <script type="module">
+        // Adicionando as funções addDoc e deleteDoc na importação do Firestore
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, query, onSnapshot, doc, updateDoc, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+            authDomain: "site-renascer-eef39.firebaseapp.com",
+            projectId: "site-renascer-eef39",
+            storageBucket: "site-renascer-eef39.firebasestorage.app",
+            messagingSenderId: "1043023040737",
+            appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        let currentUnsubscribe = null;
+        window.dadosAtuais = {};
+
+        window.switchTab = function(collectionName, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+            btnElement.classList.add('active-tab');
+            
+            const titles = {
+                'conexoes_novos_membros': 'Novos Contatos',
+                'inscricoes_batismo': 'Inscrições para Batismo',
+                'inscricoes_voluntarios': 'Novos Voluntários',
+                'pedidos_oracao': 'Pedidos de Oração',
+                'interesse_grupos': 'Interesse em Grupos'
+            };
+            document.getElementById('tab-title').innerText = titles[collectionName];
+            loadData(collectionName);
+        }
+
+        function gerarLinkWhats(telefone, nome, motivo = "") {
+            if(!telefone) return "#";
+            const apenasNumeros = telefone.replace(/\D/g, "");
+            const numeroFinal = apenasNumeros.length <= 11 ? "55" + apenasNumeros : apenasNumeros;
+            const texto = window.encodeURIComponent(`Olá ${nome}, falo da Igreja Renascer! Recebemos sua solicitação sobre ${motivo}. Como podemos te ajudar?`);
+            return `https://api.whatsapp.com/send?phone=${numeroFinal}&text=${texto}`;
+        }
+
+        function loadData(collectionName) {
+            if (currentUnsubscribe) currentUnsubscribe();
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('table-body').innerHTML = '';
+            
+            currentUnsubscribe = onSnapshot(query(collection(db, collectionName)), (snapshot) => {
+                document.getElementById('loading').style.display = 'none';
+                const body = document.getElementById('table-body');
+                const head = document.getElementById('table-head');
+                body.innerHTML = '';
+                document.getElementById('count-badge').innerText = `${snapshot.size} registros`;
+
+                window.dadosAtuais = {};
+
+                snapshot.forEach((documento) => {
+                    const docId = documento.id;
+                    const data = documento.data();
+                    window.dadosAtuais[docId] = data;
+                    let row = '';
+                    
+                    const nomeParaWhats = data.nome || data.nome_solicitante || "Irmão(ã)";
+                    const assunto = collectionName.replace('inscricoes_', '').replace('conexoes_', '').replace('_', ' ');
+                    const linkWhats = gerarLinkWhats(data.telefone, nomeParaWhats, assunto);
+
+                    // --- MUDANÇA AQUI: Layout exclusivo para Novos Contatos com o botão de Aceitar ---
+                    if (collectionName === 'conexoes_novos_membros') {
+                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes</th><th class="p-4 text-center">Ações</th></tr>';
+                        row = `<tr>
+                            <td class="p-4 font-bold text-gray-900">${data.nome || '-'}</td>
+                            <td class="p-4 text-gray-600">${data.telefone || '-'}</td>
+                            <td class="p-4 text-sm text-gray-500">${data.mensagem || data.departamento_interesse || ''}</td>
+                            <td class="p-4">
+                                <div class="flex justify-center gap-2">
+                                    <button onclick="tornarMembro('${docId}')" class="inline-flex items-center bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition shadow-sm" title="Adicionar aos Membros Oficiais">
+                                        👤 Aceitar
+                                    </button>
+                                    <a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition shadow-sm">
+                                        WhatsApp
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>`;
+                    } 
+                    else if (collectionName === 'pedidos_oracao') {
+                        const isRealizada = data.status === 'realizada';
+                        const badgeStatus = isRealizada 
+                            ? `<span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[9px] font-bold tracking-widest">REALIZADA</span>` 
+                            : `<span class="bg-orange-100 text-orange-700 px-2 py-0.5 rounded text-[9px] font-bold tracking-widest">PENDENTE</span>`;
+
+                        head.innerHTML = '<tr><th class="p-4">Status / Nome</th><th class="p-4 w-1/3">Pedido (Resumo)</th><th class="p-4">Público?</th><th class="p-4 text-center">Ações</th></tr>';
+                        
+                        row = `<tr class="${isRealizada ? 'bg-gray-50 opacity-60' : 'hover:bg-gray-50 transition'}">
+                            <td class="p-4">
+                                <div class="font-bold text-gray-900">${data.nome_solicitante}</div>
+                                <div class="mt-1">${badgeStatus}</div>
+                            </td>
+                            <td class="p-4 text-sm text-gray-600 max-w-xs truncate" title="Clique em Ver Pedido para ler inteiro">${data.motivo}</td>
+                            <td class="p-4 text-xs font-bold ${data.pedido_publico ? 'text-green-600' : 'text-red-600'}">${data.pedido_publico ? 'SIM' : 'SIGILO'}</td>
+                            <td class="p-4 text-center">
+                                <div class="flex justify-center gap-2">
+                                    <button onclick="abrirPedido('${docId}')" class="bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-100 transition shadow-sm">
+                                        👁️ Ver
+                                    </button>
+                                    ${!isRealizada ? `
+                                    <button onclick="marcarOracao('${docId}')" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition shadow-sm">
+                                        ✓ Feito
+                                    </button>` : ''}
+                                </div>
+                            </td>
+                        </tr>`;
+                    } else if (collectionName === 'inscricoes_batismo') {
+                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Fez Curso?</th><th class="p-4 text-right">Ação</th></tr>';
+                        row = `<tr>
+                            <td class="p-4 font-bold text-gray-900">${data.nome}</td>
+                            <td class="p-4 text-gray-600">${data.telefone}</td>
+                            <td class="p-4 text-sm font-bold ${data.concluiu_curso ? 'text-green-600' : 'text-orange-500'}">${data.concluiu_curso ? 'CONCLUÍDO' : 'PENDENTE'}</td>
+                            <td class="p-4 text-right">
+                                <a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>
+                            </td>
+                        </tr>`;
+                    } else {
+                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes</th><th class="p-4 text-right">Ação</th></tr>';
+                        row = `<tr>
+                            <td class="p-4 font-bold text-gray-900">${data.nome}</td>
+                            <td class="p-4 text-gray-600">${data.telefone}</td>
+                            <td class="p-4 text-sm text-gray-500">${data.departamento_interesse || data.perfil_desejado || data.mensagem || ''}</td>
+                            <td class="p-4 text-right">
+                                <a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>
+                            </td>
+                        </tr>`;
+                    }
+                    body.innerHTML += row;
+                });
+            });
+        }
+
+        // ==============================================================
+        // NOVA FUNÇÃO: Transferir de Novos Contatos para Membros
+        // ==============================================================
+        window.tornarMembro = function(id) {
+            const contato = window.dadosAtuais[id];
+            if(!contato) return;
+
+            // Abre o popup do SweetAlert2 perguntando se quer confirmar
+            Swal.fire({
+                title: 'Aceitar como Membro?',
+                text: `Você está prestes a adicionar ${contato.nome} à lista de Membresia Oficial. O cadastro será removido desta lista de pendências.`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#2563eb', // Azul
+                cancelButtonColor: '#ef4444', // Vermelho
+                confirmButtonText: 'Sim, adicionar!',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        // 1. Grava os dados na tabela de Membros Oficiais
+                        await addDoc(collection(db, "membros_oficiais"), {
+                            nome: contato.nome || '',
+                            telefone: contato.telefone || '',
+                            email: contato.email || '',
+                            observacoes: contato.mensagem ? `Integrado do site. Mensagem: ${contato.mensagem}` : 'Integrado pelo formulário de novos contatos.',
+                            criado_em: new Date().toISOString()
+                        });
+                        
+                        // 2. Apaga o registro atual para limpar a lista de "Novos Contatos"
+                        await deleteDoc(doc(db, "conexoes_novos_membros", id));
+                        
+                        // Mensagem de Sucesso Animada
+                        Swal.fire({
+                            title: 'Pronto!',
+                            text: `${contato.nome} agora é um membro oficial. Você pode completar a ficha lá na aba de Membresia.`,
+                            icon: 'success',
+                            confirmButtonColor: '#16a34a' // Verde
+                        });
+                        
+                    } catch (error) {
+                        console.error("Erro ao transferir:", error);
+                        Swal.fire('Ops!', 'Ocorreu um erro ao transferir o membro.', 'error');
+                    }
+                }
+            });
+        }
+
+        // ==========================================
+        // LÓGICA DO MODAL DE PEDIDO DE ORAÇÃO
+        // ==========================================
+        window.abrirPedido = function(id) {
+            const pedido = window.dadosAtuais[id];
+            if(!pedido) return;
+            document.getElementById('pedido-nome').innerText = pedido.nome_solicitante;
+            document.getElementById('pedido-tipo').innerText = pedido.pedido_publico ? 'Público' : 'Sigilo';
+            document.getElementById('pedido-texto').innerText = pedido.motivo;
+            document.getElementById('pedido-whats').href = gerarLinkWhats(pedido.telefone, pedido.nome_solicitante, "seu pedido de oração");
+
+            const btnConcluir = document.getElementById('btn-concluir-pedido');
+            if(pedido.status === 'realizada') {
+                btnConcluir.style.display = 'none';
+            } else {
+                btnConcluir.style.display = 'flex';
+                btnConcluir.onclick = function() { marcarOracao(id); };
+            }
+            document.getElementById('modal-pedido').classList.remove('hidden');
+        }
+
+        window.fecharPedido = function() {
+            document.getElementById('modal-pedido').classList.add('hidden');
+        }
+
+        window.marcarOracao = async function(id) {
+            try {
+                await updateDoc(doc(db, "pedidos_oracao", id), {
+                    status: 'realizada',
+                    data_realizacao: new Date().toISOString()
+                });
+                fecharPedido();
+            } catch (error) {
+                console.error("Erro ao atualizar oração", error);
+                alert("Erro ao marcar como realizada.");
+            }
+        }
+
+        loadData('conexoes_novos_membros');
+    </script>
+</body>
+</html> 
