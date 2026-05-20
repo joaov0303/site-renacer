@@ -111,14 +111,14 @@
                 <!-- Domingo -->
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Domingo</span>
+                        <span class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Segunda-Feira</span>
                         <span class="text-2xl">🌅</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Culto de Celebração</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Nosso encontro principal para toda a família, com louvor, palavra e espaço Kids.</p>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">GM -- Grupos de Mesa</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Uma extensão de nossa igreja, onde os membros se reúnem para estudo bíblico e comunhão.</p>
                     <div class="space-y-3">
                         <div class="flex items-center text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
-                            <span class="font-bold mr-2">🕕 18h00</span> 
+                            <span class="font-bold mr-2">🕕 19:30</span> 
                         </div>
                     </div>
                 </div>
@@ -138,21 +138,20 @@
                     </div>
                 </div>
 
-                <!-- Sexta-feira -->
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300">
+                 <!-- Domingo -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-bold text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Sexta-Feira</span>
-                        <span class="text-2xl">⚡</span>
+                        <span class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Domingo</span>
+                        <span class="text-2xl">🌅</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Encontro de Jovens</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Muito louvor, comunhão e uma mensagem direcionada para os desafios da juventude.</p>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Culto de Celebração</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Nosso encontro principal para toda a família, com louvor, palavra e espaço Kids.</p>
                     <div class="space-y-3">
                         <div class="flex items-center text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
-                            <span class="font-bold mr-2">🕗 20h00</span> - Conexão Jovem
+                            <span class="font-bold mr-2">🕕 18h00</span> 
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <!-- Destaques / Eventos Especiais -->
@@ -286,7 +285,8 @@
                 const card = `
                     <div class="flex flex-col sm:flex-row bg-gray-50 dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
                         <div class="sm:w-2/5 bg-gray-900 relative min-h-[200px]">
-                            <img src="${evento.imagem_url || 'https://via.placeholder.com/400x300'}" class="w-full h-full object-cover opacity-80">
+                            <link href="${evento.imagem_url || 'https://via.placeholder.com/400x300'}" class="w-full h-full object-cover opacity-80">
+                           
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                             <div class="absolute bottom-4 left-4 text-white">
                                 <span class="bg-blue-600 text-xs font-bold px-2 py-1 rounded-md uppercase">${evento.data_texto}</span>
