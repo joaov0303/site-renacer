@@ -5,47 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programação - Igreja Renascer</title>
     <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Configurar o Tailwind para alternar o dark mode via classe -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+
+    <!-- Script para evitar o "piscar" (FOUC) ao carregar a página -->
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans antialiased flex flex-col min-h-screen transition-colors duration-300">
 
     <!-- 1. Cabeçalho (Header) -->
-   <header class="bg-white shadow-sm fixed w-full z-50">
+    <header class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-none dark:border-b dark:border-gray-800 fixed w-full z-50 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="/index.html" class="font-bold text-2xl tracking-tighter text-gray-900 mr-2">IGREJA <span class="text-green-600">RENASCER</span></a>
+                    <a href="/index.html" class="font-bold text-2xl tracking-tighter text-gray-900 dark:text-white mr-2">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
                     <img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto">
                 </div>
 
-               <nav class="hidden md:flex space-x-8">
-                    <a href="/index.html" class="text-gray-600 hover:text-green-600 font-medium transition">Início</a>
-                    <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium transition">Quem Somos</a>
-                    <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium transition">Programação</a>
-                    <a href="/site_igreja/generosidade.html" class="text-gray-600 hover:text-green-600 font-medium transition">Contribua</a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Início</a>
+                    <a href="/site_igreja/quem-somos.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Quem Somos</a>
+                    <a href="/site_igreja/programacao.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Programação</a>
+                    <a href="/site_igreja/generosidade.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Contribua</a>
                 </nav>
 
-                <div class="hidden md:block">
-                    <a href="https://admin-renascer.netlify.app/" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
-                </div>
-
-                <div class="md:hidden flex items-center">
-                    <button id="btn-menu" class="text-gray-600 hover:text-green-600 focus:outline-none">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <!-- Grupo de botões à direita -->
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    
+                    <!-- Botão Tema Claro/Escuro -->
+                    <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 transition">
+                        <!-- Ícone da Lua (Escuro) -->
+                        <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <!-- Ícone do Sol (Claro) -->
+                        <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
                     </button>
-                </div>
 
+                    <div class="hidden md:block">
+                        <a href="https://admin-renascer.netlify.app/" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
+                    </div>
+
+                    <div class="md:hidden flex items-center">
+                        <button id="btn-menu" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 focus:outline-none p-2">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
             </div>
         </div>  
 
-        <div id="menu-mobile" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 flex flex-col py-4 px-6 space-y-4">
-            <a href="/index.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Início</a>
-            <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Quem Somos</a>
-            <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Programação</a>
+        <div id="menu-mobile" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 shadow-lg absolute w-full left-0 top-20 z-40 flex flex-col py-4 px-6 space-y-4">
+            <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Início</a>
+            <a href="/site_igreja/quem-somos.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Quem Somos</a>
+            <a href="/site_igreja/programacao.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Programação</a>
             <div class="pt-2">
                 <a href="/site_igreja/generosidade.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
             </div>
@@ -55,7 +88,7 @@
     <!-- 2. Conteúdo Principal: Programação -->
     <main class="flex-grow">
         <!-- Hero Interno -->
-        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
             <div class="absolute inset-0 z-0">
                 <!-- Imagem de adoração/culto -->
                 <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
@@ -63,59 +96,58 @@
             <div class="relative z-10 max-w-4xl mx-auto text-center">
                 <span class="text-green-400 font-bold tracking-widest uppercase text-sm mb-4 block">Nossa Agenda</span>
                 <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Programe-se</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Reunir a igreja é um dos nossos maiores privilégios. Confira nossos horários e junte-se a nós durante a semana.</p>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Reunir a igreja é um dos maiores privilégios. Confira nossos horários e junte-se a nós durante a semana.</p>
             </div>
         </section>
 
         <!-- Grade de Programação Semanal -->
         <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto -mt-16 relative z-20">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">Cultos Semanais</h2>
-                <p class="text-gray-600 mt-2">Encontros fixos que acontecem toda semana.</p>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Cultos Semanais</h2>
+                <p class="text-gray-600 dark:text-gray-400 mt-2">Encontros fixos que acontecem toda semana.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Domingo -->
-                <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-bold text-green-600 uppercase tracking-wider bg-green-50 px-3 py-1 rounded-full">Domingo</span>
+                        <span class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Domingo</span>
                         <span class="text-2xl">🌅</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Culto de Celebração</h3>
-                    <p class="text-gray-600 mb-6 text-sm">Nosso encontro principal para toda a família, com louvor, palavra e espaço Kids.</p>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Culto de Celebração</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Nosso encontro principal para toda a família, com louvor, palavra e espaço Kids.</p>
                     <div class="space-y-3">
-
-                        <div class="flex items-center text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div class="flex items-center text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
                             <span class="font-bold mr-2">🕕 18h00</span> 
                         </div>
                     </div>
                 </div>
 
                 <!-- Quarta-feira -->
-                <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-bold text-gray-500 uppercase tracking-wider bg-gray-100 px-3 py-1 rounded-full">Quarta-Feira</span>
+                        <span class="text-sm font-bold text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Quarta-Feira</span>
                         <span class="text-2xl">📖</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Celebração Profética</h3>
-                    <p class="text-gray-600 mb-6 text-sm">Um ambiente focado no estudo profundo da palavra e no fortalecimento da fé.</p>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Celebração Profética</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Um ambiente focado no estudo profundo da palavra e no fortalecimento da fé.</p>
                     <div class="space-y-3">
-                        <div class="flex items-center text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div class="flex items-center text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
                             <span class="font-bold mr-2">🕗 19h30</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Sexta-feira -->
-                <div class="bg-white p-8 rounded-3xl shadow-xl border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-bold text-gray-500 uppercase tracking-wider bg-gray-100 px-3 py-1 rounded-full">Sexta-Feira</span>
+                        <span class="text-sm font-bold text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Sexta-Feira</span>
                         <span class="text-2xl">⚡</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Encontro de Jovens</h3>
-                    <p class="text-gray-600 mb-6 text-sm">Muito louvor, comunhão e uma mensagem direcionada para os desafios da juventude.</p>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Encontro de Jovens</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Muito louvor, comunhão e uma mensagem direcionada para os desafios da juventude.</p>
                     <div class="space-y-3">
-                        <div class="flex items-center text-gray-700 bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <div class="flex items-center text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
                             <span class="font-bold mr-2">🕗 20h00</span> - Conexão Jovem
                         </div>
                     </div>
@@ -124,97 +156,47 @@
         </section>
 
         <!-- Destaques / Eventos Especiais -->
-        <section class="py-24 bg-white border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold text-gray-900">Eventos Especiais do Mês</h2>
-            <p class="text-gray-600 mt-2">Fique por dentro das datas importantes.</p>
-        </div>
-
-        <div id="container-eventos-dinamicos" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <p class="text-gray-400">Carregando eventos...</p>
-        </div>
-    </div>
-</section>
-
- <script>
-        const btnMenu = document.getElementById('btn-menu');
-        const menuMobile = document.getElementById('menu-mobile');
-
-        btnMenu.addEventListener('click', () => {
-            menuMobile.classList.toggle('hidden');
-        });
-    </script>
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
-        authDomain: "site-renascer-eef39.firebaseapp.com",
-        projectId: "site-renascer-eef39",
-        storageBucket: "site-renascer-eef39.firebasestorage.app",
-        messagingSenderId: "1043023040737",
-        appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const container = document.getElementById('container-eventos-dinamicos');
-
-    // Escuta mudanças na coleção 'agenda_eventos' em tempo real
-    const q = query(collection(db, "agenda_eventos"), orderBy("data_evento", "asc"));
-    
-    onSnapshot(q, (snapshot) => {
-        container.innerHTML = ''; // Limpa o "Carregando..."
-        
-        if (snapshot.empty) {
-            container.innerHTML = '<p class="text-gray-500 italic">Nenhum evento especial agendado para este mês.</p>';
-            return;
-        }
-
-        snapshot.forEach((doc) => {
-            const evento = doc.data();
-            // Criando o HTML do card dinamicamente
-            const card = `
-                <div class="flex flex-col sm:flex-row bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-200">
-                    <div class="sm:w-2/5 bg-gray-900 relative min-h-[200px]">
-                        <img src="${evento.imagem_url || 'https://via.placeholder.com/400x300'}" class="w-full h-full object-cover opacity-80">
-                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                            <span class="bg-blue-600 text-xs font-bold px-2 py-1 rounded-md uppercase">${evento.data_texto}</span>
-                        </div>
-                    </div>
-                    <div class="p-6 sm:w-3/5 flex flex-col justify-center">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">${evento.titulo}</h3>
-                        <p class="text-gray-600 text-sm mb-4">${evento.descricao}</p>
-                        <span class="text-gray-900 font-bold text-sm">📍 ${evento.local} • ${evento.horario}</span>
-                    </div>
+        <section class="py-24 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 transition-colors duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-12">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Eventos Especiais do Mês</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Fique por dentro das datas importantes.</p>
                 </div>
-            `;
-            container.innerHTML += card;
-        });
-    });
-</script>
+
+                <div id="container-eventos-dinamicos" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <p class="text-gray-400 dark:text-gray-500">Carregando eventos...</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
     <!-- 6. Rodapé (Footer) -->
- <footer class="bg-gray-900 text-white py-16">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
-       <div>
-               <a href="//index.html" class="font-bold text-2xl tracking-tighter text-White-900">IGREJA <span class="text-green-600">RENASCER</span></a>
+            <div>
+               <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
                 <p class="mt-4 text-gray-400">NÓS SOMOS FAMÍLIA! <br/>
-UM LUGAR PARA VOCÊ RENASCER!</p>
+                UM LUGAR PARA VOCÊ RENASCER!</p>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Contatos</h4>
-                <p class="mt-4 text-gray-400"></p> <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500">Av. São João, 805;-Capim Branco II</a></p>
-               <p class="mt-4 text-gray-400"></p>  <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500">contato: (38)9.99956-9758</a></p>
-               <p class="mt-4 text-gray-400"></p>  <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500">Instagram: @igrejarenascerunai</a></p>
+                <div class="space-y-4">
+                    <p>
+                        <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Av. São João, 805 - Capim Branco II</a>
+                    </p>
+                    <p>
+                        <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Contato: (38) 99995-6975</a>
+                    </p>
+                    <p>
+                        <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Instagram: @igrejarenascerunai</a>
+                    </p>
+                </div>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Fique por dentro</h4>
                 <form id="form-newsletter" class="flex gap-2">
-                    <input type="email" id="email-newsletter" placeholder="Seu melhor e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    <input type="email" id="email-newsletter" placeholder="Seu melhor e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 dark:text-white dark:bg-gray-800 dark:border dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500" required>
                     <button type="submit" class="bg-green-600 px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition">Assinar</button>
                 </form>
             </div>
@@ -223,5 +205,103 @@ UM LUGAR PARA VOCÊ RENASCER!</p>
             &copy; 2026 Igreja Renascer <br/> Todos os direitos reservados.
         </div>
     </footer>
-    </body>
-    </html>
+
+    <!-- Scripts -->
+    <script>
+        // Lógica do Menu Mobile
+        const btnMenu = document.getElementById('btn-menu');
+        const menuMobile = document.getElementById('menu-mobile');
+
+        btnMenu.addEventListener('click', () => {
+            menuMobile.classList.toggle('hidden');
+        });
+
+        // Lógica do Theme Toggle (Claro / Escuro)
+        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        var themeToggleBtn = document.getElementById('theme-toggle');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+    </script>
+
+    <!-- Script do Firebase (Eventos Dinâmicos) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+            authDomain: "site-renascer-eef39.firebaseapp.com",
+            projectId: "site-renascer-eef39",
+            storageBucket: "site-renascer-eef39.firebasestorage.app",
+            messagingSenderId: "1043023040737",
+            appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const container = document.getElementById('container-eventos-dinamicos');
+
+        // Escuta mudanças na coleção 'agenda_eventos' em tempo real
+        const q = query(collection(db, "agenda_eventos"), orderBy("data_evento", "asc"));
+        
+        onSnapshot(q, (snapshot) => {
+            container.innerHTML = ''; // Limpa o "Carregando..."
+            
+            if (snapshot.empty) {
+                container.innerHTML = '<p class="text-gray-500 dark:text-gray-400 italic">Nenhum evento especial agendado para este mês.</p>';
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const evento = doc.data();
+                // Criando o HTML do card dinamicamente COM CLASSES DARK MODE
+                const card = `
+                    <div class="flex flex-col sm:flex-row bg-gray-50 dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                        <div class="sm:w-2/5 bg-gray-900 relative min-h-[200px]">
+                            <img src="${evento.imagem_url || 'https://via.placeholder.com/400x300'}" class="w-full h-full object-cover opacity-80">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 text-white">
+                                <span class="bg-blue-600 text-xs font-bold px-2 py-1 rounded-md uppercase">${evento.data_texto}</span>
+                            </div>
+                        </div>
+                        <div class="p-6 sm:w-3/5 flex flex-col justify-center">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${evento.titulo}</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${evento.descricao}</p>
+                            <span class="text-gray-900 dark:text-gray-300 font-bold text-sm">📍 ${evento.local} • ${evento.horario}</span>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        });
+    </script>
+</body>
+</html>
