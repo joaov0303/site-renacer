@@ -2,56 +2,85 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <!-- ESSENCIAL: Esta tag avisa aos navegadores móveis para respeitarem o tamanho da tela -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="icon" type="image/x-icon" href="/img/logo_branca.png">   
     <title>Igreja Renascer - Bem-vindo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-    <header class="bg-white shadow-sm fixed w-full z-50">
+    <!-- 1. Configurar o Tailwind para alternar o dark mode via classe -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+
+    <!-- 2. Script para evitar o "piscar" (FOUC) ao carregar a página -->
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans antialiased transition-colors duration-300">
+
+    <header class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-none dark:border-b dark:border-gray-800 fixed w-full z-50 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="/index.html" class="font-bold text-xl sm:text-2xl tracking-tighter text-gray-900 mr-2">IGREJA <span class="text-green-600">RENASCER</span></a>
+                    <a href="/index.html" class="font-bold text-xl sm:text-2xl tracking-tighter text-gray-900 dark:text-white mr-2">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
                     <img src="/img/logo.png" alt="Igreja Renascer" class="h-10 sm:h-12 w-auto">
                 </div>
 
                 <nav class="hidden md:flex space-x-8">
-                    <a href="/index.html" class="text-gray-600 hover:text-green-600 font-medium transition">Início</a>
-                    <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium transition">Quem Somos</a>
-                    <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium transition">Programação</a>
-                    <a href="/site_igreja/generosidade.html" class="text-gray-600 hover:text-green-600 font-medium transition">Contribua</a>
+                    <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Início</a>
+                    <a href="/site_igreja/quem-somos.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Quem Somos</a>
+                    <a href="/site_igreja/programacao.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Programação</a>
+                    <a href="/site_igreja/generosidade.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Contribua</a>
                 </nav>
 
-                <div class="hidden md:block">
-                    <a href="https://admin-renascer.netlify.app/" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
-                </div>
-
-                <div class="md:hidden flex items-center">
-                    <button id="btn-menu" class="text-gray-600 hover:text-green-600 focus:outline-none">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <!-- Grupo de botões à direita -->
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    
+                    <!-- 3. Botão Tema Claro/Escuro -->
+                    <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 transition">
+                        <!-- Ícone da Lua (Escuro) -->
+                        <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <!-- Ícone do Sol (Claro) -->
+                        <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
                     </button>
+
+                    <div class="hidden md:block">
+                        <a href="https://admin-renascer.netlify.app/" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
+                    </div>
+
+                    <div class="md:hidden flex items-center">
+                        <button id="btn-menu" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 focus:outline-none p-2">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
             </div>
         </div>  
 
-        <!-- AJUSTE: Adicionado top-20 e z-40 para o menu não ficar escondido atrás de outros elementos -->
-        <div id="menu-mobile" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 top-20 z-40 flex flex-col py-4 px-6 space-y-4">
-            <a href="/index.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Início</a>
-            <a href="/site_igreja/quem-somos.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Quem Somos</a>
-            <a href="/site_igreja/programacao.html" class="text-gray-600 hover:text-green-600 font-medium text-lg transition">Programação</a>
+        <div id="menu-mobile" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 shadow-lg absolute w-full left-0 top-20 z-40 flex flex-col py-4 px-6 space-y-4">
+            <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Início</a>
+            <a href="/site_igreja/quem-somos.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Quem Somos</a>
+            <a href="/site_igreja/programacao.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Programação</a>
             <div class="pt-2">
                 <a href="/site_igreja/generosidade.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
             </div>
-            <div class="pt-2 border-t mt-2">
-                <a href="https://admin-renascer.netlify.app/" class="inline-block text-green-600 font-semibold hover:text-green-700 transition">Login (Admin)</a>
+            <div class="pt-2 border-t dark:border-gray-800 mt-2">
+                <a href="https://admin-renascer.netlify.app/" class="inline-block text-green-600 dark:text-green-500 font-semibold hover:text-green-700 dark:hover:text-green-400 transition">Login (Admin)</a>
             </div>
         </div>
     </header>
@@ -73,27 +102,27 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-16">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <a href="/site_igreja/quero-batizar.html" class="block">
-                <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">💧</div>
-                    <h3 class="font-bold text-lg">Quero me Batizar</h3>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">💧</div>
+                    <h3 class="font-bold text-lg dark:text-white">Quero me Batizar</h3>
                 </div>
             </a>
             <a href="/site_igreja/seja-voluntario.html" class="block">
-                <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🤝</div>
-                    <h3 class="font-bold text-lg">Seja Voluntário</h3>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🤝</div>
+                    <h3 class="font-bold text-lg dark:text-white">Seja Voluntário</h3>
                 </div>
             </a>
             <a href="/site_igreja/pedidos-oracao.html" class="block">
-                <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🙏</div>
-                    <h3 class="font-bold text-lg">Pedidos de Oração</h3>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">🙏</div>
+                    <h3 class="font-bold text-lg dark:text-white">Pedidos de Oração</h3>
                 </div>
             </a>
             <a href="/site_igreja/encontre-um-grupo.html" class="block">
-                <div class="bg-white p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">👥</div>
-                    <h3 class="font-bold text-lg">Encontre um Grupo</h3>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">👥</div>
+                    <h3 class="font-bold text-lg dark:text-white">Encontre um Grupo</h3>
                 </div>
             </a>
         </div>
@@ -102,59 +131,59 @@
     <section id="quem-somos" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Nossa Missão</h2>
-                <p class="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed">Somos uma igreja grande para servir e pequena para se importar. Nosso foco é amar a Deus sobre todas as coisas e amar as pessoas através de ações práticas e relacionamento verdadeiro.</p>
-                <a href="/site_igreja/quem-somos.html" class="text-green-600 font-bold hover:text-green-800 flex items-center gap-2">Leia nossa história completa <span aria-hidden="true">→</span></a>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">Nossa Missão</h2>
+                <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">Somos uma igreja grande para servir e pequena para se importar. Nosso foco é amar a Deus sobre todas as coisas e amar as pessoas através de ações práticas e relacionamento verdadeiro.</p>
+                <a href="/site_igreja/quem-somos.html" class="text-green-600 dark:text-green-500 font-bold hover:text-green-800 dark:hover:text-green-400 flex items-center gap-2">Leia nossa história completa <span aria-hidden="true">→</span></a>
             </div>
-            <div class="bg-gray-200 rounded-3xl h-64 sm:h-80 w-full object-cover shadow-lg flex items-center justify-center overflow-hidden">
-                 <img src="/img/jesus.jpeg" alt="Comunidade" class="w-full h-full object-cover">
+            <div class="bg-gray-200 dark:bg-gray-800 rounded-3xl h-64 sm:h-80 w-full object-cover shadow-lg flex items-center justify-center overflow-hidden">
+                 <img src="/img/jesus.jpeg" alt="Comunidade" class="w-full h-full object-cover opacity-90">
             </div>
         </div>
     </section>
 
-    <section id="programacao" class="bg-gray-100 py-24">
+    <section id="programacao" class="bg-gray-100 dark:bg-gray-800 py-24 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Nossa Programação</h2>
-                <p class="text-gray-600 mt-4 text-base sm:text-lg">Junte-se a nós durante a semana.</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Nossa Programação</h2>
+                <p class="text-gray-600 dark:text-gray-300 mt-4 text-base sm:text-lg">Junte-se a nós durante a semana.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border-l-4 border-green-600">
-                    <span class="text-sm font-bold text-green-600 uppercase tracking-wider">Domingo</span>
-                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-2">Culto de Celebração</h3>
-                    <p class="text-gray-600">Horários: 18h</p>
+                <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-md border-l-4 border-green-600">
+                    <span class="text-sm font-bold text-green-600 dark:text-green-500 uppercase tracking-wider">Domingo</span>
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-2 dark:text-white">Culto de Celebração</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Horários: 18h</p>
                 </div>
-                <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border-l-4 border-gray-400">
-                    <span class="text-sm font-bold text-gray-500 uppercase tracking-wider">Quarta-feira</span>
-                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-2">Culto Fé e Ensino</h3>
-                    <p class="text-gray-600">Horário: 20h</p>
+                <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 rounded-2xl shadow-md border-l-4 border-gray-400 dark:border-gray-600">
+                    <span class="text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Quarta-feira</span>
+                    <h3 class="text-xl sm:text-2xl font-bold mt-2 mb-2 dark:text-white">Culto Fé e Ensino</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Horário: 20h</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-900 text-white py-16">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-               <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600">RENASCER</span></a>
+               <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
                 <p class="mt-4 text-gray-400 text-sm sm:text-base">NÓS SOMOS FAMÍLIA! <br/>UM LUGAR PARA VOCÊ RENASCER!</p>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Contatos</h4>
                 <p class="mt-4 text-gray-400 text-sm sm:text-base">
-                    <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500">Av. São João, 805 - Capim Branco II</a>
+                    <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Av. São João, 805 - Capim Branco II</a>
                 </p>
                 <p class="mt-4 text-gray-400 text-sm sm:text-base">  
-                    <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500">contato: (38) 99995-6975</a>
+                    <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">contato: (38) 99995-6975</a>
                 </p>
                 <p class="mt-4 text-gray-400 text-sm sm:text-base">  
-                    <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500">Instagram: @igrejarenascerunai</a>
+                    <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Instagram: @igrejarenascerunai</a>
                 </p>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Fique por dentro</h4>
                 <form id="form-newsletter" class="flex flex-col sm:flex-row gap-2">
-                    <input type="email" id="email-newsletter" placeholder="Seu e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    <input type="email" id="email-newsletter" placeholder="Seu e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 dark:text-white dark:bg-gray-800 dark:border dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500" required>
                     <button type="submit" class="bg-green-600 px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition w-full sm:w-auto">Assinar</button>
                 </form>
             </div>
@@ -165,15 +194,56 @@
     </footer>
 
     <script>
+        // ----------------------------------------
+        // Lógica do Menu Mobile
+        // ----------------------------------------
         const btnMenu = document.getElementById('btn-menu');
         const menuMobile = document.getElementById('menu-mobile');
 
         btnMenu.addEventListener('click', () => {
             menuMobile.classList.toggle('hidden');
         });
+
+        // ----------------------------------------
+        // Lógica do Theme Toggle (Claro / Escuro)
+        // ----------------------------------------
+        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        var themeToggleBtn = document.getElementById('theme-toggle');
+
+        // Mostra o ícone correspondente ao carregar a página
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            // Alterna os ícones
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            // Salva a configuração no Local Storage
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
     </script>
 
-    <!-- AJUSTE: Módulos do Firebase atualizados para importar via CDN diretamente no navegador -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
