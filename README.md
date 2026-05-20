@@ -1,2 +1,2 @@
 # site-renascer
-site renasce
+Site feito para a apresentação da igreja renascer e o gerenciamento dos membros!
