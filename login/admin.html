@@ -13,10 +13,9 @@
     <header class="bg-gray-900 text-white shadow-md relative z-50">
         <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
             <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-blue-500">RENASCER</span></h1>
-            
             <nav class="hidden md:flex space-x-8 font-medium text-sm">
-                <a href="admin-dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
-                <a href="admin.html" class="text-blue-400 border-b-2 border-blue-400 pb-1">Respostas do Site</a>
+                <a href="admin-dashboard.html" class="text-blue-400 border-b-2 border-blue-400 pb-1">Dashboard</a>
+                <a href="admin.html" class="text-gray-300 hover:text-white transition">Respostas do Site</a>
                 <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
@@ -321,5 +320,21 @@
 
         loadData('conexoes_novos_membros');
     </script>
+        <!-- Script do Menu Mobile -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnMenuMobile = document.getElementById('btn-menu-mobile');
+            const menuMobile = document.getElementById('menu-mobile');
+
+            btnMenuMobile.addEventListener('click', () => {
+                menuMobile.classList.toggle('hidden');
+            });
+        });
+    </script>
+
+    <!-- Seu script do Firebase continua aqui embaixo -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+</script>
 </body>
 </html> 
