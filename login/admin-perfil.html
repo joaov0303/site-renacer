@@ -12,14 +12,14 @@
 
     <header class="bg-gray-900 text-white shadow-md relative z-50">
         <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-blue-500">RENASCER</span></h1>
+            <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-green-500">RENASCER</span></h1>
             
             <nav class="hidden md:flex space-x-8 font-medium text-sm">
                 <a href="admin-dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
                 <a href="admin.html" class="text-gray-300 hover:text-white transition">Respostas do Site</a>
                 <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
-                <a href="admin-perfil.html" class="text-blue-400 border-b-2 border-blue-400 pb-1">Meu Perfil</a>
+                <a href="admin-perfil.html" class="text-green-400 border-b-2 border-green-400 pb-1">Meu Perfil</a>
             </nav>
             
             <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
@@ -37,7 +37,7 @@
                 <a href="admin-eventos.html" class="block text-gray-300 hover:text-white transition">Publicar Eventos</a>
                 <a href="admin-perfil.html" class="block text-gray-300 hover:text-white transition">Meu Perfil</a>
                 <hr class="border-gray-700">
-                <a href="/index.html" target="_blank" class="block text-blue-400 font-bold hover:text-blue-300 transition">← Ver Site Público</a>
+                <a href="/index.html" target="_blank" class="block text-green-400 font-bold hover:text-green-300 transition">← Ver Site Público</a>
             </nav>
         </div>
     </header>
@@ -52,7 +52,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             <div class="md:col-span-1 bg-white rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center h-fit">
-                <div id="avatar-container" class="w-24 h-24 bg-blue-600 text-white rounded-full flex items-center justify-center text-3xl font-bold shadow-inner mb-4 uppercase overflow-hidden">
+                <div id="avatar-container" class="w-24 h-24 bg-green-600 text-white rounded-full flex items-center justify-center text-3xl font-bold shadow-inner mb-4 uppercase overflow-hidden">
                     --
                 </div>
                 <h3 id="identidade-nome" class="font-bold text-xl text-gray-800 truncate w-full">Carregando...</h3>
@@ -74,10 +74,10 @@
                         <form id="form-dados-perfil" class="space-y-4">
                             <div>
                                 <label class="block font-bold text-xs text-gray-700 mb-1">Nome de Exibição</label>
-                                <input type="text" id="perfil-nome-input" placeholder="Ex: Insira o seu nome" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition" required>
+                                <input type="text" id="perfil-nome-input" placeholder="Ex: Insira o seu nome" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition" required>
                             </div>
 
-                            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-md text-sm">
+                            <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-md text-sm">
                                 Guardar Nome
                             </button>
                         </form>
@@ -93,7 +93,7 @@
                         <form id="form-senha" class="space-y-4">
                             <div>
                                 <label class="block font-bold text-xs text-gray-700 mb-1">Nova Palavra-passe</label>
-                                <input type="password" id="nova-senha" placeholder="Insira a nova senha" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition" required minlength="6">
+                                <input type="password" id="nova-senha" placeholder="Insira a nova senha" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition" required minlength="6">
                             </div>
                             <button type="submit" class="bg-gray-900 text-white px-6 py-3 rounded-xl font-bold hover:bg-black transition shadow-md text-sm">
                                 Atualizar Palavra-passe
@@ -144,7 +144,7 @@
                 // Exibe a imagem de perfil fixada
                 const avatarContainer = document.getElementById('avatar-container');
                 avatarContainer.innerHTML = `<img src="${fotoFixa}" alt="Foto de perfil" class="w-full h-full object-cover">`;
-                avatarContainer.classList.remove('bg-blue-600'); 
+                avatarContainer.classList.remove('bg-green-600'); 
 
                 // Preencher o input de nome
                 document.getElementById('perfil-nome-input').value = user.displayName || '';

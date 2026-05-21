@@ -12,9 +12,9 @@
 
     <header class="bg-gray-900 text-white shadow-md relative z-50">
         <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-blue-500">RENASCER</span></h1>
+            <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-green-500">RENASCER</span></h1>
             <nav class="hidden md:flex space-x-8 font-medium text-sm">
-                <a href="admin-dashboard.html" class="text-blue-400 border-b-2 border-blue-400 pb-1">Dashboard</a>
+                <a href="admin-dashboard.html" class="text-green-400 border-b-2 border-green-400 pb-1">Dashboard</a>
                 <a href="admin.html" class="text-gray-300 hover:text-white transition">Respostas do Site</a>
                 <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
@@ -51,7 +51,7 @@
         <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
             <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
                 <h2 id="tab-title" class="text-xl font-bold text-gray-800">Novos Contatos</h2>
-                <span id="count-badge" class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-bold">0 registros</span>
+                <span id="count-badge" class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-bold">0 registros</span>
             </div>
             <div class="overflow-x-auto w-full">
                 <table class="w-full text-left">
@@ -83,7 +83,7 @@
                 <a id="pedido-whats" href="#" target="_blank" class="bg-gray-100 text-gray-700 border border-gray-200 px-5 py-3 rounded-xl font-bold hover:bg-green-50 hover:text-green-700 transition text-center flex items-center justify-center gap-2">
                     <span class="text-xl">💬</span> Chamar no WhatsApp
                 </a>
-                <button id="btn-concluir-pedido" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2">
+                <button id="btn-concluir-pedido" class="bg-green-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2">
                     ✓ Marcar Oração Realizada
                 </button>
             </div>
@@ -169,7 +169,7 @@
                             <td class="p-4 text-sm text-gray-500">${data.mensagem || data.departamento_interesse || ''}</td>
                             <td class="p-4">
                                 <div class="flex justify-center gap-2">
-                                    <button onclick="tornarMembro('${docId}')" class="inline-flex items-center bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition shadow-sm" title="Adicionar aos Membros Oficiais">
+                                    <button onclick="tornarMembro('${docId}')" class="inline-flex items-center bg-green-50 text-green-700 border border-green-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition shadow-sm" title="Adicionar aos Membros Oficiais">
                                         👤 Aceitar
                                     </button>
                                     <a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition shadow-sm">
@@ -200,7 +200,7 @@
                                         👁️ Ver
                                     </button>
                                     ${!isRealizada ? `
-                                    <button onclick="marcarOracao('${docId}')" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition shadow-sm">
+                                    <button onclick="marcarOracao('${docId}')" class="bg-green-50 text-green-700 border border-green-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition shadow-sm">
                                         ✓ Feito
                                     </button>` : ''}
                                 </div>
