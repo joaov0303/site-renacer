@@ -22,7 +22,7 @@
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
             </nav>
             
-           <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
+           <a href="https://igrejarenascer.netlify.app/" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
             
             <button id="btn-menu-mobile" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -81,13 +81,14 @@
                 <p class="text-gray-800 text-base leading-relaxed whitespace-pre-wrap" id="pedido-texto"></p>
             </div>
             <div class="flex flex-col sm:flex-row justify-end gap-3">
-                <a id="pedido-whats" href="#" target="_blank" class="bg-gray-100 text-gray-700 border border-gray-200 px-5 py-3 rounded-xl font-bold hover:bg-green-50 hover:text-green-700 transition text-center flex items-center justify-center gap-2">
+                
+                <a id="pedido-whats" href="#" target="_blank" class="bg-gray-100 text-gray-700 border border-gray-200 px-5 py-3 rounded-xl font-bold hover:bg-green-50 hover:text-green-700 transition text-center flex items-center justify-center gap-2 cursor-pointer">
                     <span class="text-xl">💬</span> Chamar no WhatsApp
                 </a>
+                
                 <button id="btn-concluir-pedido" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2">
                     ✓ Marcar Oração Realizada
                 </button>
-
 
             </div>
         </div>
@@ -96,10 +97,8 @@
     <script src="menu.js"></script>
 
     <script type="module">
-        // Adicionando as funções addDoc e deleteDoc na importação do Firestore
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, query, onSnapshot, doc, updateDoc, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-
 
         const firebaseConfig = {
             apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
@@ -131,9 +130,15 @@
             loadData(collectionName);
         }
 
+        // ==========================================
+        // FUNÇÃO GERADORA DE LINK CORRIGIDA
+        // ==========================================
         function gerarLinkWhats(telefone, nome, motivo = "") {
-            if(!telefone) return "#";
-            const apenasNumeros = telefone.replace(/\D/g, "");
+            if(!telefone) return null; // Retorna nulo se não houver telefone
+            // O String() impede que o código quebre se o telefone vier como formato numérico do banco
+            const apenasNumeros = String(telefone).replace(/\D/g, "");
+            if (apenasNumeros.length < 8) return null; // Se for um número inválido muito curto
+            
             const numeroFinal = apenasNumeros.length <= 11 ? "55" + apenasNumeros : apenasNumeros;
             const texto = window.encodeURIComponent(`Olá ${nome}, falo da Igreja Renascer! Recebemos sua solicitação sobre ${motivo}. Como podemos te ajudar?`);
             return `https://api.whatsapp.com/send?phone=${numeroFinal}&text=${texto}`;
@@ -163,7 +168,6 @@
                     const assunto = collectionName.replace('inscricoes_', '').replace('conexoes_', '').replace('_', ' ');
                     const linkWhats = gerarLinkWhats(data.telefone, nomeParaWhats, assunto);
 
-                    // --- MUDANÇA AQUI: Layout exclusivo para Novos Contatos com o botão de Aceitar ---
                     if (collectionName === 'conexoes_novos_membros') {
                         head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes</th><th class="p-4 text-center">Ações</th></tr>';
                         row = `<tr>
@@ -175,9 +179,10 @@
                                     <button onclick="tornarMembro('${docId}')" class="inline-flex items-center bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition shadow-sm" title="Adicionar aos Membros Oficiais">
                                         👤 Aceitar
                                     </button>
+                                    ${linkWhats ? `
                                     <a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition shadow-sm">
                                         WhatsApp
-                                    </a>
+                                    </a>` : `<span class="text-[10px] text-gray-400 flex items-center">Sem Tel</span>`}
                                 </div>
                             </td>
                         </tr>`;
@@ -192,7 +197,7 @@
                         
                         row = `<tr class="${isRealizada ? 'bg-gray-50 opacity-60' : 'hover:bg-gray-50 transition'}">
                             <td class="p-4">
-                                <div class="font-bold text-gray-900">${data.nome_solicitante}</div>
+                                <div class="font-bold text-gray-900">${data.nome_solicitante || 'Anônimo'}</div>
                                 <div class="mt-1">${badgeStatus}</div>
                             </td>
                             <td class="p-4 text-sm text-gray-600 max-w-xs truncate" title="Clique em Ver Pedido para ler inteiro">${data.motivo}</td>
@@ -216,7 +221,7 @@
                             <td class="p-4 text-gray-600">${data.telefone}</td>
                             <td class="p-4 text-sm font-bold ${data.concluiu_curso ? 'text-green-600' : 'text-orange-500'}">${data.concluiu_curso ? 'CONCLUÍDO' : 'PENDENTE'}</td>
                             <td class="p-4 text-right">
-                                <a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>
+                                ${linkWhats ? `<a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>` : '-'}
                             </td>
                         </tr>`;
                     } else {
@@ -226,7 +231,7 @@
                             <td class="p-4 text-gray-600">${data.telefone}</td>
                             <td class="p-4 text-sm text-gray-500">${data.departamento_interesse || data.perfil_desejado || data.mensagem || ''}</td>
                             <td class="p-4 text-right">
-                                <a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>
+                                ${linkWhats ? `<a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>` : '-'}
                             </td>
                         </tr>`;
                     }
@@ -235,27 +240,22 @@
             });
         }
 
-        // ==============================================================
-        // NOVA FUNÇÃO: Transferir de Novos Contatos para Membros
-        // ==============================================================
         window.tornarMembro = function(id) {
             const contato = window.dadosAtuais[id];
             if(!contato) return;
 
-            // Abre o popup do SweetAlert2 perguntando se quer confirmar
             Swal.fire({
                 title: 'Aceitar como Membro?',
                 text: `Você está prestes a adicionar ${contato.nome} à lista de Membresia Oficial. O cadastro será removido desta lista de pendências.`,
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonColor: '#2563eb', // Azul
-                cancelButtonColor: '#ef4444', // Vermelho
+                confirmButtonColor: '#2563eb', 
+                cancelButtonColor: '#ef4444', 
                 confirmButtonText: 'Sim, adicionar!',
                 cancelButtonText: 'Cancelar'
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        // 1. Grava os dados na tabela de Membros Oficiais
                         await addDoc(collection(db, "membros_oficiais"), {
                             nome: contato.nome || '',
                             telefone: contato.telefone || '',
@@ -264,15 +264,13 @@
                             criado_em: new Date().toISOString()
                         });
                         
-                        // 2. Apaga o registro atual para limpar a lista de "Novos Contatos"
                         await deleteDoc(doc(db, "conexoes_novos_membros", id));
                         
-                        // Mensagem de Sucesso Animada
                         Swal.fire({
                             title: 'Pronto!',
                             text: `${contato.nome} agora é um membro oficial. Você pode completar a ficha lá na aba de Membresia.`,
                             icon: 'success',
-                            confirmButtonColor: '#16a34a' // Verde
+                            confirmButtonColor: '#16a34a'
                         });
                         
                     } catch (error) {
@@ -284,15 +282,36 @@
         }
 
         // ==========================================
-        // LÓGICA DO MODAL DE PEDIDO DE ORAÇÃO
+        // LÓGICA DO MODAL (COM AVISO SE NÃO TIVER FONE)
         // ==========================================
         window.abrirPedido = function(id) {
             const pedido = window.dadosAtuais[id];
             if(!pedido) return;
-            document.getElementById('pedido-nome').innerText = pedido.nome_solicitante;
+            
+            document.getElementById('pedido-nome').innerText = pedido.nome_solicitante || 'Anônimo';
             document.getElementById('pedido-tipo').innerText = pedido.pedido_publico ? 'Público' : 'Sigilo';
             document.getElementById('pedido-texto').innerText = pedido.motivo;
-            document.getElementById('pedido-whats').href = gerarLinkWhats(pedido.telefone, pedido.nome_solicitante, "seu pedido de oração");
+            
+            // Controle Inteligente do Botão do WhatsApp
+            const telefoneDoPedido = pedido.telefone || pedido.celular || pedido.whatsapp;
+            const linkWhats = gerarLinkWhats(telefoneDoPedido, pedido.nome_solicitante || 'Irmão(ã)', "seu pedido de oração");
+            const btnWhats = document.getElementById('pedido-whats');
+
+            if (linkWhats) {
+                // Se tiver telefone, o botão funciona normalmente
+                btnWhats.href = linkWhats;
+                btnWhats.target = "_blank";
+                btnWhats.onclick = null; // Limpa qualquer aviso anterior
+                btnWhats.classList.remove('opacity-50');
+            } else {
+                // Se NÃO tiver telefone, o botão mostra um alerta bonito
+                btnWhats.href = "javascript:void(0)";
+                btnWhats.removeAttribute('target');
+                btnWhats.classList.add('opacity-50');
+                btnWhats.onclick = function() {
+                    Swal.fire('Sem Contato', 'Esta pessoa não deixou um número de WhatsApp no pedido de oração.', 'info');
+                };
+            }
 
             const btnConcluir = document.getElementById('btn-concluir-pedido');
             if(pedido.status === 'realizada') {
@@ -301,6 +320,7 @@
                 btnConcluir.style.display = 'flex';
                 btnConcluir.onclick = function() { marcarOracao(id); };
             }
+            
             document.getElementById('modal-pedido').classList.remove('hidden');
         }
 
@@ -324,4 +344,4 @@
         loadData('conexoes_novos_membros');
     </script>
 </body>
-</html> 
+</html>
