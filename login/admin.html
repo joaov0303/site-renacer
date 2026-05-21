@@ -22,7 +22,7 @@
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
             </nav>
             
-           <a href="https://igrejarenascer.netlify.app/" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
+           <a href="https://site-renacer.vercel.app/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
             
             <button id="btn-menu-mobile" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -130,14 +130,10 @@
             loadData(collectionName);
         }
 
-        // ==========================================
-        // FUNÇÃO GERADORA DE LINK CORRIGIDA
-        // ==========================================
         function gerarLinkWhats(telefone, nome, motivo = "") {
-            if(!telefone) return null; // Retorna nulo se não houver telefone
-            // O String() impede que o código quebre se o telefone vier como formato numérico do banco
+            if(!telefone) return null; 
             const apenasNumeros = String(telefone).replace(/\D/g, "");
-            if (apenasNumeros.length < 8) return null; // Se for um número inválido muito curto
+            if (apenasNumeros.length < 8) return null; 
             
             const numeroFinal = apenasNumeros.length <= 11 ? "55" + apenasNumeros : apenasNumeros;
             const texto = window.encodeURIComponent(`Olá ${nome}, falo da Igreja Renascer! Recebemos sua solicitação sobre ${motivo}. Como podemos te ajudar?`);
@@ -168,6 +164,9 @@
                     const assunto = collectionName.replace('inscricoes_', '').replace('conexoes_', '').replace('_', ' ');
                     const linkWhats = gerarLinkWhats(data.telefone, nomeParaWhats, assunto);
 
+                    // =====================================
+                    // 1. ABA DE NOVOS CONTATOS
+                    // =====================================
                     if (collectionName === 'conexoes_novos_membros') {
                         head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes</th><th class="p-4 text-center">Ações</th></tr>';
                         row = `<tr>
@@ -183,10 +182,16 @@
                                     <a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition shadow-sm">
                                         WhatsApp
                                     </a>` : `<span class="text-[10px] text-gray-400 flex items-center">Sem Tel</span>`}
+                                    <button onclick="excluirRegistro('${collectionName}', '${docId}')" class="inline-flex items-center bg-red-50 text-red-700 border border-red-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition shadow-sm" title="Excluir">
+                                        🗑️
+                                    </button>
                                 </div>
                             </td>
                         </tr>`;
                     } 
+                    // =====================================
+                    // 2. ABA DE PEDIDOS DE ORAÇÃO
+                    // =====================================
                     else if (collectionName === 'pedidos_oracao') {
                         const isRealizada = data.status === 'realizada';
                         const badgeStatus = isRealizada 
@@ -211,32 +216,85 @@
                                     <button onclick="marcarOracao('${docId}')" class="bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition shadow-sm">
                                         ✓ Feito
                                     </button>` : ''}
+                                    <button onclick="excluirRegistro('${collectionName}', '${docId}')" class="inline-flex items-center bg-red-50 text-red-700 border border-red-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition shadow-sm" title="Excluir">
+                                        🗑️
+                                    </button>
                                 </div>
                             </td>
                         </tr>`;
-                    } else if (collectionName === 'inscricoes_batismo') {
-                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Fez Curso?</th><th class="p-4 text-right">Ação</th></tr>';
+                    } 
+                    // =====================================
+                    // 3. ABA DE INSCRIÇÕES DE BATISMO
+                    // =====================================
+                    else if (collectionName === 'inscricoes_batismo') {
+                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Fez Curso?</th><th class="p-4 text-center">Ações</th></tr>';
                         row = `<tr>
                             <td class="p-4 font-bold text-gray-900">${data.nome}</td>
                             <td class="p-4 text-gray-600">${data.telefone}</td>
                             <td class="p-4 text-sm font-bold ${data.concluiu_curso ? 'text-green-600' : 'text-orange-500'}">${data.concluiu_curso ? 'CONCLUÍDO' : 'PENDENTE'}</td>
-                            <td class="p-4 text-right">
-                                ${linkWhats ? `<a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>` : '-'}
+                            <td class="p-4 text-center">
+                                <div class="flex justify-center gap-2">
+                                    ${linkWhats ? `<a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>` : '-'}
+                                    <button onclick="excluirRegistro('${collectionName}', '${docId}')" class="inline-flex items-center bg-red-50 text-red-700 border border-red-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition shadow-sm" title="Excluir">
+                                        🗑️
+                                    </button>
+                                </div>
                             </td>
                         </tr>`;
-                    } else {
-                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes</th><th class="p-4 text-right">Ação</th></tr>';
+                    } 
+                    // =====================================
+                    // 4. OUTRAS ABAS (Voluntários, Grupos, etc)
+                    // =====================================
+                    else {
+                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes</th><th class="p-4 text-center">Ações</th></tr>';
                         row = `<tr>
                             <td class="p-4 font-bold text-gray-900">${data.nome}</td>
                             <td class="p-4 text-gray-600">${data.telefone}</td>
                             <td class="p-4 text-sm text-gray-500">${data.departamento_interesse || data.perfil_desejado || data.mensagem || ''}</td>
-                            <td class="p-4 text-right">
-                                ${linkWhats ? `<a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>` : '-'}
+                            <td class="p-4 text-center">
+                                <div class="flex justify-center gap-2">
+                                    ${linkWhats ? `<a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>` : '-'}
+                                    <button onclick="excluirRegistro('${collectionName}', '${docId}')" class="inline-flex items-center bg-red-50 text-red-700 border border-red-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition shadow-sm" title="Excluir">
+                                        🗑️
+                                    </button>
+                                </div>
                             </td>
                         </tr>`;
                     }
                     body.innerHTML += row;
                 });
+            });
+        }
+
+        // ==========================================
+        // NOVA FUNÇÃO: EXCLUIR REGISTRO GENÉRICO
+        // ==========================================
+        window.excluirRegistro = function(colecao, id) {
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Esta ação apagará permanentemente este registro.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Sim, excluir!',
+                cancelButtonText: 'Cancelar'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        await deleteDoc(doc(db, colecao, id));
+                        Swal.fire({
+                            title: 'Excluído!', 
+                            text: 'O registro foi removido com sucesso.', 
+                            icon: 'success', 
+                            timer: 2000, 
+                            showConfirmButton: false
+                        });
+                    } catch (error) {
+                        console.error("Erro ao excluir:", error);
+                        Swal.fire('Erro!', 'Não foi possível excluir o registro.', 'error');
+                    }
+                }
             });
         }
 
@@ -281,9 +339,6 @@
             });
         }
 
-        // ==========================================
-        // LÓGICA DO MODAL (COM AVISO SE NÃO TIVER FONE)
-        // ==========================================
         window.abrirPedido = function(id) {
             const pedido = window.dadosAtuais[id];
             if(!pedido) return;
@@ -292,19 +347,16 @@
             document.getElementById('pedido-tipo').innerText = pedido.pedido_publico ? 'Público' : 'Sigilo';
             document.getElementById('pedido-texto').innerText = pedido.motivo;
             
-            // Controle Inteligente do Botão do WhatsApp
             const telefoneDoPedido = pedido.telefone || pedido.celular || pedido.whatsapp;
             const linkWhats = gerarLinkWhats(telefoneDoPedido, pedido.nome_solicitante || 'Irmão(ã)', "seu pedido de oração");
             const btnWhats = document.getElementById('pedido-whats');
 
             if (linkWhats) {
-                // Se tiver telefone, o botão funciona normalmente
                 btnWhats.href = linkWhats;
                 btnWhats.target = "_blank";
-                btnWhats.onclick = null; // Limpa qualquer aviso anterior
+                btnWhats.onclick = null; 
                 btnWhats.classList.remove('opacity-50');
             } else {
-                // Se NÃO tiver telefone, o botão mostra um alerta bonito
                 btnWhats.href = "javascript:void(0)";
                 btnWhats.removeAttribute('target');
                 btnWhats.classList.add('opacity-50');
