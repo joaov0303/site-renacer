@@ -16,7 +16,7 @@
 
     <header class="bg-gray-900 text-white shadow-md relative z-50">
         <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-         <a href="/login/admin-dashboard.html">  <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-green-500">RENASCER</span></h1>
+         <a href="/login/admin-dashboard.html">  <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-green-500">RENASCER</span></h1></a>
             
             <nav class="hidden md:flex space-x-8 font-medium text-sm">
                 <a href="admin-dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
@@ -50,7 +50,7 @@
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden sticky top-8">
                 <div class="p-6 border-b border-gray-100 bg-green-50 transition-colors" id="cabecalho-form">
                     <h2 class="text-xl font-bold text-gray-800" id="titulo-form">Publicar Novo Evento</h2>
-                    <p class="text-sm text-gray-600 mt-1">Os dados aparecerão na aba "Programação".</p>
+                    <p class="text-sm text-gray-600 mt-1">Cadastre os eventos do mês, eles aparecerão na hora certa.</p>
                 </div>
                 <div class="p-6 max-h-[75vh] overflow-y-auto hide-scrollbar">
                     <form id="form-admin-evento" class="space-y-5">
@@ -101,13 +101,20 @@
         </div>
 
         <div class="lg:col-span-7">
+            
+            <div class="flex flex-wrap gap-2 mb-6" id="botoes-filtro">
+                <button id="btn-semana" onclick="mudarFiltro('semana')" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-green-600 text-white shadow-md transition">📅 Esta Semana</button>
+                <button id="btn-ativos" onclick="mudarFiltro('ativos')" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 transition">📋 Todos Futuros</button>
+                <button id="btn-expirados" onclick="mudarFiltro('expirados')" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 transition">🗑️ Expirados</button>
+            </div>
+
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
                 <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
                     <div>
-                        <h2 class="text-xl font-bold text-gray-800">Eventos Cadastrados</h2>
+                        <h2 class="text-xl font-bold text-gray-800" id="titulo-tabela">Eventos desta Semana</h2>
                         <p class="text-xs text-gray-500 mt-1">Os eventos expiram no dia seguinte à Data Real.</p>
                     </div>
-                    <span id="count-badge" class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-bold shrink-0">0 eventos</span>
+                    <span id="count-badge" class="bg-gray-200 text-gray-700 px-4 py-1 rounded-full text-sm font-bold shrink-0">0</span>
                 </div>
                 
                 <div class="overflow-x-auto w-full">
@@ -123,6 +130,13 @@
                         </tbody>
                     </table>
                 </div>
+                
+                <div id="mensagem-vazia" class="hidden p-16 text-center">
+                    <div class="text-4xl mb-3">📭</div>
+                    <h3 class="text-gray-800 font-bold text-lg">Nenhum evento aqui.</h3>
+                    <p class="text-gray-500 text-sm mt-1">A lista está vazia para este filtro.</p>
+                </div>
+
                 <div id="loading" class="p-10 text-center text-gray-400 font-medium">Buscando agenda...</div>
             </div>
         </div>
@@ -137,7 +151,6 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        // Importando ferramentas extras: deleteDoc, updateDoc, doc, onSnapshot, query, orderBy
         import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
         // Banco de Dados Oficial
@@ -153,38 +166,75 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Variáveis de controle
-        window.eventosAtuais = {};
+        // Variáveis de controle globais
+        window.eventosCadastrados = [];
+        window.eventosAtuais = {}; // Auxiliar para edição
         window.eventoEditandoId = null;
+        window.filtroAtual = 'semana'; // Filtro padrão ao entrar na página
 
         // ==========================================
-        // 1. CARREGAR E EXIBIR A LISTA DE EVENTOS
+        // 1. SISTEMA DE FILTRO INTELIGENTE
         // ==========================================
-        // Pegamos a data de hoje no formato YYYY-MM-DD para fazer a comparação do Time/Validade
-        const dataHoje = new Date().toISOString().split('T')[0];
-
-        onSnapshot(query(collection(db, "agenda_eventos"), orderBy('data_evento')), (snapshot) => {
-            const body = document.getElementById('table-body');
-            const loading = document.getElementById('loading');
+        window.mudarFiltro = function(filtro) {
+            window.filtroAtual = filtro;
             
-            body.innerHTML = '';
-            if(loading) loading.style.display = 'none';
-            document.getElementById('count-badge').innerText = `${snapshot.size} eventos`;
+            // Alterar o visual dos botões de filtro
+            const classeAtiva = "px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition ";
+            const classeInativa = "px-5 py-2.5 rounded-xl font-bold text-sm bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 transition";
+            
+            document.getElementById('btn-semana').className = filtro === 'semana' ? classeAtiva + "bg-green-600 text-white" : classeInativa;
+            document.getElementById('btn-ativos').className = filtro === 'ativos' ? classeAtiva + "bg-blue-600 text-white" : classeInativa;
+            document.getElementById('btn-expirados').className = filtro === 'expirados' ? classeAtiva + "bg-red-600 text-white" : classeInativa;
 
-            snapshot.forEach((documento) => {
-                const docId = documento.id;
-                const data = documento.data();
-                window.eventosAtuais[docId] = data;
+            // Altera o título da tabela
+            const titulos = {
+                'semana': 'Eventos desta Semana',
+                'ativos': 'Todos os Eventos Futuros',
+                'expirados': 'Eventos Expirados (Histórico)'
+            };
+            document.getElementById('titulo-tabela').innerText = titulos[filtro];
+
+            renderizarTabela();
+        }
+
+        // Função que desenha a tabela baseada no filtro selecionado
+        function renderizarTabela() {
+            const body = document.getElementById('table-body');
+            const mensagemVazia = document.getElementById('mensagem-vazia');
+            body.innerHTML = '';
+            
+            // Lógica de Datas
+            const dataHojeObj = new Date();
+            const dataHojeStr = dataHojeObj.toISOString().split('T')[0]; // Pega YYYY-MM-DD de hoje
+            
+            // Para "Esta Semana", vamos olhar 7 dias para frente
+            const dataLimiteObj = new Date();
+            dataLimiteObj.setDate(dataLimiteObj.getDate() + 7);
+            const dataLimiteStr = dataLimiteObj.toISOString().split('T')[0];
+
+            let contadorEventos = 0;
+
+            window.eventosCadastrados.forEach((eventoObj) => {
+                const docId = eventoObj.id;
+                const data = eventoObj.data;
                 
-                // SISTEMA DE VALIDADE (TIME): Verifica se a data real do evento já passou
-                const isExpirado = data.data_evento < dataHoje;
-                
-                // Define as cores do selo de validade
+                // Variáveis automáticas de status
+                const isExpirado = data.data_evento < dataHojeStr;
+                const isEstaSemana = data.data_evento >= dataHojeStr && data.data_evento <= dataLimiteStr;
+
+                // ==========================
+                // REGRAS DO FILTRO
+                // ==========================
+                if (window.filtroAtual === 'semana' && (!isEstaSemana || isExpirado)) return; // Sai se não for dessa semana ou já passou
+                if (window.filtroAtual === 'ativos' && isExpirado) return; // Sai se estiver nos ativos, mas a data já passou
+                if (window.filtroAtual === 'expirados' && !isExpirado) return; // Sai se estiver na aba de expirados, mas ainda vai acontecer
+
+                // Define as cores do selo de validade (Se for expirado, fica vermelho, senão verde)
                 const badgeClass = isExpirado ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700";
                 const badgeTexto = isExpirado ? "🔴 EXPIRADO" : "🟢 NO PRAZO";
                 const rowOpacidade = isExpirado ? "opacity-60 bg-gray-50" : "hover:bg-gray-50";
 
-                // Imagem de capa (ou ícone padrão se não tiver imagem)
+                // Imagem de capa (ou ícone padrão)
                 const imagem = data.imagem_url && data.imagem_url !== "" 
                     ? `<img src="${data.imagem_url}" class="w-12 h-12 rounded-lg object-cover border border-gray-200 shadow-sm shrink-0">`
                     : `<div class="w-12 h-12 rounded-lg bg-green-100 text-green-600 flex items-center justify-center font-bold text-xl shrink-0">📅</div>`;
@@ -212,11 +262,44 @@
                         </div>
                     </td>
                 </tr>`;
+                
+                contadorEventos++;
             });
-        });
+
+            // Atualiza a badge de contagem
+            document.getElementById('count-badge').innerText = `${contadorEventos} eventos`;
+            
+            // Exibe mensagem vazia se não tiver eventos no filtro atual
+            if(contadorEventos === 0) {
+                mensagemVazia.classList.remove('hidden');
+            } else {
+                mensagemVazia.classList.add('hidden');
+            }
+        }
 
         // ==========================================
-        // 2. EXCLUIR EVENTO (Com Alerta de Segurança)
+        // BUSCAR DADOS DO FIREBASE EM TEMPO REAL
+        // ==========================================
+        onSnapshot(query(collection(db, "agenda_eventos"), orderBy('data_evento')), (snapshot) => {
+            const loading = document.getElementById('loading');
+            if(loading) loading.style.display = 'none';
+
+            window.eventosCadastrados = [];
+            window.eventosAtuais = {};
+
+            snapshot.forEach((documento) => {
+                // Guarda no Array (para o filtro) e no Objeto (para facilitar a edição rápida)
+                window.eventosCadastrados.push({ id: documento.id, data: documento.data() });
+                window.eventosAtuais[documento.id] = documento.data();
+            });
+
+            // Manda desenhar a tabela com os novos dados recebidos
+            renderizarTabela();
+        });
+
+
+        // ==========================================
+        // 2. EXCLUIR EVENTO
         // ==========================================
         window.excluirEvento = function(id) {
             const evento = window.eventosAtuais[id];
@@ -235,7 +318,7 @@
                 if (result.isConfirmed) {
                     try {
                         await deleteDoc(doc(db, "agenda_eventos", id));
-                        Swal.fire('Excluído!', 'O evento foi removido da agenda.', 'success');
+                        Swal.fire({title: 'Excluído!', text:'O evento foi removido da agenda.', icon:'success', timer:2000, showConfirmButton:false});
                     } catch (error) {
                         console.error("Erro ao excluir:", error);
                         Swal.fire('Erro!', 'Não foi possível excluir o evento.', 'error');
@@ -251,9 +334,8 @@
             const evento = window.eventosAtuais[id];
             if(!evento) return;
 
-            window.eventoEditandoId = id; // Marca que o formulário está em modo de edição
+            window.eventoEditandoId = id; 
             
-            // Muda o visual do formulário para mostrar que está editando
             document.getElementById('titulo-form').innerText = "Editando: " + evento.titulo;
             document.getElementById('cabecalho-form').classList.replace('bg-green-50', 'bg-yellow-50');
             document.getElementById('btn-submit').innerText = "Atualizar Evento";
@@ -261,7 +343,6 @@
             document.getElementById('btn-submit').classList.replace('hover:bg-green-700', 'hover:bg-yellow-700');
             document.getElementById('btn-cancelar').classList.remove('hidden');
 
-            // Preenche os campos
             document.getElementById('evento_titulo').value = evento.titulo || '';
             document.getElementById('evento_data_texto').value = evento.data_texto || '';
             document.getElementById('evento_data_real').value = evento.data_evento || '';
@@ -270,11 +351,10 @@
             document.getElementById('evento_imagem').value = evento.imagem_url !== "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" ? evento.imagem_url : '';
             document.getElementById('evento_descricao').value = evento.descricao || '';
 
-            // Rola a tela para o topo
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Cancela a edição e limpa os campos
+        // Cancela a edição
         window.cancelarEdicao = function() {
             window.eventoEditandoId = null;
             
@@ -309,17 +389,15 @@
 
             try {
                 if (window.eventoEditandoId) {
-                    // MODO ATUALIZAR
                     dados.atualizado_em = new Date().toISOString();
                     await updateDoc(doc(db, "agenda_eventos", window.eventoEditandoId), dados);
                     Swal.fire({ title: 'Sucesso!', text: 'O Evento foi atualizado.', icon: 'success', timer: 2000, showConfirmButton: false });
                 } else {
-                    // MODO CADASTRAR NOVO
                     dados.criado_em = new Date().toISOString();
                     await addDoc(collection(db, "agenda_eventos"), dados);
                     Swal.fire({ title: 'Sucesso!', text: 'Novo evento publicado no site!', icon: 'success', timer: 2000, showConfirmButton: false });
                 }
-                cancelarEdicao(); // Limpa o formulário e volta pro estado original
+                cancelarEdicao();
             } catch (error) { 
                 console.error(error);
                 Swal.fire('Erro!', 'Ocorreu um erro ao gravar o evento.', 'error');
