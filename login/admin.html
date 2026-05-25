@@ -94,6 +94,30 @@
         </div>
     </div>
 
+    <div id="modal-ficha" class="fixed inset-0 bg-black bg-opacity-70 hidden flex justify-center items-center z-[100] p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-2xl relative my-auto">
+            <button onclick="fecharFicha()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 font-bold text-3xl leading-none">&times;</button>
+            <div class="flex items-center gap-4 mb-6 border-b border-gray-100 pb-6">
+                <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl shrink-0">📋</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900">Ficha de Inscrição</h2>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-bold mt-1" id="ficha-nome-header">Nome</p>
+                </div>
+            </div>
+            
+            <div class="mb-2"><p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Detalhes Preenchidos:</p></div>
+            
+            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 mb-8 max-h-[50vh] overflow-y-auto hide-scrollbar" id="ficha-conteudo">
+                </div>
+            
+            <div class="flex justify-end gap-3">
+                <button onclick="fecharFicha()" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-bold hover:bg-gray-300 transition shadow-sm">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Ativação do menu hambúrguer para dispositivos móveis
         document.getElementById('btn-menu-mobile')?.addEventListener('click', function() {
@@ -173,13 +197,16 @@
                     // 1. ABA DE NOVOS CONTATOS
                     // =====================================
                     if (collectionName === 'conexoes_novos_membros') {
-                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes</th><th class="p-4 text-center">Ações</th></tr>';
+                        head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes (Resumo)</th><th class="p-4 text-center">Ações</th></tr>';
                         row = `<tr>
                             <td class="p-4 font-bold text-gray-900">${data.nome || '-'}</td>
                             <td class="p-4 text-gray-600">${data.telefone || '-'}</td>
-                            <td class="p-4 text-sm text-gray-500">${data.mensagem || data.departamento_interesse || ''}</td>
+                            <td class="p-4 text-sm text-gray-500 max-w-xs truncate">${data.mensagem || data.departamento_interesse || ''}</td>
                             <td class="p-4">
                                 <div class="flex justify-center gap-2">
+                                    <button onclick="abrirFicha('${docId}')" class="inline-flex items-center bg-white text-gray-700 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-100 transition shadow-sm" title="Ver Ficha Completa">
+                                        👁️ Ficha
+                                    </button>
                                     <button onclick="tornarMembro('${docId}')" class="inline-flex items-center bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition shadow-sm" title="Adicionar aos Membros Oficiais">
                                         👤 Aceitar
                                     </button>
@@ -272,7 +299,7 @@
         }
 
         // ==========================================
-        // NOVA FUNÇÃO: EXCLUIR REGISTRO GENÉRICO
+        // EXCLUIR REGISTRO GENÉRICO
         // ==========================================
         window.excluirRegistro = function(colecao, id) {
             Swal.fire({
@@ -342,6 +369,50 @@
                     }
                 }
             });
+        }
+
+        // ==========================================
+        // NOVA FUNÇÃO: VISUALIZAR FICHA DO NOVO CONTATO
+        // ==========================================
+        window.abrirFicha = function(id) {
+            const contato = window.dadosAtuais[id];
+            if(!contato) return;
+
+            document.getElementById('ficha-nome-header').innerText = contato.nome || 'Nome não informado';
+
+            // Geração Dinâmica dos Dados
+            let htmlFicha = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
+            
+            // Função para formatar as chaves (ex: data_nascimento -> Data Nascimento)
+            const formatarChave = (chave) => {
+                return chave.split('_').map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1)).join(' ');
+            };
+
+            for (const [key, value] of Object.entries(contato)) {
+                // Ignorar campos em branco
+                if (value && String(value).trim() !== '') {
+                    // Tratar se for objeto, formata como json
+                    const valStr = typeof value === 'object' ? JSON.stringify(value) : value;
+                    
+                    // Se a mensagem for muito longa, ocupar a linha inteira na grid
+                    const fullWidth = (key === 'mensagem' || valStr.length > 50) ? 'col-span-1 md:col-span-2' : '';
+
+                    htmlFicha += `
+                        <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm ${fullWidth}">
+                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">${formatarChave(key)}</span>
+                            <span class="block text-gray-800 font-medium whitespace-pre-wrap">${valStr}</span>
+                        </div>
+                    `;
+                }
+            }
+            htmlFicha += '</div>';
+
+            document.getElementById('ficha-conteudo').innerHTML = htmlFicha;
+            document.getElementById('modal-ficha').classList.remove('hidden');
+        }
+
+        window.fecharFicha = function() {
+            document.getElementById('modal-ficha').classList.add('hidden');
         }
 
         window.abrirPedido = function(id) {

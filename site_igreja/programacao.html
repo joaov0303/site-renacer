@@ -6,17 +6,14 @@
     <title>Programação - Igreja Renascer</title>
     <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Configurar o Tailwind para alternar o dark mode via classe -->
     <script>
         tailwind.config = {
             darkMode: 'class',
         }
     </script>
 
-    <!-- Script para evitar o "piscar" (FOUC) ao carregar a página -->
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -27,7 +24,6 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans antialiased flex flex-col min-h-screen transition-colors duration-300">
 
-    <!-- 1. Cabeçalho (Header) -->
     <header class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-none dark:border-b dark:border-gray-800 fixed w-full z-50 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -44,16 +40,12 @@
                     <a href="/site_igreja/generosidade.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Contribua</a>
                 </nav>
 
-                <!-- Grupo de botões à direita -->
                 <div class="flex items-center space-x-2 md:space-x-4">
                     
-                    <!-- Botão Tema Claro/Escuro -->
                     <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 transition">
-                        <!-- Ícone da Lua (Escuro) -->
                         <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
-                        <!-- Ícone do Sol (Claro) -->
                         <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
@@ -85,12 +77,9 @@
         </div>
     </header>
 
-    <!-- 2. Conteúdo Principal: Programação -->
     <main class="flex-grow">
-        <!-- Hero Interno -->
         <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
             <div class="absolute inset-0 z-0">
-                <!-- Imagem de adoração/culto -->
                 <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
             </div>
             <div class="relative z-10 max-w-4xl mx-auto text-center">
@@ -100,7 +89,6 @@
             </div>
         </section>
 
-        <!-- Grade de Programação Semanal -->
         <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto -mt-16 relative z-20">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Cultos Semanais</h2>
@@ -108,7 +96,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Domingo -->
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Segunda-Feira</span>
@@ -123,7 +110,6 @@
                     </div>
                 </div>
 
-                <!-- Quarta-feira -->
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-sm font-bold text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Quarta-Feira</span>
@@ -138,8 +124,7 @@
                     </div>
                 </div>
 
-                 <!-- Domingo -->
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
+                 <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Domingo</span>
                         <span class="text-2xl">🌅</span>
@@ -154,12 +139,11 @@
                 </div>
         </section>
 
-        <!-- Destaques / Eventos Especiais -->
         <section class="py-24 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 transition-colors duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Eventos Especiais do Mês</h2>
-                    <p class="text-gray-600 dark:text-gray-400 mt-2">Fique por dentro das datas importantes.</p>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Próximos Eventos</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Fique por dentro da programação desta semana.</p>
                 </div>
 
                 <div id="container-eventos-dinamicos" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -170,7 +154,6 @@
 
     </main>
 
-    <!-- 6. Rodapé (Footer) -->
     <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
@@ -201,11 +184,10 @@
             </div>
         </div>
         <div class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            &copy; 2026 Igreja Renascer <br/> Todos os direitos reservados.
+            © 2026 Igreja Renascer <br/> Todos os direitos reservados.
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
         // Lógica do Menu Mobile
         const btnMenu = document.getElementById('btn-menu');
@@ -250,10 +232,10 @@
         });
     </script>
 
-    <!-- Script do Firebase (Eventos Dinâmicos) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        // IMPORTANTE: Adicionado o "where" aqui na linha abaixo
+        import { getFirestore, collection, query, where, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
@@ -268,14 +250,34 @@
         const db = getFirestore(app);
         const container = document.getElementById('container-eventos-dinamicos');
 
-        // Escuta mudanças na coleção 'agenda_eventos' em tempo real
-        const q = query(collection(db, "agenda_eventos"), orderBy("data_evento", "asc"));
+        // 1. Pegar a data de HOJE no formato correto localmente (YYYY-MM-DD)
+        const hoje = new Date();
+        const year = hoje.getFullYear();
+        const month = String(hoje.getMonth() + 1).padStart(2, '0');
+        const day = String(hoje.getDate()).padStart(2, '0');
+        const dataHojeStr = `${year}-${month}-${day}`;
+
+        // 2. Pegar a data LIMITE (hoje + 7 dias)
+        const limite = new Date(hoje);
+        limite.setDate(limite.getDate() + 7);
+        const limiteYear = limite.getFullYear();
+        const limiteMonth = String(limite.getMonth() + 1).padStart(2, '0');
+        const limiteDay = String(limite.getDate()).padStart(2, '0');
+        const dataLimiteStr = `${limiteYear}-${limiteMonth}-${limiteDay}`;
+
+        // 3. Montar a consulta (query) filtrando apenas eventos dessa janela
+        const q = query(
+            collection(db, "agenda_eventos"), 
+            where("data_evento", ">=", dataHojeStr),
+            where("data_evento", "<=", dataLimiteStr),
+            orderBy("data_evento", "asc")
+        );
         
         onSnapshot(q, (snapshot) => {
             container.innerHTML = ''; // Limpa o "Carregando..."
             
             if (snapshot.empty) {
-                container.innerHTML = '<p class="text-gray-500 dark:text-gray-400 italic">Nenhum evento especial agendado para este mês.</p>';
+                container.innerHTML = '<p class="text-gray-500 dark:text-gray-400 italic">Nenhum evento especial agendado para esta semana.</p>';
                 return;
             }
 
@@ -286,7 +288,7 @@
                     <div class="flex flex-col sm:flex-row bg-gray-50 dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
                         <div class="sm:w-2/5 bg-gray-900 relative min-h-[200px]">
                             <img src="${evento.imagem_url || 'https://via.placeholder.com/400x300'}" class="w-full h-full object-cover opacity-80">
-                           
+                            
                             <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                             <div class="absolute bottom-4 left-4 text-white">
                                 <span class="bg-green-600 text-xs font-bold px-2 py-1 rounded-md uppercase">${evento.data_texto}</span>
