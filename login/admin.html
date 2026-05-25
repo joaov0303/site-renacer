@@ -94,7 +94,12 @@
         </div>
     </div>
 
-    <script src="menu.js"></script>
+    <script>
+        // Ativação do menu hambúrguer para dispositivos móveis
+        document.getElementById('btn-menu-mobile')?.addEventListener('click', function() {
+            document.getElementById('menu-mobile').classList.toggle('hidden');
+        });
+    </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
