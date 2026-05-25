@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mulheres - Igreja Renascer</title>
-    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
+    <title>Galeria de Fotos - Igreja Renascer</title>
+    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Configurar o Tailwind para alternar o dark mode via classe -->
     <script>
         tailwind.config = {
             darkMode: 'class',
         }
     </script>
 
-    <!-- Script para evitar o "piscar" (FOUC) ao carregar a página -->
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -27,7 +24,6 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans antialiased flex flex-col min-h-screen transition-colors duration-300">
 
-    <!-- 1. Cabeçalho (Header) -->
     <header class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-none dark:border-b dark:border-gray-800 fixed w-full z-50 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -36,28 +32,20 @@
                     <a href="/index.html" class="font-bold text-2xl tracking-tighter text-gray-900 dark:text-white mr-2">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
                     <img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto">
                 </div>
-
-               <nav class="hidden md:flex space-x-8">
+   
+                <nav class="hidden md:flex space-x-8">
                     <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Início</a>
                     <a href="/site_igreja/quem-somos.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Quem Somos</a>
                     <a href="/site_igreja/programacao.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Programação</a>
-                    <a href="/site_igreja/galeria.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Galeria</a>
+                    <a href="/site_igreja/galeria.html" class="text-green-600 dark:text-green-500 font-semibold border-b-2 border-green-600 dark:border-green-500 pb-1">Galeria</a>
                     <a href="/site_igreja/generosidade.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Contribua</a>
                 </nav>
 
-                <!-- Grupo de botões à direita -->
                 <div class="flex items-center space-x-2 md:space-x-4">
                     
-                    <!-- Botão Tema Claro/Escuro -->
                     <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 transition">
-                        <!-- Ícone da Lua (Escuro) -->
-                        <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                        </svg>
-                        <!-- Ícone do Sol (Claro) -->
-                        <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                        </svg>
+                        <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
                     </button>
 
                     <div class="hidden md:block">
@@ -66,9 +54,7 @@
 
                     <div class="md:hidden flex items-center">
                         <button id="btn-menu" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 focus:outline-none p-2">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </button>
                     </div>
 
@@ -80,111 +66,114 @@
             <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Início</a>
             <a href="/site_igreja/quem-somos.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Quem Somos</a>
             <a href="/site_igreja/programacao.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Programação</a>
+            <a href="/site_igreja/galeria.html" class="text-green-600 dark:text-green-500 font-medium text-lg transition">Galeria</a>
             <div class="pt-2">
                 <a href="/site_igreja/generosidade.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
             </div>
         </div>
     </header>
 
-    <!-- 2. Conteúdo Principal -->
     <main class="flex-grow">
-        <!-- Hero Interno -->
         <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
             <div class="absolute inset-0 z-0">
-                <!-- Imagem com clima feminino/comunhão -->
-                <img src="/img/mulheres 2.png" alt="Mulheres Renascer" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Galeria" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
             </div>
             <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <span class="text-pink-400 font-bold tracking-widest uppercase text-sm mb-4 block">Ministério Feminino</span>
-                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Mulheres Renascer</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Um ambiente seguro de cura, encorajamento e crescimento mútuo. Conecte-se com outras mulheres através dos nossos canais.</p>
+                <span class="text-green-400 font-bold tracking-widest uppercase text-sm mb-4 block">Memórias & Momentos</span>
+                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Galeria de Fotos</h1>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Relembre os momentos marcantes de adoração, comunhão e celebração da nossa família de fé.</p>
             </div>
         </section>
 
-        <!-- Seção de Links e QR Codes -->
-        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto -mt-16 relative z-20">
-            
-            <!-- max-w-md e mx-auto garantem que o cartão fique com um tamanho ideal e centralizado -->
-            <div class="max-w-md mx-auto">
+        <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto -mt-10 relative z-20">
+            <div class="bg-white dark:bg-gray-800 p-8 sm:p-12 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 text-center max-w-3xl mx-auto">
+                <div class="text-4xl mb-4">📸</div>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Álbum do Último Culto de Celebração</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto">Todas as fotos do nosso último encontro de domingo já estão disponíveis no nosso drive público externo. Clique no botão abaixo para visualizar ou fazer download.</p>
                 
-                <!-- Cartão Único (WhatsApp) -->
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl border-t-4 border-pink-600 flex flex-col items-center text-center hover:-translate-y-2 transition duration-300">
-                    <div class="w-16 h-16 bg-pink-50 dark:bg-pink-900/40 text-pink-600 dark:text-pink-400 rounded-full flex items-center justify-center mb-4 text-3xl">
-                        💬
-                    </div>
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Grupo do WhatsApp</h2>
-                    <p class="text-gray-500 dark:text-gray-400 mb-6 text-sm">Receba nossos devocionais, motivos de oração e avisos sobre nossos encontros semanais.</p>
-                    
-                    <!-- QR Code Único (Fundo branco garantido) -->
-                    <div class="bg-white p-4 rounded-2xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm inline-block">
-                        <img src="/img/qrcode_mulheres.png" alt="QR Code WhatsApp" class="w-40 h-40">
-                    </div>
+                <a href="https://photos.google.com" target="_blank" class="inline-flex items-center gap-3 bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg hover:-translate-y-0.5 duration-150">
+                    Ver Álbum Completo de Fotos
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+            </div>
+        </section>
 
-                    <!-- Botão Único -->
-                    <a href="https://chat.whatsapp.com/DHCGaeNMYVJ4hrKwZkwPrk" target="_blank" class="w-full bg-pink-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-pink-700 transition shadow-lg flex items-center justify-center gap-2">
-                        Entrar no Grupo
-                    </a>
+        <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Nossas Celebrações</h3>
+                <p class="text-gray-600 dark:text-gray-400 mt-2">Registros de adoração, batismos, pequenos grupos e ações sociais.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-1">Cultos de Domingo</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Momentos marcantes da palavra e do louvor congregacional.</p>
+                    </div>
                 </div>
-
+                <div class="group bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-1">Comunhão e Grupos</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Registros dos nossos Grupos de Mesa e conexões semanais.</p>
+                    </div>
+                </div>
+                <div class="group bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                    <div class="h-56 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-1">Ministérios e Eventos</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Batismos, conferências e atividades de capacitação.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- 3. Rodapé (Footer) -->
     <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
-                <p class="mt-4 text-gray-400">NÓS SOMOS FAMÍLIA! <br/>
-                UM LUGAR PARA VOCÊ RENASCER!</p>
+                <p class="mt-4 text-gray-400">NÓS SOMOS FAMÍLIA! <br/> UM LUGAR PARA VOCÊ RENASCER!</p>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Contatos</h4>
                 <div class="space-y-4">
-                    <p>
-                        <a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Av. São João, 805 - Capim Branco II</a>
-                    </p>
-                    <p>
-                        <a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Contato: (38) 99995-6975</a>
-                    </p>
-                    <p>
-                        <a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Instagram: @igrejarenascerunai</a>
-                    </p>
+                    <p><a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Av. São João, 805 - Capim Branco II</a></p>
+                    <p><a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Contato: (38) 99995-6975</a></p>
+                    <p><a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Instagram: @igrejarenascerunai</a></p>
                 </div>
             </div>
             <div>
                 <h4 class="font-bold text-lg mb-4">Fique por dentro</h4>
                 <form id="form-newsletter" class="flex gap-2">
-                    <input type="email" id="email-newsletter" placeholder="Seu melhor e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 dark:text-white dark:bg-gray-800 dark:border dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    <input type="email" placeholder="Seu melhor e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 dark:text-white dark:bg-gray-800 dark:border dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500" required>
                     <button type="submit" class="bg-green-600 px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition">Assinar</button>
                 </form>
             </div>
         </div>
-        
         <div class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            &copy; 2026 Igreja Renascer <br/> Todos os direitos reservados.
+            © 2026 Igreja Renascer <br/> Todos os direitos reservados.
         </div>
     </footer>
 
     <script>
-        // ----------------------------------------
         // Lógica do Menu Mobile
-        // ----------------------------------------
         const btnMenu = document.getElementById('btn-menu');
         const menuMobile = document.getElementById('menu-mobile');
+        btnMenu.addEventListener('click', () => { menuMobile.classList.toggle('hidden'); });
 
-        btnMenu.addEventListener('click', () => {
-            menuMobile.classList.toggle('hidden');
-        });
-
-        // ----------------------------------------
         // Lógica do Theme Toggle (Claro / Escuro)
-        // ----------------------------------------
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
         var themeToggleBtn = document.getElementById('theme-toggle');
 
-        // Mostra o ícone correspondente ao carregar a página
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             themeToggleLightIcon.classList.remove('hidden');
         } else {
@@ -192,11 +181,8 @@
         }
 
         themeToggleBtn.addEventListener('click', function() {
-            // Alterna os ícones
             themeToggleDarkIcon.classList.toggle('hidden');
             themeToggleLightIcon.classList.toggle('hidden');
-
-            // Salva a configuração no Local Storage
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     document.documentElement.classList.add('dark');
@@ -216,6 +202,5 @@
             }
         });
     </script>
-
 </body>
 </html>
