@@ -8,13 +8,27 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
-    
+    <style>
+        .hide-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .hide-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .hide-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .active-tab { border-bottom: 2px solid #16a34a; color: #16a34a; font-weight: bold; }
+
+        /* Estilo para Responsividade de Tabelas */
+        @media (max-width: 768px) {
+            thead { display: none; }
+            tbody tr { display: block; border-bottom: 2px solid #f3f4f6; padding: 1rem 0; margin-bottom: 0.5rem; background: #fff; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+            tbody tr td { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 1rem; border: none; text-align: right; }
+            tbody tr td::before { content: attr(data-label); font-weight: bold; text-transform: uppercase; font-size: 0.7rem; color: #9ca3af; margin-right: 10px; text-align: left; }
+            .btn-container { justify-content: flex-end; width: 100%; margin-top: 10px; flex-wrap: wrap; }
+        }
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
 
     <header class="bg-gray-900 text-white shadow-md relative z-50">
         <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-blue-500">RENASCER</span></h1>
+            <a href="/login/admin-dashboard.html"><h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-green-500">RENASCER</span></h1></a>
             
             <nav class="hidden md:flex space-x-8 font-medium text-sm">
                 <a href="admin-dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
@@ -24,7 +38,7 @@
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
             </nav>
             
-           <a href="https://site-renacer.vercel.app/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
+            <a href="https://site-renacer.vercel.app/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
             
             <button id="btn-menu-mobile" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -57,7 +71,7 @@
                 <span id="count-badge" class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-bold">0 registros</span>
             </div>
             <div class="overflow-x-auto w-full">
-                <table class="w-full text-left">
+                <table class="w-full text-left border-collapse">
                     <thead id="table-head" class="bg-gray-50 border-b border-gray-200 text-gray-400 text-[10px] uppercase tracking-widest font-bold">
                     </thead>
                     <tbody id="table-body" class="divide-y divide-gray-100">
@@ -83,15 +97,12 @@
                 <p class="text-gray-800 text-base leading-relaxed whitespace-pre-wrap" id="pedido-texto"></p>
             </div>
             <div class="flex flex-col sm:flex-row justify-end gap-3">
-                
                 <a id="pedido-whats" href="#" target="_blank" class="bg-gray-100 text-gray-700 border border-gray-200 px-5 py-3 rounded-xl font-bold hover:bg-green-50 hover:text-green-700 transition text-center flex items-center justify-center gap-2 cursor-pointer">
                     <span class="text-xl">💬</span> Chamar no WhatsApp
                 </a>
-                
                 <button id="btn-concluir-pedido" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2">
                     ✓ Marcar Oração Realizada
                 </button>
-
             </div>
         </div>
     </div>
@@ -110,7 +121,7 @@
             <div class="mb-2"><p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Detalhes Preenchidos:</p></div>
             
             <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 mb-8 max-h-[50vh] overflow-y-auto hide-scrollbar" id="ficha-conteudo">
-                </div>
+            </div>
             
             <div class="flex justify-end gap-3">
                 <button onclick="fecharFicha()" class="bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-bold hover:bg-gray-300 transition shadow-sm">
@@ -201,11 +212,11 @@
                     if (collectionName === 'conexoes_novos_membros') {
                         head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes (Resumo)</th><th class="p-4 text-center">Ações</th></tr>';
                         row = `<tr>
-                            <td class="p-4 font-bold text-gray-900">${data.nome || '-'}</td>
-                            <td class="p-4 text-gray-600">${data.telefone || '-'}</td>
-                            <td class="p-4 text-sm text-gray-500 max-w-xs truncate">${data.mensagem || data.departamento_interesse || ''}</td>
-                            <td class="p-4">
-                                <div class="flex justify-center gap-2">
+                            <td class="p-4 font-bold text-gray-900" data-label="Nome">${data.nome || '-'}</td>
+                            <td class="p-4 text-gray-600" data-label="WhatsApp">${data.telefone || '-'}</td>
+                            <td class="p-4 text-sm text-gray-500 max-w-xs truncate" data-label="Resumo">${data.mensagem || data.departamento_interesse || ''}</td>
+                            <td class="p-4" data-label="Ações">
+                                <div class="flex justify-center gap-2 btn-container flex-wrap">
                                     <button onclick="abrirFicha('${docId}')" class="inline-flex items-center bg-white text-gray-700 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-100 transition shadow-sm" title="Ver Ficha Completa">
                                         👁️ Ficha
                                     </button>
@@ -235,14 +246,14 @@
                         head.innerHTML = '<tr><th class="p-4">Status / Nome</th><th class="p-4 w-1/3">Pedido (Resumo)</th><th class="p-4">Público?</th><th class="p-4 text-center">Ações</th></tr>';
                         
                         row = `<tr class="${isRealizada ? 'bg-gray-50 opacity-60' : 'hover:bg-gray-50 transition'}">
-                            <td class="p-4">
+                            <td class="p-4" data-label="Nome / Status">
                                 <div class="font-bold text-gray-900">${data.nome_solicitante || 'Anônimo'}</div>
                                 <div class="mt-1">${badgeStatus}</div>
                             </td>
-                            <td class="p-4 text-sm text-gray-600 max-w-xs truncate" title="Clique em Ver Pedido para ler inteiro">${data.motivo}</td>
-                            <td class="p-4 text-xs font-bold ${data.pedido_publico ? 'text-green-600' : 'text-red-600'}">${data.pedido_publico ? 'SIM' : 'SIGILO'}</td>
-                            <td class="p-4 text-center">
-                                <div class="flex justify-center gap-2">
+                            <td class="p-4 text-sm text-gray-600 max-w-xs truncate" title="${data.motivo}" data-label="Motivo">${data.motivo}</td>
+                            <td class="p-4 text-xs font-bold ${data.pedido_publico ? 'text-green-600' : 'text-red-600'}" data-label="Público?">${data.pedido_publico ? 'SIM' : 'SIGILO'}</td>
+                            <td class="p-4 text-center" data-label="Ações">
+                                <div class="flex justify-center gap-2 btn-container flex-wrap">
                                     <button onclick="abrirPedido('${docId}')" class="bg-white border border-gray-200 text-gray-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-100 transition shadow-sm">
                                         👁️ Ver
                                     </button>
@@ -263,11 +274,14 @@
                     else if (collectionName === 'inscricoes_batismo') {
                         head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Fez Curso?</th><th class="p-4 text-center">Ações</th></tr>';
                         row = `<tr>
-                            <td class="p-4 font-bold text-gray-900">${data.nome}</td>
-                            <td class="p-4 text-gray-600">${data.telefone}</td>
-                            <td class="p-4 text-sm font-bold ${data.concluiu_curso ? 'text-green-600' : 'text-orange-500'}">${data.concluiu_curso ? 'CONCLUÍDO' : 'PENDENTE'}</td>
-                            <td class="p-4 text-center">
-                                <div class="flex justify-center gap-2">
+                            <td class="p-4 font-bold text-gray-900" data-label="Nome">${data.nome}</td>
+                            <td class="p-4 text-gray-600" data-label="WhatsApp">${data.telefone}</td>
+                            <td class="p-4 text-sm font-bold ${data.concluiu_curso ? 'text-green-600' : 'text-orange-500'}" data-label="Fez Curso?">${data.concluiu_curso ? 'CONCLUÍDO' : 'PENDENTE'}</td>
+                            <td class="p-4 text-center" data-label="Ações">
+                                <div class="flex justify-center gap-2 btn-container flex-wrap">
+                                    <button onclick="abrirFicha('${docId}')" class="inline-flex items-center bg-white text-gray-700 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-100 transition shadow-sm" title="Ver Ficha">
+                                        👁️ Ficha
+                                    </button>
                                     ${linkWhats ? `<a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>` : '-'}
                                     <button onclick="excluirRegistro('${collectionName}', '${docId}')" class="inline-flex items-center bg-red-50 text-red-700 border border-red-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition shadow-sm" title="Excluir">
                                         🗑️
@@ -282,11 +296,14 @@
                     else {
                         head.innerHTML = '<tr><th class="p-4">Nome</th><th class="p-4">WhatsApp</th><th class="p-4">Detalhes</th><th class="p-4 text-center">Ações</th></tr>';
                         row = `<tr>
-                            <td class="p-4 font-bold text-gray-900">${data.nome}</td>
-                            <td class="p-4 text-gray-600">${data.telefone}</td>
-                            <td class="p-4 text-sm text-gray-500">${data.departamento_interesse || data.perfil_desejado || data.mensagem || ''}</td>
-                            <td class="p-4 text-center">
-                                <div class="flex justify-center gap-2">
+                            <td class="p-4 font-bold text-gray-900" data-label="Nome">${data.nome}</td>
+                            <td class="p-4 text-gray-600" data-label="WhatsApp">${data.telefone}</td>
+                            <td class="p-4 text-sm text-gray-500" data-label="Detalhes">${data.departamento_interesse || data.perfil_desejado || data.mensagem || ''}</td>
+                            <td class="p-4 text-center" data-label="Ações">
+                                <div class="flex justify-center gap-2 btn-container flex-wrap">
+                                    <button onclick="abrirFicha('${docId}')" class="inline-flex items-center bg-white text-gray-700 border border-gray-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-gray-100 transition shadow-sm" title="Ver Ficha">
+                                        👁️ Ficha
+                                    </button>
                                     ${linkWhats ? `<a href="${linkWhats}" target="_blank" class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-green-600 hover:text-white transition">WhatsApp</a>` : '-'}
                                     <button onclick="excluirRegistro('${collectionName}', '${docId}')" class="inline-flex items-center bg-red-50 text-red-700 border border-red-200 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-red-600 hover:text-white transition shadow-sm" title="Excluir">
                                         🗑️
@@ -374,7 +391,7 @@
         }
 
         // ==========================================
-        // NOVA FUNÇÃO: VISUALIZAR FICHA DO NOVO CONTATO
+        // VISUALIZAR FICHA (AGORA EM TODAS AS ABAS)
         // ==========================================
         window.abrirFicha = function(id) {
             const contato = window.dadosAtuais[id];
@@ -385,18 +402,13 @@
             // Geração Dinâmica dos Dados
             let htmlFicha = '<div class="grid grid-cols-1 md:grid-cols-2 gap-4">';
             
-            // Função para formatar as chaves (ex: data_nascimento -> Data Nascimento)
             const formatarChave = (chave) => {
                 return chave.split('_').map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1)).join(' ');
             };
 
             for (const [key, value] of Object.entries(contato)) {
-                // Ignorar campos em branco
                 if (value && String(value).trim() !== '') {
-                    // Tratar se for objeto, formata como json
                     const valStr = typeof value === 'object' ? JSON.stringify(value) : value;
-                    
-                    // Se a mensagem for muito longa, ocupar a linha inteira na grid
                     const fullWidth = (key === 'mensagem' || valStr.length > 50) ? 'col-span-1 md:col-span-2' : '';
 
                     htmlFicha += `
