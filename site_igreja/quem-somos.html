@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quem Somos - Igreja Renascer</title>
     <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
-    
+    <style>
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -111,7 +114,7 @@
                 </div>
                 <div class="bg-gray-200 dark:bg-gray-800 rounded-3xl h-[400px] w-full shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700">
                      <!-- Lembre-se de colocar o caminho correto para sua imagem aqui -->
-                     <img src="/img/irmaos.png" alt="Comunidade Igreja Renascer" class="w-full h-full object-cover">
+                     <img src="/img/irmaos.JPG" alt="Comunidade Igreja Renascer" class="w-full h-full object-cover">
                 </div>
             </div>
 
@@ -144,64 +147,59 @@
             </div>
         </section>
 
-        <!-- Liderança e Equipe Pastoral -->
-        <section class="py-24 bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 transition-colors duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <span class="text-green-600 dark:text-green-400 font-bold tracking-widest uppercase text-sm mb-2 block">Nossos Líderes</span>
-                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Conheça nossa equipe</h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto">Homens e mulheres dedicados a cuidar da nossa igreja e direcionar nossa comunidade.</p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Pastor 1 -->
-                    <div class="bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden group transition-colors duration-300">
-                        <div class="h-64 overflow-hidden bg-gray-200 dark:bg-gray-600">
-                            <!-- Imagem do Pastor -->
-                            <img src="/img/pastor.png" alt="Pastor Presidente" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 text-center">
-                            <h4 class="font-bold text-gray-900 dark:text-white text-xl">Pr. <br/>Wilton Gonçalves</h4>
-                            <p class="text-green-600 dark:text-green-400 text-sm font-medium mt-1">Pastor Presidente</p>
-                        </div>
-                    </div>
+    <!-- Liderança e Equipe Pastoral -->
+<section class="py-24 bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 relative overflow-hidden transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+        <span class="text-green-600 dark:text-green-400 font-bold tracking-widest uppercase text-sm mb-2 block">Nossos Líderes</span>
+        <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-16">Conheça nossa equipe</h2>
 
-                    <!-- Pastor 2 -->
-                    <div class="bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden group transition-colors duration-300">
-                        <div class="h-64 overflow-hidden bg-gray-200 dark:bg-gray-600">
-                            <!-- Imagem da Pastora -->
-                            <img src="/img/bruna.png" alt="Pastora" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 text-center">
-                            <h4 class="font-bold text-gray-900 dark:text-white text-xl">Pra. <br/>Bruna Gonçalves</h4>
-                            <p class="text-green-600 dark:text-green-400 text-sm font-medium mt-1">Pastora Presidente</p>
-                        </div>
-                    </div>
+        <!-- Contêiner do Carrossel -->
+        <div class="relative group">
+            <!-- Botão Esquerdo -->
+            <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg hover:bg-green-600 hover:text-white transition-all border border-gray-200 dark:border-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            </button>
 
-                    <!-- Líder 3 -->
-                    <div class="bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden group transition-colors duration-300">
-                        <div class="h-64 overflow-hidden bg-gray-200 dark:bg-gray-600">
-                            <!-- Imagem -->
-                            <img src="/img/lideres-jovens.png" alt="Líder de Jovens" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 text-center">
-                            <h4 class="font-bold text-gray-900 dark:text-white text-xl">Gleyson e Juliana</h4>
-                            <p class="text-green-600 dark:text-green-400 text-sm font-medium mt-1">Líderes de Jovens</p>
-                        </div>
-                    </div>
-
-                    <!-- Líder 4 -->
-                    <div class="bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden group transition-colors duration-300">
-                        <div class="h-64 overflow-hidden bg-gray-200 dark:bg-gray-600">
-                            <!-- Imagem -->
-                            <img src="/img/lider-midia.png" alt="Líder de midia" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-6 text-center">
-                            <h4 class="font-bold text-gray-900 dark:text-white text-xl">Maria Eduarda Nascimento</h4>
-                            <p class="text-green-600 dark:text-green-400 text-sm font-medium mt-1">Líder da Mídia</p>
-                        </div>
-                    </div>
+            <!-- Lista de Cards (Scroll Horizontal) -->
+            <div id="carouselContainer" class="flex overflow-x-auto gap-8 pb-8 scroll-smooth scrollbar-hide snap-x">
+                <!-- Card 1 -->
+                <div class="min-w-[280px] md:min-w-[300px] bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden snap-start">
+                    <div class="h-64 overflow-hidden bg-gray-200"><img src="/img/pastor.png" alt="Pastor" class="w-full h-full object-cover"></div>
+                    <div class="p-6"><h4 class="font-bold text-xl">Pr. Wilton Gonçalves</h4><p class="text-green-600">Pastor Presidente</p></div>
+                </div>
+                <!-- Card 2 -->
+                <div class="min-w-[280px] md:min-w-[300px] bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden snap-start">
+                    <div class="h-64 overflow-hidden bg-gray-200"><img src="/img/bruna.png" alt="Pastora" class="w-full h-full object-cover"></div>
+                    <div class="p-6"><h4 class="font-bold text-xl">Pra. Bruna Gonçalves</h4><p class="text-green-600">Pastora Presidente</p></div>
+                </div>
+                <!-- Card 3 -->
+                <div class="min-w-[280px] md:min-w-[300px] bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden snap-start">
+                    <div class="h-64 overflow-hidden bg-gray-200"><img src="/img/lideres-jovens.png" alt="Líderes" class="w-full h-full object-cover"></div>
+                    <div class="p-6"><h4 class="font-bold text-xl">Gleyson e Juliana</h4><p class="text-green-600">Líderes de Jovens</p></div>
+                </div>
+                <div class="min-w-[280px] md:min-w-[300px] bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden snap-start">
+                    <div class="h-64 overflow-hidden bg-gray-200"><img src="/img/lider_de_adolescentes.jpg" alt="Líderes de Adolescentes" class="w-full h-full object-cover"></div>
+                    <div class="p-6"><h4 class="font-bold text-xl">Ildimarques e Alessandra</h4><p class="text-green-600">Líderes de Adolescentes</p></div>
+                </div>
+                <div class="min-w-[280px] md:min-w-[300px] bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden snap-start">
+                    <div class="h-64 overflow-hidden bg-gray-200"><img src="/img/lider-midia.png" alt="Lider da Mídia" class="w-full h-full object-cover"></div>
+                    <div class="p-6"><h4 class="font-bold text-xl">Maria Eduarda Nascimento</h4><p class="text-green-600">Lider da Mídia</p></div>
+                </div>
+                <div class="min-w-[280px] md:min-w-[300px] bg-white dark:bg-gray-700 rounded-3xl shadow-md overflow-hidden snap-start">
+                    <div class="h-64 overflow-hidden bg-gray-200"><img src="/img/Pr_Juliano.JPG" alt="Pastor" class="w-full h-full object-cover"></div>
+                    <div class="p-6"><h4 class="font-bold text-xl">Pr. Juliano</h4><p class="text-green-600">Pastor</p></div>
                 </div>
             </div>
-        </section>
+            
+
+            <!-- Botão Direito -->
+            <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg hover:bg-green-600 hover:text-white transition-all border border-gray-200 dark:border-gray-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
+    </div>
+</section>
+        
     </main>
 
     <!-- 6. Rodapé (Footer) -->
@@ -286,5 +284,10 @@
             }
         });
     </script>
+    <script>
+    const container = document.getElementById('carouselContainer');
+    document.getElementById('nextBtn').addEventListener('click', () => { container.scrollBy({ left: 300, behavior: 'smooth' }); });
+    document.getElementById('prevBtn').addEventListener('click', () => { container.scrollBy({ left: -300, behavior: 'smooth' }); });
+</script>
 </body>
 </html>
