@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png">
+    <title>Mural de Orações - Igreja Renascer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans antialiased flex flex-col min-h-screen transition-colors duration-300">
+
+    <header class="bg-white dark:bg-gray-900 shadow-sm dark:shadow-none dark:border-b dark:border-gray-800 fixed w-full z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                  <div class="flex-shrink-0 flex items-center">
+                    <a href="/index.html" class="font-bold text-2xl tracking-tighter text-gray-900 dark:text-white mr-2">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
+                    <img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto hidden md:block">
+                </div>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Início</a>
+                    <a href="/site_igreja/quem-somos.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Quem Somos</a>
+                    <a href="/site_igreja/programacao.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Programação</a>
+                    <a href="/site_igreja/galeria.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Galeria</a>
+                    <a href="/site_igreja/generosidade.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium transition">Contribua</a>
+                </nav>
+
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    <!-- Botão Tema Claro/Escuro -->
+                    <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 transition">
+                        <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+
+                    <div class="hidden md:block">
+                        <a href="/login/index.html" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
+                    </div>
+
+                    <div class="md:hidden flex items-center">
+                        <button id="btn-menu" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 focus:outline-none p-2">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+         <div id="menu-mobile" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 shadow-lg absolute w-full left-0 top-20 z-40 flex flex-col py-4 px-6 space-y-4">
+            <a href="/index.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Início</a>
+            <a href="/site_igreja/quem-somos.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Quem Somos</a>
+            <a href="/site_igreja/programacao.html" class="text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-500 font-medium text-lg transition">Programação</a>
+            <a href="/site_igreja/galeria.html" class="text-gray-600 dark:text-gray-500 font-medium text-lg transition">Galeria</a>
+            <div class="pt-2">
+                <a href="/site_igreja/generosidade.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-32 pb-20">
+        <section class="text-center px-4 mb-16">
+            <span class="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4 inline-block">Intercessão</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">Mural de Orações</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">"Orai uns pelos outros para serdes curados. A oração de um justo é poderosa e eficaz." (Tiago 5:16). Junte-se a nós em intercessão.</p>
+        </section>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="loading" class="text-center py-20 text-gray-400 font-medium animate-pulse">Carregando pedidos de oração...</div>
+            
+            <div id="mural-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+        </div>
+    </main>
+    
+    <!-- 6. Rodapé (Footer) -->
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+               <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
+                <p class="mt-4 text-gray-400">NÓS SOMOS FAMÍLIA! <br/>
+                UM LUGAR PARA VOCÊ RENASCER!</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-4">Contatos</h4>
+                <div class="space-y-4">
+                    <p><a href="https://maps.app.goo.gl/Tsh1XxxPJbQxeLjg8" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Av. São João, 805 - Capim Branco II</a></p>
+                    <p><a href="https://whatsa.me/5538999956975" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Contato: (38) 99995-6975</a></p>
+                    <p><a href="https://www.instagram.com/igrejarenascerunai/" class="text-gray-400 hover:text-green-500 dark:hover:text-green-400">Instagram: @igrejarenascerunai</a></p>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-4">Fique por dentro</h4>
+                <form id="form-newsletter" class="flex gap-2">
+                    <input type="email" id="email-newsletter" placeholder="Seu melhor e-mail" class="w-full px-4 py-2 rounded-lg text-gray-900 dark:text-white dark:bg-gray-800 dark:border dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    <button type="submit" class="bg-green-600 px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition">Assinar</button>
+                </form>
+            </div>
+        </div>
+        <div class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+            &copy; 2026 Igreja Renascer <br/> Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+           const btnMenu = document.getElementById('btn-menu');
+        const menuMobile = document.getElementById('menu-mobile');
+
+        btnMenu.addEventListener('click', () => {
+            menuMobile.classList.toggle('hidden');
+        });
+
+       
+
+        var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        var themeToggleBtn = document.getElementById('theme-toggle');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (localStorage.getItem('color-theme') === 'light') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            }
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, query, where, onSnapshot, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+            authDomain: "site-renascer-eef39.firebaseapp.com",
+            projectId: "site-renascer-eef39",
+            storageBucket: "site-renascer-eef39.firebasestorage.app",
+            messagingSenderId: "1043023040737",
+            appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Buscar apenas os pedidos marcados como PÚBLICOS e que ainda NÃO foram resolvidos
+        const q = query(
+            collection(db, "pedidos_oracao"), 
+            where("pedido_publico", "==", true)
+        );
+
+        onSnapshot(q, (snapshot) => {
+            document.getElementById('loading').style.display = 'none';
+            const mural = document.getElementById('mural-grid');
+            mural.innerHTML = '';
+
+            let encontrouAtivos = false;
+
+            snapshot.forEach((documento) => {
+                const data = documento.data();
+                const id = documento.id;
+                
+                // Ocultar os que já foram marcados como "realizada" no painel admin
+                if(data.status === 'realizada') return; 
+                
+                encontrouAtivos = true;
+                
+                // Verifica se este dispositivo já clicou em "orar" neste pedido
+                const jaOrou = localStorage.getItem(`orou_${id}`);
+                const btnClass = jaOrou 
+                    ? "bg-green-600 text-white shadow-md border-transparent cursor-default" 
+                    : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-gray-200 dark:border-gray-600 hover:bg-green-50 dark:hover:bg-gray-600 hover:text-green-700 hover:border-green-200 transition shadow-sm cursor-pointer";
+                
+                const btnText = jaOrou ? "Você está orando 🙏" : "Estou Orando 🙏";
+                const contagem = data.contagem_oracoes || 0;
+
+                mural.innerHTML += `
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 flex flex-col justify-between transform hover:-translate-y-1 transition duration-300">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 text-orange-600 rounded-full flex items-center justify-center text-xl shrink-0">👤</div>
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-900 dark:text-white leading-tight">${data.nome_solicitante || 'Irmão(ã) em Cristo'}</h3>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 italic">"${data.motivo}"</p>
+                        </div>
+                        
+                        <div class="pt-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between">
+                            <span class="text-sm font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-3 py-1.5 rounded-lg">
+                                ${contagem} orando
+                            </span>
+                            
+                            <button id="btn-${id}" class="px-5 py-2.5 rounded-xl text-sm font-bold border flex items-center gap-2 ${btnClass}">
+                                ${btnText}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (!encontrouAtivos) {
+                mural.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">Nenhum pedido de oração público no momento.</div>';
+            } else {
+                // Adiciona os eventos de clique aos botões após renderizar
+                snapshot.forEach((documento) => {
+                    if(documento.data().status !== 'realizada') {
+                        const btn = document.getElementById(`btn-${documento.id}`);
+                        if(btn && !localStorage.getItem(`orou_${documento.id}`)) {
+                            btn.addEventListener('click', () => registrarOracao(documento.id));
+                        }
+                    }
+                });
+            }
+        });
+
+        // Função tornada global para o clique
+        window.registrarOracao = async function(id) {
+            if(localStorage.getItem(`orou_${id}`)) return; // Bloqueio duplo de segurança
+
+            const btn = document.getElementById(`btn-${id}`);
+            btn.innerHTML = '<span class="animate-spin">⏳</span> Processando...';
+            btn.disabled = true;
+
+            try {
+                // Incrementa a contagem de orações de forma segura no Firebase
+                await updateDoc(doc(db, "pedidos_oracao", id), {
+                    contagem_oracoes: increment(1)
+                });
+
+                // Salva no navegador que esta pessoa já orou por este pedido
+                localStorage.setItem(`orou_${id}`, 'true');
+
+                // Notificação de sucesso sutil
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Obrigado por interceder!',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                });
+
+            } catch (error) {
+                console.error("Erro ao registrar oração:", error);
+                Swal.fire('Erro', 'Não foi possível registar. Verifique a sua conexão.', 'error');
+                btn.disabled = false;
+                btn.innerHTML = "Estou Orando 🙏";
+            }
+        };
+    </script>
+</body>
+</html>
