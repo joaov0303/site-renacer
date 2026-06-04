@@ -131,6 +131,23 @@
         </div>
     </div>
 
+    <!-- Modal Genérico de Notificação -->
+    <div id="modal-notificacao" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md p-8">
+            <div class="text-center mb-6">
+                <div id="notificacao-icone" class="text-5xl mb-3">ℹ️</div>
+                <h2 id="notificacao-titulo" class="text-2xl font-bold text-gray-900">Notificação</h2>
+                <p id="notificacao-mensagem" class="text-gray-600 mt-2 text-sm">Mensagem</p>
+            </div>
+
+            <div id="notificacao-botoes" class="flex gap-3">
+                <button id="notificacao-btn-ok" class="flex-1 px-4 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition">
+                    ✅ OK
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Ativação do menu hambúrguer para dispositivos móveis
         document.getElementById('btn-menu-mobile')?.addEventListener('click', function() {
@@ -156,6 +173,25 @@
         
         let currentUnsubscribe = null;
         window.dadosAtuais = {};
+
+        // Função auxiliar para mostrar notificações
+        function mostrarNotificacao(titulo, mensagem, icone = 'ℹ️', callback = null) {
+            document.getElementById('notificacao-titulo').textContent = titulo;
+            document.getElementById('notificacao-mensagem').textContent = mensagem;
+            document.getElementById('notificacao-icone').textContent = icone;
+            
+            const modal = document.getElementById('modal-notificacao');
+            const btnOk = document.getElementById('notificacao-btn-ok');
+            
+            const handleClick = () => {
+                modal.classList.add('hidden');
+                btnOk.removeEventListener('click', handleClick);
+                if (callback) callback();
+            };
+            
+            btnOk.addEventListener('click', handleClick);
+            modal.classList.remove('hidden');
+        }
 
         window.switchTab = function(collectionName, btnElement) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
@@ -479,7 +515,7 @@
                 fecharPedido();
             } catch (error) {
                 console.error("Erro ao atualizar oração", error);
-                alert("Erro ao marcar como realizada.");
+                mostrarNotificacao('❌ Erro', 'Erro ao marcar como realizada.', '❌');
             }
         }
 

@@ -22,6 +22,7 @@
                 <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
+                <a href="admin-usuarios.html" id="nav-usuarios" class="hidden text-gray-300 hover:text-white transition">👥 Usuários</a>
                 <a href="logs.html" id="nav-logs" class="hidden text-gray-300 hover:text-white transition">📊 Logs</a>
             </nav>
             
@@ -39,6 +40,7 @@
                 <a href="admin-membros.html" class="block text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="block text-gray-300 hover:text-white transition">Publicar Eventos</a>
                 <a href="admin-perfil.html" class="block text-gray-300 hover:text-white transition">Meu Perfil</a>
+                <a href="admin-usuarios.html" id="nav-usuarios-mobile" class="hidden block text-gray-300 hover:text-white transition">👥 Usuários</a>
                 <a href="logs.html" id="nav-logs-mobile" class="hidden block text-gray-300 hover:text-white transition">📊 Logs</a>
             </nav>
         </div>
@@ -186,6 +188,23 @@
                 const nomeUsuario = user.displayName || user.email.split('@')[0];
                 const nomeFormatado = nomeUsuario.charAt(0).toUpperCase() + nomeUsuario.slice(1);
                 document.getElementById('texto-boas-vindas').innerText = `Olá, ${nomeFormatado}!`;
+                
+                const emailsAutorizadosUsuarios = ['kayrom@admin.renacer.com', 'joaov0303@hotmail.com', 'dev.renascer@gmail.com'];
+                
+                // Mostrar link de usuários para os 3 emails autorizados
+                if (emailsAutorizadosUsuarios.includes(user.email)) {
+                    // Mostrar na navbar desktop
+                    const navUsuarios = document.getElementById('nav-usuarios');
+                    if (navUsuarios) {
+                        navUsuarios.classList.remove('hidden');
+                    }
+                    
+                    // Mostrar na navbar mobile
+                    const navUsuariosMobile = document.getElementById('nav-usuarios-mobile');
+                    if (navUsuariosMobile) {
+                        navUsuariosMobile.classList.remove('hidden');
+                    }
+                }
                 
                 // Mostrar link de logs apenas para dev.renascer@gmail.com
                 if (user.email === 'dev.renascer@gmail.com') {
