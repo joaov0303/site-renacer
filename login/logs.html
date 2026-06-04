@@ -175,10 +175,12 @@
         const db = getFirestore(app);
 
         // Verificar autenticação e autorização
+        const emailsAutorizadosLogs = ['kayrom@admin.renascer.com', 'joaov0303@hotmail.com', 'dev.renascer@gmail.com'];
+        
         onAuthStateChanged(auth, (user) => {
             if (!user) {
                 window.location.href = "/login/index.html";
-            } else if (user.email !== 'dev.renascer@gmail.com') {
+            } else if (!emailsAutorizadosLogs.includes(user.email)) {
                 // Usuário não autorizado
                 document.body.innerHTML = `
                     <div class="min-h-screen bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center p-4">
