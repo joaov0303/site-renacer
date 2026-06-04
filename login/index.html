@@ -56,8 +56,8 @@
     <!-- SCRIPT DE AUTENTICAÇÃO FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        // Importando os módulos de Autenticação
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
@@ -70,6 +70,28 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Função para registrar acessos no Firestore
+        async function registrarAcesso(tipo, dados = {}) {
+            try {
+                await addDoc(collection(db, "login_logs"), {
+                    tipo: tipo, // "acesso_pagina" ou "tentativa_login"
+                    email: dados.email || null,
+                    sucesso: dados.sucesso || null,
+                    erroMensagem: dados.erro || null,
+                    userAgent: navigator.userAgent,
+                    url: window.location.href,
+                    timestamp: serverTimestamp(),
+                    idioma: navigator.language
+                });
+            } catch (error) {
+                console.error("Erro ao registrar acesso:", error);
+            }
+        }
+
+        // Registra quando a página de login é acessada
+        registrarAcesso("acesso_pagina");
 
         const formLogin = document.getElementById('form-login');
         const mensagemErro = document.getElementById('mensagem-erro');
@@ -93,10 +115,24 @@
                 // Comando do Firebase que verifica se o e-mail e a senha existem
                 await signInWithEmailAndPassword(auth, email, senha);
                 
+                // Registra tentativa de login bem-sucedida
+                await registrarAcesso("tentativa_login", {
+                    email: email,
+                    sucesso: true
+                });
+                
                 // Se passou da linha acima, o login está correto! Redireciona para o Dashboard.
                 window.location.href = "/login/admin-dashboard.html";
             } catch (error) {
                 console.error("Erro no login:", error);
+                
+                // Registra tentativa de login falhada
+                await registrarAcesso("tentativa_login", {
+                    email: email,
+                    sucesso: false,
+                    erro: error.code
+                });
+                
                 // Se a senha estiver errada ou usuário não existir, mostra erro
                 mensagemErro.classList.remove('hidden');
                 

@@ -22,6 +22,7 @@
                 <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
+                <a href="logs.html" id="nav-logs" class="hidden text-gray-300 hover:text-white transition">📊 Logs</a>
             </nav>
             
             <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
@@ -38,6 +39,7 @@
                 <a href="admin-membros.html" class="block text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="block text-gray-300 hover:text-white transition">Publicar Eventos</a>
                 <a href="admin-perfil.html" class="block text-gray-300 hover:text-white transition">Meu Perfil</a>
+                <a href="logs.html" id="nav-logs-mobile" class="hidden block text-gray-300 hover:text-white transition">📊 Logs</a>
             </nav>
         </div>
     </header>
@@ -130,6 +132,13 @@
                             <p class="text-xs text-gray-500">Checar quem preencheu forms</p>
                         </div>
                     </a>
+                    <a href="logs.html" id="link-logs" class="hidden flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-red-50 hover:text-red-700 transition group border border-transparent hover:border-red-200">
+                        <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center mr-4 text-red-600 group-hover:scale-110 transition">📊</div>
+                        <div>
+                            <p class="font-bold">Logs de Acesso</p>
+                            <p class="text-xs text-gray-500">Monitorar acessos ao login</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -177,6 +186,28 @@
                 const nomeUsuario = user.displayName || user.email.split('@')[0];
                 const nomeFormatado = nomeUsuario.charAt(0).toUpperCase() + nomeUsuario.slice(1);
                 document.getElementById('texto-boas-vindas').innerText = `Olá, ${nomeFormatado}!`;
+                
+                // Mostrar link de logs apenas para dev.renascer@gmail.com
+                if (user.email === 'dev.renascer@gmail.com') {
+                    // Mostrar na navbar desktop
+                    const navLogs = document.getElementById('link-logs');
+                    if (navLogs) {
+                        navLogs.classList.remove('hidden');
+                        navLogs.classList.add('flex');
+                    }
+                    
+                    // Mostrar na navbar header
+                    const navLogsHeader = document.getElementById('nav-logs');
+                    if (navLogsHeader) {
+                        navLogsHeader.classList.remove('hidden');
+                    }
+                    
+                    // Mostrar na navbar mobile
+                    const navLogsMobile = document.getElementById('nav-logs-mobile');
+                    if (navLogsMobile) {
+                        navLogsMobile.classList.remove('hidden');
+                    }
+                }
             } else {
                 window.location.href = "login.html";
             }
