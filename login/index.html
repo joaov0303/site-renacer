@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Arquivo CSS Externo -->
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
+    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png">
     
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
@@ -101,7 +101,7 @@
     <!-- SCRIPT DE AUTENTICAÇÃO FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -159,23 +159,20 @@
             emailAtual = email;
 
             try {
-                // Verifica credenciais do usuário no Firestore
+                // Tenta autenticar com Firebase Auth
+                await signInWithEmailAndPassword(auth, email, senha);
+                
+                // Se autenticação foi bem-sucedida, busca dados adicionais no Firestore
                 const q = query(collection(db, "usuarios_autorizados"), where("email", "==", email));
                 const querySnapshot = await getDocs(q);
 
                 if (querySnapshot.empty) {
-                    throw new Error("Usuário não encontrado");
+                    throw new Error("Usuário não encontrado no banco de dados");
                 }
 
                 const usuarioDoc = querySnapshot.docs[0];
                 const usuarioData = usuarioDoc.data();
                 
-                // Verifica senha (comparar com hash)
-                const senhaHash = btoa(senha); // Base64 encoding
-                if (usuarioData.senha !== senhaHash) {
-                    throw new Error("Senha incorreta");
-                }
-
                 // Registra tentativa de login bem-sucedida
                 await registrarAcesso("tentativa_login", {
                     email: email,
