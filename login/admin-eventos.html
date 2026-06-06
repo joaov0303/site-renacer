@@ -152,10 +152,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        // Todos os imports do Firestore em uma única linha
-        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-        // Import da Autenticação
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        // IMPORTANTE: Foi adicionado o 'getDocs' à importação abaixo
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
         // Banco de Dados Oficial
         const firebaseConfig = {
@@ -169,7 +167,6 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const auth = getAuth(app); // Inicializa o Auth
 
         // Variáveis de controle globais
         window.eventosCadastrados = [];
@@ -177,62 +174,26 @@
         window.eventoEditandoId = null;
         window.filtroAtual = 'semana'; 
 
-
         // ==========================================
-        // 1. VERIFICAÇÃO DE LOGIN E PERMISSÃO
-        // ==========================================
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const q = query(collection(db, "usuarios_permissoes"), where("email", "==", user.email.toLowerCase()));
-                const querySnapshot = await getDocs(q);
-
-                if (querySnapshot.empty) {
-                    alert("Você não tem permissão para acessar o painel.");
-                    window.location.href = "login.html"; 
-                    return;
-                }
-
-                let nivelAcesso = "";
-                querySnapshot.forEach((doc) => {
-                    nivelAcesso = doc.data().nivelAcesso;
-                });
-
-                // Regra Corrigida: Administrador e Secretaria podem acessar
-                if (nivelAcesso !== "Administrador" && nivelAcesso !== "Secretaria") {
-                    alert("Acesso Negado: Apenas Administradores e a Secretaria podem publicar eventos.");
-                    window.location.href = "admin-dashboard.html";
-                    return;
-                }
-
-                // Se passou no bloqueio, carrega a agenda!
-                iniciarAgenda();
-
-            } else {
-                window.location.href = "login.html";
-            }
-        });
-
-
-        // ==========================================
-        // 2. FUNÇÕES DA PÁGINA (SÓ RODAM SE LOGADO)
+        // NOVA FUNÇÃO: DELETAR EVENTOS PASSADOS SOZINHO
         // ==========================================
         async function limparEventosExpirados() {
             const dataHojeObj = new Date();
-            const dataHojeStr = dataHojeObj.toISOString().split('T')[0]; 
+            const dataHojeStr = dataHojeObj.toISOString().split('T')[0]; // Pega YYYY-MM-DD de hoje
 
             try {
-                // CORRIGIDO AQUI: De agenda_eventos para eventos
-                const snapshot = await getDocs(collection(db, "eventos"));
+                const snapshot = await getDocs(collection(db, "agenda_eventos"));
                 const promessasDeletar = [];
 
                 snapshot.forEach((documento) => {
                     const data = documento.data();
+                    // Se o evento for mais velho que o dia de hoje, adiciona na lista para apagar
                     if (data.data_evento && data.data_evento < dataHojeStr) {
-                        // CORRIGIDO AQUI: De agenda_eventos para eventos
-                        promessasDeletar.push(deleteDoc(doc(db, "eventos", documento.id)));
+                        promessasDeletar.push(deleteDoc(doc(db, "agenda_eventos", documento.id)));
                     }
                 });
 
+                // Se encontrou algum evento antigo, exclui tudo de uma vez
                 if (promessasDeletar.length > 0) {
                     await Promise.all(promessasDeletar);
                     console.log(`Sucesso: ${promessasDeletar.length} eventos antigos deletados automaticamente.`);
@@ -242,6 +203,9 @@
             }
         }
 
+        // ==========================================
+        // 1. SISTEMA DE FILTRO INTELIGENTE
+        // ==========================================
         window.mudarFiltro = function(filtro) {
             window.filtroAtual = filtro;
             
@@ -280,8 +244,10 @@
                 
                 const isEstaSemana = data.data_evento >= dataHojeStr && data.data_evento <= dataLimiteStr;
 
+                // REGRAS DO FILTRO (Expirados foi removido, então só mostramos o que tá no prazo)
                 if (window.filtroAtual === 'semana' && !isEstaSemana) return; 
                 
+                // Selos padronizados para Verde pois os expirados não existem mais na lista
                 const badgeClass = "bg-green-100 text-green-700";
                 const badgeTexto = "🟢 NO PRAZO";
                 const rowOpacidade = "hover:bg-gray-50";
@@ -326,11 +292,15 @@
             }
         }
 
+        // ==========================================
+        // INICIAR: LIMPAR PRIMEIRO, DEPOIS BUSCAR
+        // ==========================================
         async function iniciarAgenda() {
+            // 1º: Deleta todos os expirados do banco de dados sozinhos
             await limparEventosExpirados();
 
-            // CORRIGIDO AQUI: De agenda_eventos para eventos
-            onSnapshot(query(collection(db, "eventos"), orderBy('data_evento')), (snapshot) => {
+            // 2º: Busca em tempo real o que sobrou (os que ainda vão acontecer)
+            onSnapshot(query(collection(db, "agenda_eventos"), orderBy('data_evento')), (snapshot) => {
                 const loading = document.getElementById('loading');
                 if(loading) loading.style.display = 'none';
 
@@ -346,6 +316,11 @@
             });
         }
 
+        iniciarAgenda();
+
+        // ==========================================
+        // 2. EXCLUIR EVENTO MANUALMENTE
+        // ==========================================
         window.excluirEvento = function(id) {
             const evento = window.eventosAtuais[id];
             if(!evento) return;
@@ -362,8 +337,7 @@
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        // CORRIGIDO AQUI: De agenda_eventos para eventos
-                        await deleteDoc(doc(db, "eventos", id));
+                        await deleteDoc(doc(db, "agenda_eventos", id));
                         Swal.fire({title: 'Excluído!', text:'O evento foi removido da agenda.', icon:'success', timer:2000, showConfirmButton:false});
                     } catch (error) {
                         console.error("Erro ao excluir:", error);
@@ -373,6 +347,9 @@
             });
         }
 
+        // ==========================================
+        // 3. EDITAR EVENTO (Preencher o formulário)
+        // ==========================================
         window.editarEvento = function(id) {
             const evento = window.eventosAtuais[id];
             if(!evento) return;
@@ -410,6 +387,9 @@
             document.getElementById('form-admin-evento').reset();
         }
 
+        // ==========================================
+        // 4. SALVAR (Cadastrar Novo ou Atualizar Existente)
+        // ==========================================
         document.getElementById('form-admin-evento').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = e.target.querySelector('button[type="submit"]');
@@ -429,13 +409,11 @@
             try {
                 if (window.eventoEditandoId) {
                     dados.atualizado_em = new Date().toISOString();
-                    // CORRIGIDO AQUI: De agenda_eventos para eventos
-                    await updateDoc(doc(db, "eventos", window.eventoEditandoId), dados);
+                    await updateDoc(doc(db, "agenda_eventos", window.eventoEditandoId), dados);
                     Swal.fire({ title: 'Sucesso!', text: 'O Evento foi atualizado.', icon: 'success', timer: 2000, showConfirmButton: false });
                 } else {
                     dados.criado_em = new Date().toISOString();
-                    // CORRIGIDO AQUI: De agenda_eventos para eventos
-                    await addDoc(collection(db, "eventos"), dados);
+                    await addDoc(collection(db, "agenda_eventos"), dados);
                     Swal.fire({ title: 'Sucesso!', text: 'Novo evento publicado no site!', icon: 'success', timer: 2000, showConfirmButton: false });
                 }
                 cancelarEdicao();
