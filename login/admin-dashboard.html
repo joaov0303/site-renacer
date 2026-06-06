@@ -21,6 +21,8 @@
                 <a href="admin.html" class="text-gray-300 hover:text-white transition">Respostas do Site</a>
                 <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
+                <a href="admin-usuarios.html" class="text-gray-300 hover:text-white transition">Configurar Usuários</a>
+                <a href="admin-logados.html" class="text-gray-300 hover:text-white transition">Usuários Logados</a>
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
             </nav>
             
@@ -37,6 +39,8 @@
                 <a href="admin.html" class="block text-gray-300 hover:text-white transition">Respostas do Site</a>
                 <a href="admin-membros.html" class="block text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="block text-gray-300 hover:text-white transition">Publicar Eventos</a>
+                <a href="admin-usuarios.html" class="block text-gray-300 hover:text-white transition">Configurar Usuários</a>
+                <a href="admin-logados.html" class="block text-gray-300 hover:text-white transition">Usuários Logados</a>
                 <a href="admin-perfil.html" class="block text-gray-300 hover:text-white transition">Meu Perfil</a>
             </nav>
         </div>
@@ -123,6 +127,20 @@
                             <p class="text-xs text-gray-500">Atualizar agenda do site</p>
                         </div>
                     </a>
+                    <a href="admin-usuarios.html" class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-blue-50 hover:text-blue-700 transition group border border-transparent hover:border-blue-200">
+                        <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center mr-4 text-blue-600 group-hover:scale-110 transition">👥</div>
+                        <div>
+                            <p class="font-bold">Configurar Usuários</p>
+                            <p class="text-xs text-gray-500">Gerenciar acessos e funções</p>
+                        </div>
+                    </a>
+                    <a href="admin-logados.html" class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-orange-50 hover:text-orange-700 transition group border border-transparent hover:border-orange-200">
+                        <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center mr-4 text-orange-600 group-hover:scale-110 transition">🔑</div>
+                        <div>
+                            <p class="font-bold">Usuários Logados</p>
+                            <p class="text-xs text-gray-500">Ver sessões de login recentes</p>
+                        </div>
+                    </a>
                     <a href="admin.html" class="flex items-center p-4 bg-gray-50 rounded-2xl hover:bg-purple-50 hover:text-purple-700 transition group border border-transparent hover:border-purple-200">
                         <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center mr-4 text-purple-600 group-hover:scale-110 transition">📩</div>
                         <div>
@@ -171,12 +189,48 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
+        function getUsuarioConfigurado(email) {
+            const usuarios = JSON.parse(localStorage.getItem('adminUsuarios') || '[]');
+            return usuarios.find(u => u.email.toLowerCase() === email.toLowerCase());
+        }
+
+        function aplicarPermissoes(user) {
+            const usuarioConfigurado = getUsuarioConfigurado(user.email);
+            const role = usuarioConfigurado ? usuarioConfigurado.funcao : 'Administrador';
+            const isAdmin = role === 'Administrador';
+            const isEditor = role === 'Editor' || isAdmin;
+            const isViewer = role === 'Visualizador';
+
+            if (!isAdmin) {
+                document.querySelectorAll('a[href="admin-usuarios.html"], a[href="admin-logados.html"]').forEach(el => el.classList.add('hidden'));
+            }
+
+            if (isViewer) {
+                document.querySelectorAll('a[href="admin-eventos.html"]').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('a[href="admin-usuarios.html"]').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('a[href="admin-logados.html"]').forEach(el => el.classList.add('hidden'));
+            }
+
+            let badge = document.getElementById('role-badge');
+            if (!badge) {
+                badge = document.createElement('span');
+                badge.id = 'role-badge';
+                badge.className = 'text-sm text-gray-500 block mt-2';
+                const welcome = document.getElementById('texto-boas-vindas');
+                if (welcome) {
+                    welcome.insertAdjacentElement('afterend', badge);
+                }
+            }
+            badge.innerText = `Função: ${role}`;
+        }
+
         // Saudação com o nome do usuário
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const nomeUsuario = user.displayName || user.email.split('@')[0];
                 const nomeFormatado = nomeUsuario.charAt(0).toUpperCase() + nomeUsuario.slice(1);
                 document.getElementById('texto-boas-vindas').innerText = `Olá, ${nomeFormatado}!`;
+                aplicarPermissoes(user);
             } else {
                 window.location.href = "login.html";
             }

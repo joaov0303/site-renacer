@@ -75,6 +75,11 @@
         const mensagemErro = document.getElementById('mensagem-erro');
         const btnSubmit = formLogin.querySelector('button');
 
+        function getUsuarioConfigurado(email) {
+            const usuarios = JSON.parse(localStorage.getItem('adminUsuarios') || '[]');
+            return usuarios.find(u => u.email.toLowerCase() === email.toLowerCase());
+        }
+
         formLogin.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -92,6 +97,14 @@
             try {
                 // Comando do Firebase que verifica se o e-mail e a senha existem
                 await signInWithEmailAndPassword(auth, email, senha);
+
+                const usuarioConfigurado = getUsuarioConfigurado(email);
+                const role = usuarioConfigurado ? usuarioConfigurado.funcao : 'Administrador';
+                localStorage.setItem('currentUser', JSON.stringify({ email, role }));
+
+                const loginHistory = JSON.parse(localStorage.getItem('loginHistory') || '[]');
+                loginHistory.unshift({ email, when: new Date().toISOString() });
+                localStorage.setItem('loginHistory', JSON.stringify(loginHistory.slice(0, 20)));
                 
                 // Se passou da linha acima, o login está correto! Redireciona para o Dashboard.
                 window.location.href = "/login/admin-dashboard.html";

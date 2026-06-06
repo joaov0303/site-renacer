@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar Usuários - Admin Renascer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <header class="bg-gray-900 text-white shadow-md relative z-50">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
+            <a href="/login/admin-dashboard.html"><h1 class="text-2xl font-bold tracking-tighter">ADMIN <span class="text-green-500">RENASCER</span></h1></a>
+            
+            <nav class="hidden md:flex space-x-8 font-medium text-sm">
+                <a href="admin-dashboard.html" class="text-gray-300 hover:text-white transition">Dashboard</a>
+                <a href="admin.html" class="text-gray-300 hover:text-white transition">Respostas do Site</a>
+                <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
+                <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
+                <a href="admin-usuarios.html" class="text-green-400 border-b-2 border-green-400 pb-1">Configurar Usuários</a>
+                <a href="admin-logados.html" class="text-gray-300 hover:text-white transition">Usuários Logados</a>
+                <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
+            </nav>
+            
+            <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
+
+            <button id="btn-menu-mobile" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <div id="menu-mobile" class="hidden md:hidden bg-gray-800 border-t border-gray-700 absolute w-full left-0 shadow-2xl">
+            <nav class="flex flex-col px-6 py-4 space-y-5 font-medium text-base">
+                <a href="admin-dashboard.html" class="block text-gray-300 hover:text-white transition">Dashboard</a>
+                <a href="admin.html" class="block text-gray-300 hover:text-white transition">Respostas do Site</a>
+                <a href="admin-membros.html" class="block text-gray-300 hover:text-white transition">Membresia</a>
+                <a href="admin-eventos.html" class="block text-gray-300 hover:text-white transition">Publicar Eventos</a>
+                <a href="admin-usuarios.html" class="block text-green-400 font-bold">Configurar Usuários</a>
+                <a href="admin-logados.html" class="block text-gray-300 hover:text-white transition">Usuários Logados</a>
+                <a href="admin-perfil.html" class="block text-gray-300 hover:text-white transition">Meu Perfil</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-800">Configurar Usuários</h2>
+            <p class="text-gray-500 mt-1">Gerencie os usuários do painel administrativo e atribua funções.</p>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+            <section class="xl:col-span-2 bg-white rounded-3xl shadow-sm border border-gray-100 p-6 overflow-x-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800">Lista de Usuários Configurados</h3>
+                        <p class="text-sm text-gray-500 mt-1">Estes dados são armazenados localmente no painel.</p>
+                    </div>
+                    <button id="btn-limpar-usuarios" class="text-sm bg-red-50 text-red-600 px-4 py-2 rounded-xl border border-red-200 hover:bg-red-100 transition">Limpar Tudo</button>
+                </div>
+
+                <table class="min-w-full text-left border-collapse">
+                    <thead class="bg-green-50 text-gray-500 text-xs uppercase tracking-wider font-bold">
+                        <tr>
+                            <th class="px-4 py-3">Email</th>
+                            <th class="px-4 py-3">Função</th>
+                            <th class="px-4 py-3">Estado</th>
+                            <th class="px-4 py-3">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuarios-table" class="divide-y divide-gray-100 text-sm text-gray-700"></tbody>
+                </table>
+            </section>
+
+            <section class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-gray-800">Adicionar ou Editar Usuário</h3>
+                    <p class="text-sm text-gray-500 mt-1">Use este formulário para criar o registro do usuário no painel.</p>
+                </div>
+                <form id="form-usuario" class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Email</label>
+                        <input id="usuario-email" type="email" placeholder="usuario@dominio.com" class="w-full px-4 py-3 border border-gray-200 rounded-2xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Função</label>
+                        <select id="usuario-funcao" class="w-full px-4 py-3 border border-gray-200 rounded-2xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="Administrador">Administrador</option>
+                            <option value="Editor">Editor</option>
+                            <option value="Visualizador">Visualizador</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Estado</label>
+                        <select id="usuario-estado" class="w-full px-4 py-3 border border-gray-200 rounded-2xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="Ativo">Ativo</option>
+                            <option value="Inativo">Inativo</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-3 sm:flex-row">
+                        <button type="submit" id="btn-salvar-usuario" class="w-full bg-green-600 text-white py-3 rounded-2xl font-bold hover:bg-green-700 transition">Salvar Usuário</button>
+                        <button type="button" id="btn-cancelar-edicao" class="w-full bg-gray-100 text-gray-700 py-3 rounded-2xl font-bold hover:bg-gray-200 transition">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('btn-menu-mobile')?.addEventListener('click', function() {
+            document.getElementById('menu-mobile').classList.toggle('hidden');
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCUTo0W0k31yBd8ORGKMzqJqv2ltLCwdEk",
+            authDomain: "site-renascer-eef39.firebaseapp.com",
+            projectId: "site-renascer-eef39",
+            storageBucket: "site-renascer-eef39.firebasestorage.app",
+            messagingSenderId: "1043023040737",
+            appId: "1:1043023040737:web:a6b4192f0e99c0487d67a0"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const STORAGE_KEY = 'adminUsuarios';
+
+        function getUsuarioConfigurado(email) {
+            const usuarios = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            return usuarios.find(u => u.email.toLowerCase() === email.toLowerCase());
+        }
+
+        function mostrarAcessoNegado() {
+            const main = document.querySelector('main');
+            if (main) {
+                main.innerHTML = `
+                    <div class="max-w-3xl mx-auto px-4 py-20 text-center">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Acesso restrito</h2>
+                        <p class="text-gray-500">Esta página só está disponível para administradores.</p>
+                        <a href="admin-dashboard.html" class="inline-block mt-8 bg-green-600 text-white px-6 py-3 rounded-2xl hover:bg-green-700 transition">Voltar ao Dashboard</a>
+                    </div>
+                `;
+            }
+        }
+
+        let editarIndice = null;
+        const formUsuario = document.getElementById('form-usuario');
+        const inputEmail = document.getElementById('usuario-email');
+        const selectFuncao = document.getElementById('usuario-funcao');
+        const selectEstado = document.getElementById('usuario-estado');
+        const usuariosTable = document.getElementById('usuarios-table');
+        const btnCancelar = document.getElementById('btn-cancelar-edicao');
+        const btnLimpar = document.getElementById('btn-limpar-usuarios');
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "/login/index.html";
+                return;
+            }
+
+            const usuarioConfigurado = getUsuarioConfigurado(user.email);
+            const role = usuarioConfigurado ? usuarioConfigurado.funcao : 'Administrador';
+            if (role !== 'Administrador') {
+                mostrarAcessoNegado();
+            }
+        });
+
+        function carregarUsuarios() {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        }
+
+        function salvarUsuarios(usuarios) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(usuarios));
+        }
+
+        function limparFormulario() {
+            editarIndice = null;
+            formUsuario.reset();
+            btnSalvarTexto('Salvar Usuário');
+        }
+
+        function btnSalvarTexto(texto) {
+            document.getElementById('btn-salvar-usuario').innerText = texto;
+        }
+
+        function renderizarUsuarios() {
+            const usuarios = carregarUsuarios();
+            if (usuarios.length === 0) {
+                usuariosTable.innerHTML = '<tr><td colspan="4" class="px-4 py-6 text-center text-gray-500 font-medium">Nenhum usuário configurado ainda.</td></tr>';
+                return;
+            }
+
+            usuariosTable.innerHTML = usuarios.map((usuario, index) => {
+                return `
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-4 font-medium text-gray-800">${usuario.email}</td>
+                        <td class="px-4 py-4 text-sm text-gray-600">${usuario.funcao}</td>
+                        <td class="px-4 py-4 text-sm ${usuario.estado === 'Ativo' ? 'text-green-600' : 'text-red-600'} font-bold">${usuario.estado}</td>
+                        <td class="px-4 py-4 space-x-2">
+                            <button onclick="editarUsuario(${index})" class="text-blue-600 hover:text-blue-800 font-medium">Editar</button>
+                            <button onclick="excluirUsuario(${index})" class="text-red-600 hover:text-red-800 font-medium">Excluir</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        window.editarUsuario = function(index) {
+            const usuarios = carregarUsuarios();
+            const usuario = usuarios[index];
+            if (!usuario) return;
+
+            editarIndice = index;
+            inputEmail.value = usuario.email;
+            selectFuncao.value = usuario.funcao;
+            selectEstado.value = usuario.estado;
+            btnSalvarTexto('Atualizar Usuário');
+        };
+
+        window.excluirUsuario = function(index) {
+            const usuarios = carregarUsuarios();
+            usuarios.splice(index, 1);
+            salvarUsuarios(usuarios);
+            renderizarUsuarios();
+        };
+
+        formUsuario.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = inputEmail.value.trim();
+            const funcao = selectFuncao.value;
+            const estado = selectEstado.value;
+            const usuarios = carregarUsuarios();
+
+            if (editarIndice !== null) {
+                usuarios[editarIndice] = { email, funcao, estado };
+            } else {
+                usuarios.push({ email, funcao, estado });
+            }
+
+            salvarUsuarios(usuarios);
+            renderizarUsuarios();
+            limparFormulario();
+        });
+
+        btnCancelar.addEventListener('click', () => {
+            limparFormulario();
+        });
+
+        btnLimpar.addEventListener('click', () => {
+            if (confirm('Deseja mesmo apagar todos os usuários configurados?')) {
+                salvarUsuarios([]);
+                renderizarUsuarios();
+                limparFormulario();
+            }
+        });
+
+        renderizarUsuarios();
+    </script>
+</body>
+</html>
