@@ -329,12 +329,8 @@
         async function iniciarAgenda() {
             await limparEventosExpirados();
 
-<<<<<<< HEAD
             // CORRIGIDO AQUI: De agenda_eventos para eventos
             onSnapshot(query(collection(db, "eventos"), orderBy('data_evento')), (snapshot) => {
-=======
-            onSnapshot(query(collection(db, "agenda_eventos"), orderBy('data_evento')), (snapshot) => {
->>>>>>> 5e8b80178076084569895a0c18ac6b390edd8fa3
                 const loading = document.getElementById('loading');
                 if(loading) loading.style.display = 'none';
 
