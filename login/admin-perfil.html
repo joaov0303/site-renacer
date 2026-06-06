@@ -116,6 +116,22 @@
     </script>
 
     <script type="module">
+        import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+// Função genérica para gravar logs
+async function registrarLog(usuario, acao, status, detalhes) {
+    try {
+        await addDoc(collection(db, "logs"), {
+            usuario: usuario,
+            acao: acao,
+            status: status, // "Sucesso" ou "Falha"
+            detalhes: detalhes,
+            dataCriacao: new Date().toISOString()
+        });
+    } catch (e) {
+        console.error("Erro ao gravar log: ", e);
+    }
+}
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getAuth, onAuthStateChanged, updatePassword, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 

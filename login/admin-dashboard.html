@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
+    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png">
     
 </head>
 <body class="bg-gray-100 min-h-screen">
@@ -21,6 +21,7 @@
                 <a href="admin.html" class="text-gray-300 hover:text-white transition">Respostas do Site</a>
                 <a href="admin-membros.html" class="text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="text-gray-300 hover:text-white transition">Publicar Eventos</a>
+                 <a href="admin-usuarios.html" id="menu-usuarios-desktop" class="text-gray-300 hover:text-white transition">Usuários</a>
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
             </nav>
             
@@ -38,6 +39,7 @@
                 <a href="admin-membros.html" class="block text-gray-300 hover:text-white transition">Membresia</a>
                 <a href="admin-eventos.html" class="block text-gray-300 hover:text-white transition">Publicar Eventos</a>
                 <a href="admin-perfil.html" class="block text-gray-300 hover:text-white transition">Meu Perfil</a>
+                <a href="admin-usuarios.html" id="menu-usuarios-mobile" class="block text-gray-300 hover:text-white transition">Usuários</a>
             </nav>
         </div>
     </header>
@@ -154,8 +156,10 @@
     </script>
 
     <script type="module">
+        
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        // Todos os imports do Firestore agrupados
+        import { getFirestore, collection, onSnapshot, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -171,147 +175,173 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Saudação com o nome do usuário
-        onAuthStateChanged(auth, (user) => {
+        // ==========================================
+        // 1. VERIFICAÇÃO DE LOGIN E PERMISSÃO
+        // ==========================================
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
+                // Checa se o usuário está na tabela de permissões VIP
+                const q = query(collection(db, "usuarios_permissoes"), where("email", "==", user.email.toLowerCase()));
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    alert("Você não tem permissão para acessar o painel.");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                // Descobre o nível de acesso
+                let nivelAcesso = "";
+                querySnapshot.forEach((doc) => {
+                    nivelAcesso = doc.data().nivelAcesso;
+                });
+
+                // Esconde o botão de Gerenciar Usuários se a pessoa não for Administrador
+                if (nivelAcesso !== "Administrador") {
+                    const menuDesktop = document.getElementById('menu-usuarios-desktop');
+                    const menuMobile = document.getElementById('menu-usuarios-mobile');
+                    if(menuDesktop) menuDesktop.style.display = 'none';
+                    if(menuMobile) menuMobile.style.display = 'none';
+                }
+
+                // Saudação
                 const nomeUsuario = user.displayName || user.email.split('@')[0];
                 const nomeFormatado = nomeUsuario.charAt(0).toUpperCase() + nomeUsuario.slice(1);
                 document.getElementById('texto-boas-vindas').innerText = `Olá, ${nomeFormatado}!`;
+
+                // Carrega os dados do dashboard apenas depois de confirmar a permissão
+                carregarDashboard();
+
             } else {
                 window.location.href = "login.html";
             }
         });
 
+        // Configuração da Data e Mês
         const opcoesData = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         document.getElementById('data-atual').innerText = new Date().toLocaleDateString('pt-BR', opcoesData);
-
-        // Configuração do Gráfico
-        const ctx = document.getElementById('graficoComunidade').getContext('2d');
-        const graficoComunidade = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Membros Oficiais', 'Novos Contatos', 'Voluntários Ativos'],
-                datasets: [{
-                    data: [0, 0, 0],
-                    backgroundColor: ['#16a34a', '#2563eb', '#9333ea'],
-                    borderWidth: 0,
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'right', labels: { padding: 20, font: { family: "'Inter', sans-serif", size: 13 } } }
-                },
-                cutout: '70%'
-            }
-        });
-
-        let dadosGrafico = [0, 0, 0];
-        function atualizarGrafico() {
-            graficoComunidade.data.datasets[0].data = dadosGrafico;
-            graficoComunidade.update();
-        }
-
-        // ==========================================
-        // DADOS E ANIVERSARIANTES
-        // ==========================================
         
-        // Pega data atual para comparar
         const hoje = new Date();
-        const mesAtual = hoje.getMonth() + 1; // getMonth() retorna 0-11
+        const mesAtual = hoje.getMonth() + 1;
         const diaAtual = hoje.getDate();
-        
-        // Configura o emblema do mês na tela
         const nomeMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         document.getElementById('mes-atual-badge').innerText = nomeMeses[mesAtual - 1];
 
-        onSnapshot(collection(db, "membros_oficiais"), (snap) => {
-            document.getElementById('count-membros').innerText = snap.size;
-            dadosGrafico[0] = snap.size;
-            atualizarGrafico();
 
-            // Módulo de Aniversariantes
-            const listaAniv = document.getElementById('lista-aniversariantes');
-            let aniversariantes = [];
-
-            snap.forEach(doc => {
-                const data = doc.data();
-                if (data.data_nascimento && data.status !== 'Inativo') {
-                    // O formato padrão do date picker é YYYY-MM-DD
-                    const [ano, mes, dia] = data.data_nascimento.split('-');
-                    
-                    if (parseInt(mes) === mesAtual) {
-                        aniversariantes.push({
-                            nome: data.nome,
-                            dia: parseInt(dia),
-                            idade: hoje.getFullYear() - parseInt(ano),
-                            telefone: data.telefone || ''
-                        });
-                    }
+        // ==========================================
+        // 2. FUNÇÃO PARA CARREGAR OS DADOS
+        // ==========================================
+        function carregarDashboard() {
+            // Configuração do Gráfico
+            const ctx = document.getElementById('graficoComunidade').getContext('2d');
+            const graficoComunidade = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Membros Oficiais', 'Novos Contatos', 'Voluntários Ativos'],
+                    datasets: [{
+                        data: [0, 0, 0],
+                        backgroundColor: ['#16a34a', '#2563eb', '#9333ea'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { padding: 20, font: { family: "'Inter', sans-serif", size: 13 } } }
+                    },
+                    cutout: '70%'
                 }
             });
 
-            // Ordenar do dia mais cedo do mês até o final do mês
-            aniversariantes.sort((a, b) => a.dia - b.dia);
-            listaAniv.innerHTML = '';
-
-            if (aniversariantes.length === 0) {
-                listaAniv.innerHTML = '<div class="col-span-full p-8 text-center text-gray-500 font-medium">Não temos aniversariantes cadastrados para este mês.</div>';
-            } else {
-                aniversariantes.forEach(pessoa => {
-                    const isHoje = pessoa.dia === diaAtual;
-                    
-                    // Design muda se o aniversário for hoje
-                    const cardClass = isHoje ? 'bg-green-50 border-green-200 shadow-md' : 'bg-gray-50 border-gray-100 hover:border-green-200 hover:bg-white';
-                    const badgeHoje = isHoje ? `<span class="bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase ml-2 shadow-sm animate-pulse">Hoje! 🎉</span>` : '';
-                    
-                    // Gerar Link do WhatsApp
-                    const numZap = pessoa.telefone.replace(/\D/g, "");
-                    let iconeWhats = '';
-                    if (numZap) {
-                        const textoWhats = window.encodeURIComponent(`Feliz aniversário, ${pessoa.nome}! Que Deus abençoe muito a sua vida e te conceda um novo ano cheio de vitórias! 🎉🙏 - Liderança Igreja Renascer`);
-                        iconeWhats = `<a href="https://api.whatsapp.com/send?phone=55${numZap}&text=${textoWhats}" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition shadow-sm border border-gray-100 shrink-0" title="Mandar Parabéns">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.305-.885-.655-1.482-1.465-1.655-1.763-.173-.298-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.012c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        </a>`;
-                    }
-
-                    listaAniv.innerHTML += `
-                        <div class="flex items-center justify-between ${cardClass} border p-4 rounded-2xl transition">
-                            <div class="flex items-center gap-4">
-                                <div class="flex flex-col items-center justify-center bg-white w-12 h-12 rounded-xl shadow-sm border border-gray-100 shrink-0">
-                                    <span class="text-[10px] text-gray-400 font-bold uppercase">${nomeMeses[mesAtual-1].substring(0,3)}</span>
-                                    <span class="text-lg font-black text-gray-800 leading-none">${pessoa.dia}</span>
-                                </div>
-                                <div class="pr-2">
-                                    <h4 class="font-bold text-gray-900 text-sm truncate w-full flex items-center">${pessoa.nome} ${badgeHoje}</h4>
-                                    <p class="text-xs text-gray-500 mt-0.5">Completa ${pessoa.idade} anos</p>
-                                </div>
-                            </div>
-                            ${iconeWhats}
-                        </div>
-                    `;
-                });
+            let dadosGrafico = [0, 0, 0];
+            function atualizarGrafico() {
+                graficoComunidade.data.datasets[0].data = dadosGrafico;
+                graficoComunidade.update();
             }
-        });
 
-        // Contagens Rápidas Adicionais
-        onSnapshot(collection(db, "conexoes_novos_membros"), (snap) => {
-            document.getElementById('count-novos').innerText = snap.size;
-            dadosGrafico[1] = snap.size;
-            atualizarGrafico();
-        });
+            // Leituras do Banco de Dados
+            onSnapshot(collection(db, "membros_oficiais"), (snap) => {
+                document.getElementById('count-membros').innerText = snap.size;
+                dadosGrafico[0] = snap.size;
+                atualizarGrafico();
 
-        onSnapshot(collection(db, "inscricoes_voluntarios"), (snap) => {
-            document.getElementById('count-voluntarios').innerText = snap.size;
-            dadosGrafico[2] = snap.size;
-            atualizarGrafico();
-        });
+                // Módulo de Aniversariantes
+                const listaAniv = document.getElementById('lista-aniversariantes');
+                let aniversariantes = [];
 
-        onSnapshot(collection(db, "pedidos_oracao"), (snap) => {
-            document.getElementById('count-oracoes').innerText = snap.size;
-        });
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    if (data.data_nascimento && data.status !== 'Inativo') {
+                        const [ano, mes, dia] = data.data_nascimento.split('-');
+                        
+                        if (parseInt(mes) === mesAtual) {
+                            aniversariantes.push({
+                                nome: data.nome,
+                                dia: parseInt(dia),
+                                idade: hoje.getFullYear() - parseInt(ano),
+                                telefone: data.telefone || ''
+                            });
+                        }
+                    }
+                });
+
+                aniversariantes.sort((a, b) => a.dia - b.dia);
+                listaAniv.innerHTML = '';
+
+                if (aniversariantes.length === 0) {
+                    listaAniv.innerHTML = '<div class="col-span-full p-8 text-center text-gray-500 font-medium">Não temos aniversariantes cadastrados para este mês.</div>';
+                } else {
+                    aniversariantes.forEach(pessoa => {
+                        const isHoje = pessoa.dia === diaAtual;
+                        const cardClass = isHoje ? 'bg-green-50 border-green-200 shadow-md' : 'bg-gray-50 border-gray-100 hover:border-green-200 hover:bg-white';
+                        const badgeHoje = isHoje ? `<span class="bg-green-500 text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase ml-2 shadow-sm animate-pulse">Hoje! 🎉</span>` : '';
+                        
+                        const numZap = pessoa.telefone.replace(/\D/g, "");
+                        let iconeWhats = '';
+                        if (numZap) {
+                            const textoWhats = window.encodeURIComponent(`Feliz aniversário, ${pessoa.nome}! Que Deus abençoe muito a sua vida e te conceda um novo ano cheio de vitórias! 🎉🙏 - Liderança Igreja Renascer`);
+                            iconeWhats = `<a href="https://api.whatsapp.com/send?phone=55${numZap}&text=${textoWhats}" target="_blank" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition shadow-sm border border-gray-100 shrink-0" title="Mandar Parabéns">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.305-.885-.655-1.482-1.465-1.655-1.763-.173-.298-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.012c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            </a>`;
+                        }
+
+                        listaAniv.innerHTML += `
+                            <div class="flex items-center justify-between ${cardClass} border p-4 rounded-2xl transition">
+                                <div class="flex items-center gap-4">
+                                    <div class="flex flex-col items-center justify-center bg-white w-12 h-12 rounded-xl shadow-sm border border-gray-100 shrink-0">
+                                        <span class="text-[10px] text-gray-400 font-bold uppercase">${nomeMeses[mesAtual-1].substring(0,3)}</span>
+                                        <span class="text-lg font-black text-gray-800 leading-none">${pessoa.dia}</span>
+                                    </div>
+                                    <div class="pr-2">
+                                        <h4 class="font-bold text-gray-900 text-sm truncate w-full flex items-center">${pessoa.nome} ${badgeHoje}</h4>
+                                        <p class="text-xs text-gray-500 mt-0.5">Completa ${pessoa.idade} anos</p>
+                                    </div>
+                                </div>
+                                ${iconeWhats}
+                            </div>
+                        `;
+                    });
+                }
+            });
+
+            onSnapshot(collection(db, "conexoes_novos_membros"), (snap) => {
+                document.getElementById('count-novos').innerText = snap.size;
+                dadosGrafico[1] = snap.size;
+                atualizarGrafico();
+            });
+
+            onSnapshot(collection(db, "inscricoes_voluntarios"), (snap) => {
+                document.getElementById('count-voluntarios').innerText = snap.size;
+                dadosGrafico[2] = snap.size;
+                atualizarGrafico();
+            });
+
+            onSnapshot(collection(db, "pedidos_oracao"), (snap) => {
+                document.getElementById('count-oracoes').innerText = snap.size;
+            });
+        }
     </script>
 </body>
 </html>
