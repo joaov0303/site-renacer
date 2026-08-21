@@ -73,70 +73,96 @@
         </div>
     </header>
 
-    <main class="flex-grow">
-        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-60">
-            <div class="absolute inset-0 z-0">
-                <img src="/img/midia.png" alt="Galeria" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
-            </div>
-            <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <span class="text-green-400 font-bold tracking-widest uppercase text-sm mb-4 block">Memórias & Momentos</span>
-                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Galeria de Fotos</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Relembre os momentos marcantes de adoração, comunhão e celebração da nossa família de fé.</p>
-            </div>
-        </section>
+    <!-- Imagem de Fundo Fixa (Parallax effect e base para o Glassmorphism) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="/img/midia.png" alt="Galeria" class="w-full h-full object-cover">
+        <!-- O Gradiente dá destaque ao texto e funde a imagem -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95"></div>
+    </div>
 
-        <section class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto -mt-10 relative z-20">
-            <div class="bg-white dark:bg-gray-800 p-8 sm:p-12 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 text-center max-w-3xl mx-auto">
-                <div class="text-4xl mb-4">📸</div>
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Álbum do Último Culto de Celebração</h2>
-                <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto">Todas as fotos do nosso último encontro de domingo já estão disponíveis no nosso drive público externo. Clique no botão abaixo para visualizar ou fazer download.</p>
+    <!-- 2. Conteúdo Principal (Glassmorphism) -->
+    <main class="flex-grow relative z-10 pt-32 pb-24 min-h-screen">
+        
+        <!-- Hero Interno -->
+        <div class="max-w-4xl mx-auto text-center px-4 mb-16 pt-10">
+            <span class="text-green-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Memórias & Momentos</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm">
+                Galeria de Fotos
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 font-light tracking-wide drop-shadow max-w-2xl mx-auto">
+                Relembre os momentos marcantes de adoração, comunhão e celebração da nossa família de fé.
+            </p>
+        </div>
+
+        <!-- Bloco Principal CTA (Drive) -->
+        <section class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full mb-20">
+            <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-12 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] text-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
                 
-                <a href="https://drive.google.com/drive/folders/1WiY-8cR9RS2scl9oM44BQvUl2ilgqYat" target="_blank" class="inline-flex items-center gap-3 bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg hover:-translate-y-0.5 duration-150">
+                <div class="relative z-10 w-20 h-20 bg-white/20 backdrop-blur-md rounded-3xl flex items-center justify-center mx-auto mb-6 border border-white/10 shadow-inner text-4xl">
+                    <span class="drop-shadow-md">📸</span>
+                </div>
+                
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 drop-shadow-sm relative z-10">Álbum do Último Culto de Celebração</h2>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto font-light leading-relaxed tracking-wide relative z-10">
+                    Todas as fotos do nosso último encontro de domingo já estão disponíveis no nosso drive público externo. Clique no botão abaixo para visualizar ou fazer download.
+                </p>
+                
+                <a href="https://drive.google.com/drive/folders/1WiY-8cR9RS2scl9oM44BQvUl2ilgqYat" target="_blank" class="inline-flex items-center justify-center gap-3 w-full sm:w-auto bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_4px_15px_0_rgba(22,163,74,0.4)] relative z-10">
                     Ver Álbum Completo de Fotos
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                 </a>
             </div>
         </section>
 
-        <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-12">
-            <div class="text-center mb-12">
-                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Nossas Celebrações</h3>
-                <p class="text-gray-600 dark:text-gray-400 mt-2">Registros de adoração, batismos, pequenos grupos e ações sociais.</p>
+        <!-- Categorias de Fotos -->
+        <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-10 border-t border-white/10">
+            <div class="text-center md:text-left mb-12">
+                <h3 class="text-3xl font-bold text-white drop-shadow-sm">Nossas Celebrações</h3>
+                <p class="text-gray-300 font-light mt-2 tracking-wide">Registros de adoração, batismos, pequenos grupos e ações sociais.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="group bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+                <!-- Card 1 -->
+                <div class="group bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-all duration-500 hover:-translate-y-2 hover:bg-white/20">
                     <div class="h-56 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-1">Cultos de Domingo</h4>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Momentos marcantes da palavra e do louvor congregacional.</p>
+                    <div class="p-6 relative z-10 -mt-6">
+                        <h4 class="font-bold text-xl text-white mb-2 drop-shadow-sm">Cultos de Domingo</h4>
+                        <p class="text-sm text-gray-300 font-light leading-relaxed">Momentos marcantes da palavra e do louvor congregacional.</p>
                     </div>
                 </div>
-                <div class="group bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+
+                <!-- Card 2 -->
+                <div class="group bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-all duration-500 hover:-translate-y-2 hover:bg-white/20">
                     <div class="h-56 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-1">Comunhão e Grupos</h4>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Registros dos nossos Grupos de Mesa e conexões semanais.</p>
+                    <div class="p-6 relative z-10 -mt-6">
+                        <h4 class="font-bold text-xl text-white mb-2 drop-shadow-sm">Comunhão e Grupos</h4>
+                        <p class="text-sm text-gray-300 font-light leading-relaxed">Registros dos nossos Grupos de Mesa e conexões semanais.</p>
                     </div>
                 </div>
-                <div class="group bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700">
+
+                <!-- Card 3 -->
+                <div class="group bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-all duration-500 hover:-translate-y-2 hover:bg-white/20">
                     <div class="h-56 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-1">Ministérios e Eventos</h4>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Batismos, conferências e atividades de capacitação.</p>
+                    <div class="p-6 relative z-10 -mt-6">
+                        <h4 class="font-bold text-xl text-white mb-2 drop-shadow-sm">Ministérios e Eventos</h4>
+                        <p class="text-sm text-gray-300 font-light leading-relaxed">Batismos, conferências e atividades de capacitação.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 relative z-10 border-t border-white/10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>

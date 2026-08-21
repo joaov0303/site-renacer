@@ -98,22 +98,30 @@
         </div>
     </header>
 
-    <!-- 2. Hero Interno e Conteúdo Principal -->
-    <main class="flex-grow">
-        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Comunhão" class="w-full h-full object-cover opacity-20 mix-blend-overlay">
-            </div>
-            <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Conheça nossos Grupos de Mesa</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Mais do que reuniões, somos uma família. Deslize para conhecer os perfis dos nossos grupos e encontre o seu lugar.</p>
-            </div>
-        </section>
+    <!-- Imagem de Fundo Fixa (Parallax effect e base para o Glassmorphism) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Comunhão" class="w-full h-full object-cover">
+        <!-- O Gradiente dá destaque ao texto e funde a imagem -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95"></div>
+    </div>
 
-        <!-- Container do Carrossel (Adaptado para imagens horizontais) -->
-        <section class="relative max-w-7xl mx-auto py-12">
+    <!-- 2. Hero Interno e Conteúdo Principal -->
+    <main class="flex-grow relative z-10 pt-32 pb-20 min-h-screen">
+        
+        <div class="max-w-4xl mx-auto text-center px-4 mb-16 pt-10">
+            <span class="text-green-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Nossos Grupos de Mesa</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm">
+                A vida em comunhão
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 font-light tracking-wide drop-shadow max-w-2xl mx-auto">
+                Mais do que reuniões, somos uma família. Deslize para conhecer os perfis dos nossos grupos e encontre o seu lugar.
+            </p>
+        </div>
+
+        <!-- Container do Carrossel (Glassmorphism) -->
+        <section class="relative max-w-7xl mx-auto py-4">
             <!-- Botão Anterior (Esquerda) -->
-            <button id="prevBtn" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-gray-200 p-3 rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 hover:scale-110 transition-all duration-300 border border-gray-200 dark:border-gray-700 focus:outline-none hidden sm:flex items-center justify-center">
+            <button id="prevBtn" class="absolute left-2 md:-left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md text-white p-3 md:p-4 rounded-full shadow-[0_4px_15px_0_rgba(0,0,0,0.3)] hover:bg-white/30 transition-all border border-white/20 focus:outline-none hidden sm:flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
@@ -123,109 +131,112 @@
             <div id="carousel-container" class="flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 sm:px-6 lg:px-8 pb-10 hide-scrollbar scroll-smooth">
                 
                 <!-- Grupo 1: Filhos de Sião -->
-                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl group border border-gray-100 dark:border-gray-700 transition-colors duration-300">
-                    <!-- Área da Imagem (Proporção 16:9) -->
-                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
-                        <!-- ATENÇÃO: Coloque o nome correto da sua imagem salva aqui no src -->
-                        <img src="/img/gm-siao.jpeg" alt="Grupo Filhos de Sião" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] overflow-hidden group transition-all duration-500 hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none z-10"></div>
+                    <!-- Área da Imagem -->
+                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-900 relative">
+                        <img src="/img/gm-siao.jpeg" alt="Grupo Filhos de Sião" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
                     </div>
                     <!-- Área de Texto Base -->
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Filhos de Sião</h3>
-                            <span class="bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
+                    <div class="p-8 relative z-20 -mt-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-3xl font-bold text-white drop-shadow-sm">Filhos de Sião</h3>
+                            <span class="bg-green-500/20 backdrop-blur-md border border-green-500/30 text-green-400 text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-sm mt-1">Segunda-feira</span>
                         </div>
-                        <div class="space-y-1 mt-4">
-                            <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2 font-medium">
-                                <span>🕒</span> 19:30 Horas
+                        <div class="space-y-3 mt-4 mb-8">
+                            <p class="text-gray-300 flex items-center gap-3 font-light tracking-wide">
+                                <span class="text-xl drop-shadow-sm">🕒</span> 19:30 Horas
                             </p>
-                            <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2 font-medium">
-                                <span>📍</span> Itapuã - Zé Pedro
+                            <p class="text-gray-300 flex items-center gap-3 font-light tracking-wide">
+                                <span class="text-xl drop-shadow-sm">📍</span> Itapuã - Zé Pedro
                             </p>
-
-                             <!-- Link/Botão 1 -->
-                    <a href="https://wa.me/qr/KRRLJEAJPKBYN1" target="_blank" class="w-full bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2">
-                        Entre em Contato com o Líder
-                    </a>
                         </div>
+                        <!-- Link/Botão 1 -->
+                        <a href="https://wa.me/qr/KRRLJEAJPKBYN1" target="_blank" class="w-full bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_4px_15px_0_rgba(22,163,74,0.4)] flex items-center justify-center gap-2">
+                            Entrar em Contato 💬
+                        </a>
                     </div>
                 </div>
 
                 <!-- Grupo 2: Firmados na Rocha -->
-                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl group border border-gray-100 dark:border-gray-700 transition-colors duration-300">
-                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
-                        <img src="/img/gm-rocha.jpeg" alt="Grupo Firmados na Rocha" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] overflow-hidden group transition-all duration-500 hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none z-10"></div>
+                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-900 relative">
+                        <img src="/img/gm-rocha.jpeg" alt="Grupo Firmados na Rocha" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Firmados na Rocha</h3>
-                            <span class="bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
+                    <div class="p-8 relative z-20 -mt-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-3xl font-bold text-white drop-shadow-sm">Firmados na Rocha</h3>
+                            <span class="bg-green-500/20 backdrop-blur-md border border-green-500/30 text-green-400 text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-sm mt-1">Segunda-feira</span>
                         </div>
-                        <div class="space-y-1 mt-4">
-                            <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2 font-medium">
-                                <span>🕒</span> 20:00 Horas
+                        <div class="space-y-3 mt-4 mb-8">
+                            <p class="text-gray-300 flex items-center gap-3 font-light tracking-wide">
+                                <span class="text-xl drop-shadow-sm">🕒</span> 20:00 Horas
                             </p>
-                            <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2 font-medium">
-                                <span>📍</span> Riviera Park
+                            <p class="text-gray-300 flex items-center gap-3 font-light tracking-wide">
+                                <span class="text-xl drop-shadow-sm">📍</span> Riviera Park
                             </p>
-
-                             <!-- Link/Botão 1 -->
-                    <a href="https://wa.me/5538999569758?src=qr" target="_blank" class="w-full bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2">
-                        Entre em Contato com o Líder
-                    </a>
                         </div>
+                        <!-- Link/Botão 2 -->
+                        <a href="https://wa.me/5538999569758?src=qr" target="_blank" class="w-full bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_4px_15px_0_rgba(22,163,74,0.4)] flex items-center justify-center gap-2">
+                            Entrar em Contato 💬
+                        </a>
                     </div>
                 </div>
 
                 <!-- Grupo 3: Arca da Aliança -->
-                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl group border border-gray-100 dark:border-gray-700 transition-colors duration-300">
-                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
-                        <img src="/img/gm-arca.jpeg" alt="Grupo Arca da Aliança" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] overflow-hidden group transition-all duration-500 hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none z-10"></div>
+                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-900 relative">
+                        <img src="/img/gm-arca.jpeg" alt="Grupo Arca da Aliança" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Arca da Aliança</h3>
-                            <span class="bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
+                    <div class="p-8 relative z-20 -mt-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-3xl font-bold text-white drop-shadow-sm">Arca da Aliança</h3>
+                            <span class="bg-green-500/20 backdrop-blur-md border border-green-500/30 text-green-400 text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-sm mt-1">Segunda-feira</span>
                         </div>
-                        <div class="space-y-1 mt-4">
-                            <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2 font-medium">
-                                <span>🕒</span> 20:00 Horas
+                        <div class="space-y-3 mt-4 mb-8">
+                            <p class="text-gray-300 flex items-center gap-3 font-light tracking-wide">
+                                <span class="text-xl drop-shadow-sm">🕒</span> 20:00 Horas
                             </p>
-                            <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2 font-medium">
-                                <span>📍</span> Iuna
+                            <p class="text-gray-300 flex items-center gap-3 font-light tracking-wide">
+                                <span class="text-xl drop-shadow-sm">📍</span> Iuna
                             </p>
-
-                             <!-- Link/Botão 1 -->
-                    <a href="https://wa.me/qr/KQV7F2ECDW3LO1" target="_blank" class="w-full bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2">
-                        Entre em Contato com o Líder
-                    </a>
                         </div>
+                        <!-- Link/Botão 3 -->
+                        <a href="https://wa.me/qr/KQV7F2ECDW3LO1" target="_blank" class="w-full bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_4px_15px_0_rgba(22,163,74,0.4)] flex items-center justify-center gap-2">
+                            Entrar em Contato 💬
+                        </a>
                     </div>
                 </div>
 
                 <!-- Grupo 4: Guerreiros de Yeshua -->
-                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-xl group border border-gray-100 dark:border-gray-700 transition-colors duration-300">
-                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-100 dark:bg-gray-700">
-                        <img src="/img/gm-yeshua.jpeg" alt="Grupo Guerreiros de Yeshua" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="snap-center shrink-0 w-[90vw] md:w-[550px] bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] overflow-hidden group transition-all duration-500 hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 relative">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none z-10"></div>
+                    <div class="aspect-[16/9] w-full overflow-hidden bg-gray-900 relative">
+                        <img src="/img/gm-yeshua.jpeg" alt="Grupo Guerreiros de Yeshua" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Guerreiros de Yeshua</h3>
-                            <span class="bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-xs font-bold px-3 py-1 rounded-full uppercase">Segunda-feira</span>
+                    <div class="p-8 relative z-20 -mt-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-3xl font-bold text-white drop-shadow-sm">Guerreiros de Yeshua</h3>
+                            <span class="bg-green-500/20 backdrop-blur-md border border-green-500/30 text-green-400 text-xs font-bold px-3 py-1.5 rounded-full uppercase shadow-sm mt-1">Segunda-feira</span>
                         </div>
-                        <div class="space-y-1 mt-4">
-                            <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2 font-medium">
-                                <span>🕒</span> 19:00 Horas
+                        <div class="space-y-3 mt-4 mb-8">
+                            <p class="text-gray-300 flex items-center gap-3 font-light tracking-wide">
+                                <span class="text-xl drop-shadow-sm">🕒</span> 19:00 Horas
                             </p>
-                            <p class="text-gray-600 dark:text-gray-400 flex items-center gap-2 font-medium">
-                                <span>📍</span> Centro
+                            <p class="text-gray-300 flex items-center gap-3 font-light tracking-wide">
+                                <span class="text-xl drop-shadow-sm">📍</span> Centro
                             </p>
-
-                             <!-- Link/Botão 1 -->
-                    <a href="https://wa.me/qr/J65OYU7FTVGBN1" target="_blank" class="w-full bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2">
-                        Entre em Contato com o Líder
-                    </a>
                         </div>
+                        <!-- Link/Botão 4 -->
+                        <a href="https://wa.me/qr/J65OYU7FTVGBN1" target="_blank" class="w-full bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_4px_15px_0_rgba(22,163,74,0.4)] flex items-center justify-center gap-2">
+                            Entrar em Contato 💬
+                        </a>
                     </div>
                 </div>
 
@@ -234,7 +245,7 @@
             </div>
 
             <!-- Botão Próximo (Direita) -->
-            <button id="nextBtn" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-gray-200 p-3 rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 hover:scale-110 transition-all duration-300 border border-gray-200 dark:border-gray-700 focus:outline-none hidden sm:flex items-center justify-center">
+            <button id="nextBtn" class="absolute right-2 md:-right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-md text-white p-3 md:p-4 rounded-full shadow-[0_4px_15px_0_rgba(0,0,0,0.3)] hover:bg-white/30 transition-all border border-white/20 focus:outline-none hidden sm:flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
@@ -242,18 +253,23 @@
         </section>
 
         <!-- 4. Call to Action (Chamada para o formulário) -->
-        <section class="py-16 bg-green-600 dark:bg-green-700 text-center px-4 sm:px-6 lg:px-8 transition-colors duration-300">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Gostou de algum perfil?</h2>
-            <p class="text-green-100 dark:text-green-50 mb-8 max-w-2xl mx-auto text-lg">Deixe seus dados e nossa liderança conectará você ao grupo perfeito mais próximo da sua casa.</p>
-            <a href="encontre-um-grupo.html" class="inline-block bg-white dark:bg-gray-100 text-green-600 dark:text-green-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 dark:hover:bg-white transition shadow-xl">
-                Preencher Formulário de Conexão
-            </a>
+        <section class="py-16 px-4 sm:px-6 lg:px-8 relative z-20">
+            <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-10 md:p-16 text-center max-w-5xl mx-auto shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-50 pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-sm">Gostou de algum perfil?</h2>
+                    <p class="text-gray-300 mb-10 max-w-2xl mx-auto text-lg font-light tracking-wide leading-relaxed">Deixe seus dados e nossa liderança conectará você ao grupo perfeito mais próximo da sua casa.</p>
+                    <a href="encontre-um-grupo.html" class="inline-block bg-white/20 backdrop-blur-md border border-white/30 text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-white/30 transition-all duration-300 shadow-[0_4px_15px_0_rgba(255,255,255,0.1)]">
+                        Preencher Formulário de Conexão
+                    </a>
+                </div>
+            </div>
         </section>
 
     </main>
 
     <!-- 6. Rodapé (Footer) -->
-    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 relative z-10 border-t border-white/10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
@@ -282,7 +298,6 @@
                 </form>
             </div>
         </div>
-        
         <div class="mt-16 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
             &copy; 2026 Igreja Renascer <br/> Todos os direitos reservados.
         </div>

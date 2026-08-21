@@ -87,42 +87,51 @@
         </div>
     </header>
 
-    <!-- 2. Conteúdo Principal -->
-    <main class="flex-grow">
+    <!-- Imagem de Fundo Fixa (Parallax effect e base para o Glassmorphism) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="/img/mulheres 2.png" alt="Mulheres Renascer" class="w-full h-full object-cover">
+        <!-- O Gradiente dá destaque ao texto e funde a imagem -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95"></div>
+    </div>
+
+    <!-- 2. Conteúdo Principal (Glassmorphism) -->
+    <main class="flex-grow relative z-10 pt-32 pb-24 min-h-screen flex flex-col items-center">
+        
         <!-- Hero Interno -->
-        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
-            <div class="absolute inset-0 z-0">
-                <!-- Imagem com clima feminino/comunhão -->
-                <img src="/img/mulheres 2.png" alt="Mulheres Renascer" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
-            </div>
-            <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <span class="text-pink-400 font-bold tracking-widest uppercase text-sm mb-4 block">Ministério Feminino</span>
-                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Mulheres Renascer</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Um ambiente seguro de cura, encorajamento e crescimento mútuo. Conecte-se com outras mulheres através dos nossos canais.</p>
-            </div>
-        </section>
+        <div class="max-w-4xl mx-auto text-center px-4 mb-16 pt-10">
+            <span class="text-pink-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Ministério Feminino</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm">
+                Mulheres Renascer
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 font-light tracking-wide drop-shadow max-w-2xl mx-auto">
+                Um ambiente seguro de cura, encorajamento e crescimento mútuo. Conecte-se com outras mulheres através dos nossos canais.
+            </p>
+        </div>
 
         <!-- Seção de Links e QR Codes -->
-        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto -mt-16 relative z-20">
+        <section class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
             
-            <!-- max-w-md e mx-auto garantem que o cartão fique com um tamanho ideal e centralizado -->
             <div class="max-w-md mx-auto">
                 
-                <!-- Cartão Único (WhatsApp) -->
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-2xl border-t-4 border-pink-600 flex flex-col items-center text-center hover:-translate-y-2 transition duration-300">
-                    <div class="w-16 h-16 bg-pink-50 dark:bg-pink-900/40 text-pink-600 dark:text-pink-400 rounded-full flex items-center justify-center mb-4 text-3xl">
-                        💬
+                <!-- Cartão Único (WhatsApp) Glassmorphism -->
+                <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex flex-col items-center text-center hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 relative overflow-hidden group">
+                    <!-- Brilho interno no hover -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-5 border border-white/10 shadow-inner text-3xl">
+                        <span class="drop-shadow-md">💬</span>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Grupo do WhatsApp</h2>
-                    <p class="text-gray-500 dark:text-gray-400 mb-6 text-sm">Receba nossos devocionais, motivos de oração e avisos sobre nossos encontros semanais.</p>
+                    
+                    <h2 class="text-2xl font-bold text-white mb-2 drop-shadow-sm relative z-10">Grupo do WhatsApp</h2>
+                    <p class="text-gray-300 mb-8 text-sm font-light leading-relaxed tracking-wide relative z-10">Receba nossos devocionais, motivos de oração e avisos sobre nossos encontros semanais.</p>
                     
                     <!-- QR Code Único (Fundo branco garantido) -->
-                    <div class="bg-white p-4 rounded-2xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm inline-block">
+                    <div class="bg-white p-4 rounded-2xl mb-8 border border-gray-200 shadow-sm inline-block relative z-10">
                         <img src="/img/qrcode_mulheres.png" alt="QR Code WhatsApp" class="w-40 h-40">
                     </div>
 
                     <!-- Botão Único -->
-                    <a href="https://chat.whatsapp.com/DHCGaeNMYVJ4hrKwZkwPrk" target="_blank" class="w-full bg-pink-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-pink-700 transition shadow-lg flex items-center justify-center gap-2">
+                    <a href="https://chat.whatsapp.com/DHCGaeNMYVJ4hrKwZkwPrk" target="_blank" class="w-full bg-pink-600/80 backdrop-blur-md border border-pink-500/50 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-pink-500 transition-all duration-300 shadow-[0_4px_15px_0_rgba(219,39,119,0.4)] flex items-center justify-center gap-2 relative z-10">
                         Entrar no Grupo
                     </a>
                 </div>
@@ -132,7 +141,7 @@
     </main>
 
     <!-- 3. Rodapé (Footer) -->
-    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 relative z-10 border-t border-white/10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>

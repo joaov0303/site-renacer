@@ -58,7 +58,7 @@
                     </button>
 
                     <div class="hidden md:block">
-                        <a href="/login/index.html"s class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
+                        <a href="/login/index.html" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
                     </div>
 
                     <div class="md:hidden flex items-center">
@@ -87,49 +87,97 @@
         </div>
     </header>
 
-    <section class="relative bg-gray-900 h-[80vh] flex items-center justify-center pt-20">
-        <div class="absolute inset-0 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto" class="w-full h-full object-cover opacity-30">
+    <!-- Hero + Cartões em Glassmorphism -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-24 overflow-hidden">
+        
+        <!-- Imagem de Fundo em Tela Cheia -->
+        <div class="absolute inset-0 z-0">
+            <!-- Imagem original mantida -->
+            <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto Renascer" class="w-full h-full object-cover">
+            
+            <!-- Overlay com Gradiente: Escuro no topo para ler o menu, claro no meio, escuro embaixo -->
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-gray-900/95"></div>
         </div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mt-10 sm:mt-0">
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">Igreja Renascer</h1>
-            <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-10">Somos família <br/> Um lugar para você Renascer.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                
-                <a href="/site_igreja/nossos-grupos.html" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition w-full sm:w-auto">Grupos de Mesa</a>
-                <a href="/site_igreja/novo-aqui.html" class="bg-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-700 transition shadow-lg w-full sm:w-auto">Sou Novo Aqui</a>
-                <a href="/site_igreja/oracoes.html" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition w-full sm:w-auto">Mural de Orações</a>
+
+        <!-- Conteúdo do Hero -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mb-16">
+            <span class="text-green-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Bem-vindo à sua casa</span>
+            
+            <!-- Título com efeito gradiente sutil -->
+           <!-- Título com efeito gradiente sutil -->
+<h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm pb-2">
+    Igreja Renascer
+</h1>
+            
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 font-light tracking-wide drop-shadow">
+                Somos família. Um lugar para você recomeçar.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-5">
+                <!-- Botão Glassmorphism -->
+                <a href="/site_igreja/nossos-grupos.html" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 hover:border-white/40 transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+                    Grupos de Mesa
+                </a>
+                <!-- Botão Primário Translúcido -->
+                <a href="/site_igreja/novo-aqui.html" class="bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_8px_32px_0_rgba(22,163,74,0.4)]">
+                    Sou Novo Aqui
+                </a>
+                <a href="/site_igreja/oracoes.html" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 hover:border-white/40 transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+                    Mural de Oração
+                </a>
             </div>
         </div>
-    </section>
 
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 -mt-16">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            <a href="/site_igreja/quero-batizar.html" class="block">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"><img src="/img/agua.png" alt="Comunidade" class="w-full h-full object-cover opacity-90"></div>
-                    <h3 class="font-bold text-lg dark:text-white">Quero me Batizar</h3>
-                </div>
-            </a>
-            <a href="/site_igreja/seja-voluntario.html" class="block">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"><img src="/img/socorro.png" alt="Voluntário" class="w-full h-full object-cover opacity-90"></div>
-                    <h3 class="font-bold text-lg dark:text-white">Seja Voluntário</h3>
-                </div>
-            </a>
-            <a href="/site_igreja/pedidos-oracao.html" class="block">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"><img src="/img/orar.png" alt="Oração" class="w-full h-full object-cover opacity-90"></div>
-                    <h3 class="font-bold text-lg dark:text-white">Pedidos de Oração</h3>
-                </div>
-            </a>
-            <a href="/site_igreja/encontre-um-grupo.html" class="block">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer text-center h-full">
-                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 text-xl"><img src="/img/diversidade.png" alt="Grupo" class="w-full h-full object-cover opacity-90"></div>
-                    <h3 class="font-bold text-lg dark:text-white">Encontre um Grupo</h3>
-                </div>
-            </a>
-        </div>  
+        <!-- Cartões Glassmorphism -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                
+                <!-- Cartão 1: Batismo -->
+                <a href="/site_igreja/quero-batizar.html" class="block group">
+                    <div class="h-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-5 border border-white/10 shadow-inner">
+                            <span class="text-3xl drop-shadow-md">💧</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-white tracking-wide">Quero me Batizar</h3>
+                    </div>
+                </a>
+
+                <!-- Cartão 2: Voluntário -->
+                <a href="/site_igreja/seja-voluntario.html" class="block group">
+                    <div class="h-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-5 border border-white/10 shadow-inner">
+                            <span class="text-3xl drop-shadow-md">🤝</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-white tracking-wide">Seja Voluntário</h3>
+                    </div>
+                </a>
+
+                <!-- Cartão 3: Oração -->
+                <a href="/site_igreja/pedidos-oracao.html" class="block group">
+                    <div class="h-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-5 border border-white/10 shadow-inner">
+                            <span class="text-3xl drop-shadow-md">🙏</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-white tracking-wide">Pedidos de Oração</h3>
+                    </div>
+                </a>
+
+                <!-- Cartão 4: Grupos -->
+                <a href="/site_igreja/encontre-um-grupo.html" class="block group">
+                    <div class="h-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-5 border border-white/10 shadow-inner">
+                            <span class="text-3xl drop-shadow-md">👥</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-white tracking-wide">Encontre um Grupo</h3>
+                    </div>
+                </a>
+
+            </div>
+        </div>
     </section>
 
     <section id="quem-somos" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

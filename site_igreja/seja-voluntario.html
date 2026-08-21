@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seja um Voluntário - Igreja Renascer</title>
-    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
+    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS e SweetAlert2 -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Configurar o Tailwind para alternar o dark mode via classe -->
     <script>
@@ -34,7 +35,7 @@
                 
                 <div class="flex-shrink-0 flex items-center">
                     <a href="/index.html" class="font-bold text-2xl tracking-tighter text-gray-900 dark:text-white mr-2">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
-                    <img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto">
+                    <img src="/img/logo.png" alt="Igreja Renascer" class="h-12 w-auto hidden md:block">
                 </div>
 
                 <nav class="hidden md:flex space-x-8">
@@ -50,11 +51,9 @@
                     
                     <!-- Botão Tema Claro/Escuro -->
                     <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 transition">
-                        <!-- Ícone da Lua (Escuro) -->
                         <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
-                        <!-- Ícone do Sol (Claro) -->
                         <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
@@ -87,134 +86,153 @@
         </div>
     </header>
 
-    <!-- 2. Conteúdo Principal: Voluntários -->
-    <main class="flex-grow">
+    <!-- Imagem de Fundo Fixa (Parallax effect e base para o Glassmorphism) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Equipe de Voluntários" class="w-full h-full object-cover">
+        <!-- O Gradiente dá destaque ao texto e funde a imagem -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95"></div>
+    </div>
+
+    <!-- 2. Conteúdo Principal (Glassmorphism) -->
+    <main class="flex-grow relative z-10 pt-32 pb-20 min-h-screen">
+        
         <!-- Hero Interno -->
-        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
-            <div class="absolute inset-0 z-0">
-                <!-- Imagem de equipe/bastidores -->
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Equipe de Voluntários" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
-            </div>
-            <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <span class="text-green-400 font-bold tracking-widest uppercase text-sm mb-4 block">Faça a Diferença</span>
-                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Faça parte da nossa equipe</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Grandes coisas acontecem quando unimos nossos dons. Junte-se a nós para servir a Deus, amar as pessoas e construir algo com propósito.</p>
-            </div>
-        </section>
+        <div class="max-w-4xl mx-auto text-center px-4 mb-16 pt-10">
+            <span class="text-green-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Faça a Diferença</span>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm">
+                Faça parte da nossa equipe
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 font-light tracking-wide drop-shadow max-w-2xl mx-auto">
+                Grandes coisas acontecem quando unimos nossos dons. Junte-se a nós para servir a Deus, amar as pessoas e construir algo com propósito.
+            </p>
+        </div>
 
         <!-- Formulário e Informações -->
-        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 transition-colors duration-300">
+        <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
             
             <!-- Áreas de Atuação (Lado Esquerdo) -->
-            <div class="lg:col-span-6 space-y-8 relative z-20 -mt-10 lg:-mt-0">
-                <div>
-                    <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Onde você pode servir?</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Nós acreditamos que todos têm um talento único. Explore nossas áreas e descubra onde você se encaixa melhor.</p>
+            <div class="lg:col-span-6 space-y-6">
+                <div class="mb-8">
+                    <h3 class="text-3xl font-bold text-white mb-2 drop-shadow-md">Onde você pode servir?</h3>
+                    <p class="text-gray-300 font-light leading-relaxed tracking-wide drop-shadow-sm">Nós acreditamos que todos têm um talento único. Explore nossas áreas e descubra onde você se encaixa melhor.</p>
                 </div>
                 
-                <div class="grid gap-6">
+                <div class="grid gap-4">
                     <!-- Card de Departamento 1 -->
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-start gap-4 transition-colors duration-300 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-gray-900 dark:bg-gray-700 text-white rounded-xl flex items-center justify-center flex-shrink-0 text-xl">📷</div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-1">Mídia e Fotografia</h4>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">Ideal para quem gosta de câmeras, transmissão e edição. Registre os momentos marcantes, do cronograma dos cultos aos bastidores, com olhar técnico e sensibilidade.</p>
+                    <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex items-start gap-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl border border-white/10 shadow-inner relative z-10">📷</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-white text-lg mb-1 drop-shadow-sm">Mídia e Fotografia</h4>
+                            <p class="text-gray-300 text-sm font-light leading-relaxed">Ideal para quem gosta de câmeras, transmissão e edição. Registre os momentos marcantes, do cronograma dos cultos aos bastidores, com olhar técnico e sensibilidade.</p>
                         </div>
                     </div>
 
                     <!-- Card de Departamento 2 -->
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-start gap-4 transition-colors duration-300 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center flex-shrink-0 text-xl">👋</div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-1">Recepção e Boas-Vindas</h4>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">Seja o primeiro sorriso que as pessoas veem. Ajude a criar um ambiente familiar e acolhedor para visitantes e membros.</p>
+                    <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex items-start gap-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl border border-white/10 shadow-inner relative z-10">👋</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-white text-lg mb-1 drop-shadow-sm">Recepção e Boas-Vindas</h4>
+                            <p class="text-gray-300 text-sm font-light leading-relaxed">Seja o primeiro sorriso que as pessoas veem. Ajude a criar um ambiente familiar e acolhedor para visitantes e membros.</p>
                         </div>
                     </div>
 
                     <!-- Card de Departamento 3 -->
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-start gap-4 transition-colors duration-300 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 dark:text-yellow-400 rounded-xl flex items-center justify-center flex-shrink-0 text-xl">🎈</div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-1">Ministério Kids</h4>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">Ensine e cuide da próxima geração. Um espaço cheio de energia, criatividade e cuidado com as crianças durante as reuniões.</p>
+                    <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex items-start gap-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl border border-white/10 shadow-inner relative z-10">🎈</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-white text-lg mb-1 drop-shadow-sm">Ministério Kids</h4>
+                            <p class="text-gray-300 text-sm font-light leading-relaxed">Ensine e cuide da próxima geração. Um espaço cheio de energia, criatividade e cuidado com as crianças durante as reuniões.</p>
                         </div>
                     </div>
 
                     <!-- Card de Departamento 4 -->
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-start gap-4 transition-colors duration-300 hover:-translate-y-1">
-                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 rounded-xl flex items-center justify-center flex-shrink-0 text-xl">🎶</div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 dark:text-white text-lg mb-1">Ministério de Louvor</h4>
-                            <p class="text-gray-500 dark:text-gray-400 text-sm">Seu talento é um presente de Deus; devolvê-lo em adoração é a melhor forma de agradecer.</p>
+                    <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex items-start gap-4 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center flex-shrink-0 text-2xl border border-white/10 shadow-inner relative z-10">🎶</div>
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-white text-lg mb-1 drop-shadow-sm">Ministério de Louvor</h4>
+                            <p class="text-gray-300 text-sm font-light leading-relaxed">Seu talento é um presente de Deus; devolvê-lo em adoração é a melhor forma de agradecer.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-
             <!-- Bloco do Formulário (Lado Direito) -->
-            <div class="lg:col-span-6 bg-white dark:bg-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 lg:-mt-20 relative z-20 transition-colors duration-300">
-                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Quero ser voluntário</h3>
-                <p class="text-gray-500 dark:text-gray-400 mb-8 text-sm">Preencha seus dados e os líderes entrarão em contato para alinhar as escalas.</p>
+            <div class="lg:col-span-6 bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-10 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] lg:-mt-20 h-fit relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-50 pointer-events-none"></div>
                 
-                <form id="form-voluntario" class="space-y-5">
-                    <div>
-                        <label for="nome" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Nome Completo</label>
-                        <input type="text" id="nome" required class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition">
-                    </div>
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-bold text-white mb-2 drop-shadow-sm">Quero ser voluntário</h3>
+                    <p class="text-gray-300 mb-8 font-light text-sm tracking-wide">Preencha seus dados e os líderes entrarão em contato para alinhar as escalas.</p>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <form id="form-voluntario" class="space-y-6">
                         <div>
-                            <label for="email" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">E-mail</label>
-                            <input type="email" id="email" required class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                            <label for="nome" class="block text-sm font-medium text-white mb-1">Nome Completo</label>
+                            <input type="text" id="nome" required class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                         </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-white mb-1">E-mail</label>
+                                <input type="email" id="email" required class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                            </div>
+                            <div>
+                                <label for="telefone" class="block text-sm font-medium text-white mb-1">WhatsApp</label>
+                                <input type="tel" id="telefone" required class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                            </div>
+                        </div>
+
                         <div>
-                            <label for="telefone" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">WhatsApp</label>
-                            <input type="tel" id="telefone" required class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                            <label for="area_interesse" class="block text-sm font-medium text-white mb-1">Área de Interesse</label>
+                            <select id="area_interesse" required class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition appearance-none cursor-pointer">
+                                <option value="" disabled selected class="text-gray-900">Selecione um departamento...</option>
+                                <option value="Midia e Fotografia" class="text-gray-900">Mídia e Fotografia</option>
+                                <option value="Recepcao" class="text-gray-900">Recepção e Boas-Vindas</option>
+                                <option value="Kids" class="text-gray-900">Ministério Kids</option>
+                                <option value="Louvor e Audio" class="text-gray-900">Louvor e Áudio</option>
+                                <option value="Outro" class="text-gray-900">Ainda não sei / Outro</option>
+                            </select>
                         </div>
-                    </div>
 
-                    <div>
-                        <label for="area_interesse" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Área de Interesse</label>
-                        <select id="area_interesse" required class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition appearance-none cursor-pointer">
-                            <option value="" disabled selected>Selecione um departamento...</option>
-                            <option value="Midia e Fotografia">Mídia e Fotografia</option>
-                            <option value="Recepcao">Recepção e Boas-Vindas</option>
-                            <option value="Kids">Ministério Kids</option>
-                            <option value="Louvor e Audio">Louvor e Áudio</option>
-                            <option value="Outro">Ainda não sei / Outro</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">Disponibilidade de Escala</label>
-                        <div class="flex flex-wrap gap-4">
-                            <label class="flex items-center cursor-pointer group">
-                                <input type="checkbox" name="disponibilidade" value="Domingo Manhã" class="w-4 h-4 text-green-600 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-500 rounded focus:ring-green-500">
-                                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition">Quarta-Feira</span>
-                            </label>
-                            <label class="flex items-center cursor-pointer group">
-                                <input type="checkbox" name="disponibilidade" value="Domingo Noite" class="w-4 h-4 text-green-600 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-500 rounded focus:ring-green-500">
-                                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition">Domingo</span>
-                            </label>
-                            <label class="flex items-center cursor-pointer group">
-                                <input type="checkbox" name="disponibilidade" value="Semana" class="w-4 h-4 text-green-600 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-500 rounded focus:ring-green-500">
-                                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300 group-hover:text-green-600 dark:group-hover:text-green-400 transition">Eventos</span>
-                            </label>
+                        <div class="bg-white/5 backdrop-blur-md p-5 rounded-2xl border border-white/10">
+                            <label class="block text-sm font-bold text-white mb-3">Disponibilidade de Escala</label>
+                            <div class="flex flex-wrap gap-4">
+                                <label class="flex items-center cursor-pointer group">
+                                    <div class="relative flex items-center mt-0.5">
+                                        <input type="checkbox" name="disponibilidade" value="Quarta-Feira" class="w-4 h-4 text-green-500 bg-gray-900/50 border-white/30 rounded focus:ring-green-500 transition cursor-pointer">
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-300 font-light group-hover:text-white transition">Quarta-Feira</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer group">
+                                    <div class="relative flex items-center mt-0.5">
+                                        <input type="checkbox" name="disponibilidade" value="Domingo" class="w-4 h-4 text-green-500 bg-gray-900/50 border-white/30 rounded focus:ring-green-500 transition cursor-pointer">
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-300 font-light group-hover:text-white transition">Domingo</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer group">
+                                    <div class="relative flex items-center mt-0.5">
+                                        <input type="checkbox" name="disponibilidade" value="Eventos" class="w-4 h-4 text-green-500 bg-gray-900/50 border-white/30 rounded focus:ring-green-500 transition cursor-pointer">
+                                    </div>
+                                    <span class="ml-2 text-sm text-gray-300 font-light group-hover:text-white transition">Eventos</span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <button type="submit" class="w-full bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2 mt-6">
-                        Enviar Inscrição
-                    </button>
-                </form>
+                        <button type="submit" class="w-full bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_4px_15px_0_rgba(22,163,74,0.4)] flex items-center justify-center gap-2 mt-6">
+                            Enviar Inscrição 🚀
+                        </button>
+                    </form>
+                </div>
             </div>
 
         </section>
     </main>
 
     <!-- 6. Rodapé (Footer) -->
-    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 relative z-10 border-t border-white/10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
@@ -258,7 +276,7 @@
             menuMobile.classList.toggle('hidden');
         });
 
-        // Lógica do Theme Toggle (Claro / Escuro)
+        // Lógica do Theme Toggle
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
         var themeToggleBtn = document.getElementById('theme-toggle');
@@ -293,7 +311,7 @@
         });
     </script>
 
-    <!-- Script do Firebase -->
+    <!-- Script do Firebase com SweetAlert2 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
@@ -329,9 +347,9 @@
                 });
 
                 const botaoSubmit = formVoluntario.querySelector('button');
-                const textoOriginal = botaoSubmit.innerText;
+                const textoOriginal = botaoSubmit.innerHTML;
                 
-                botaoSubmit.innerText = "Enviando dados...";
+                botaoSubmit.innerHTML = '<span class="animate-spin">⏳</span> Enviando dados...';
                 botaoSubmit.disabled = true;
                 botaoSubmit.classList.add('opacity-75');
 
@@ -346,13 +364,21 @@
                         status: "analise"
                     });
                     
-                    alert("Que incrível ter você com a gente! Os líderes do departamento entrarão em contato em breve.");
-                    formVoluntario.reset();
+                    // Substituição do alert() nativo pelo SweetAlert2
+                    Swal.fire({
+                        title: 'Inscrição Recebida!',
+                        text: 'Que incrível ter você com a gente! Os líderes do departamento entrarão em contato em breve.',
+                        icon: 'success',
+                        confirmButtonColor: '#16a34a'
+                    }).then(() => {
+                        formVoluntario.reset();
+                    });
+
                 } catch (error) {
                     console.error("Erro ao salvar: ", error);
-                    alert("Houve um erro ao enviar sua inscrição. Por favor, tente novamente.");
+                    Swal.fire('Erro!', 'Houve um erro ao enviar sua inscrição. Por favor, tente novamente.', 'error');
                 } finally {
-                    botaoSubmit.innerText = textoOriginal;
+                    botaoSubmit.innerHTML = textoOriginal;
                     botaoSubmit.disabled = false;
                     botaoSubmit.classList.remove('opacity-75');
                 }

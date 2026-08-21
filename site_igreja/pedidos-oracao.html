@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos de Oração - Igreja Renascer</title>
-    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
+    <link rel="icon" type="image/x-icon" href="/img/logo_branca.png">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS e SweetAlert2 -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Configurar o Tailwind para alternar o dark mode via classe -->
     <script>
@@ -50,11 +51,9 @@
                     
                     <!-- Botão Tema Claro/Escuro -->
                     <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5 transition">
-                        <!-- Ícone da Lua (Escuro) -->
                         <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                         </svg>
-                        <!-- Ícone do Sol (Claro) -->
                         <svg id="theme-toggle-light-icon" class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                         </svg>
@@ -87,62 +86,75 @@
         </div>
     </header>
 
-    <!-- 2. Conteúdo Principal: Pedidos de Oração -->
-    <main class="flex-grow">
-        <!-- Hero Interno -->
-        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
-            <div class="absolute inset-0 z-0">
-                <!-- Imagem serena e reflexiva -->
-                <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Momento de Oração" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
-            </div>
-            <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <span class="text-green-400 font-bold tracking-widest uppercase text-sm mb-4 block">Nós nos importamos com você</span>
-                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Como podemos orar?</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Acreditamos no poder da oração e na força da comunidade. Compartilhe seu pedido conosco e nossa equipe estará intercedendo por você.</p>
-            </div>
-        </section>
+    <!-- Imagem de Fundo Fixa (Parallax effect e base para o Glassmorphism) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Momento de Oração" class="w-full h-full object-cover">
+        <!-- O Gradiente dá destaque ao texto e funde a imagem -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95"></div>
+    </div>
 
-        <!-- Formulário -->
-        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
-            <div class="bg-white dark:bg-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 -mt-20 relative z-20 transition-colors duration-300">
+    <!-- 2. Conteúdo Principal (Glassmorphism) -->
+    <main class="flex-grow relative z-10 pt-32 pb-24 min-h-screen flex flex-col items-center">
+        
+        <!-- Hero Textos -->
+        <div class="max-w-4xl mx-auto text-center px-4 mb-12 pt-10">
+            <span class="text-green-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Nós nos importamos com você</span>
+            <h1 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm">
+                Como podemos orar?
+            </h1>
+            <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto font-light tracking-wide drop-shadow-sm">
+                Acreditamos no poder da oração e na força da comunidade. Compartilhe seu pedido conosco e nossa equipe estará intercedendo por você.
+            </p>
+        </div>
+
+        <!-- Formulário Glassmorphism -->
+        <section class="px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto w-full">
+            <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-10 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-50 pointer-events-none"></div>
                 
-                <form id="form-oracao" class="space-y-6">
+                <form id="form-oracao" class="space-y-6 relative z-10">
                     <div>
-                        <label for="nome" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Seu Nome (Opcional)</label>
-                        <input type="text" id="nome" placeholder="Pode deixar em branco se preferir" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                        <label for="nome" class="block text-sm font-medium text-white mb-2">Seu Nome <span class="font-light text-gray-400">(Opcional)</span></label>
+                        <input type="text" id="nome" placeholder="Pode deixar em branco se preferir" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                     </div>                 
 
                     <div>
-                                <label for="telefone" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">WhatsApp</label>
-                                 <input type="text" id="telefone" placeholder="Pode deixar em branco se preferir" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition">
+                        <label for="telefone" class="block text-sm font-medium text-white mb-2">WhatsApp <span class="font-light text-gray-400">(Opcional)</span></label>
+                        <input type="text" id="telefone" placeholder="Para entrarmos em contato com você" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                     </div>  
+                    
                     <div>
-                        <label for="motivo" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Seu Pedido de Oração</label>
-                        <textarea id="motivo" required rows="5" placeholder="Escreva aqui o que está em seu coração..." class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition"></textarea>
+                        <label for="motivo" class="block text-sm font-medium text-white mb-2">Seu Pedido de Oração <span class="text-red-400">*</span></label>
+                        <textarea id="motivo" required rows="5" placeholder="Escreva aqui o que está em seu coração..." class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition resize-y"></textarea>
                     </div>
 
-                    <div class="bg-gray-50 dark:bg-gray-700/50 p-5 rounded-xl border border-gray-200 dark:border-gray-600 transition-colors duration-300">
-                        <label class="block text-sm font-bold text-gray-900 dark:text-gray-200 mb-3">Privacidade do seu pedido:</label>
-                        <div class="space-y-3">
+                    <div class="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 transition-colors duration-300">
+                        <label class="block text-sm font-bold text-white mb-4">Privacidade do seu pedido:</label>
+                        <div class="space-y-4">
                             <label class="flex items-start cursor-pointer group">
-                                <input type="radio" name="privacidade" value="privado" checked class="mt-1 w-4 h-4 text-green-600 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-500 focus:ring-green-500">
+                                <div class="relative flex items-center mt-0.5">
+                                    <input type="radio" name="privacidade" value="privado" checked class="w-4 h-4 text-green-500 bg-gray-900/50 border-white/30 focus:ring-green-500 transition cursor-pointer">
+                                </div>
                                 <span class="ml-3">
-                                    <span class="block text-sm font-medium text-gray-900 dark:text-gray-200 group-hover:text-green-600 dark:group-hover:text-green-400 transition">Manter em sigilo (Apenas Equipe Pastoral)</span>
-                                    <span class="block text-xs text-gray-500 dark:text-gray-400 mt-0.5">Seu pedido será lido e orado apenas pelos pastores.</span>
+                                    <span class="block text-sm font-medium text-white group-hover:text-green-400 transition">Manter em sigilo (Apenas Equipe Pastoral)</span>
+                                    <span class="block text-xs text-gray-300 mt-1 font-light">Seu pedido será lido e orado apenas pelos pastores.</span>
                                 </span>
                             </label>
+                            
                             <label class="flex items-start cursor-pointer group">
-                                <input type="radio" name="privacidade" value="publico" class="mt-1 w-4 h-4 text-green-600 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-500 focus:ring-green-500">
+                                <div class="relative flex items-center mt-0.5">
+                                    <input type="radio" name="privacidade" value="publico" class="w-4 h-4 text-green-500 bg-gray-900/50 border-white/30 focus:ring-green-500 transition cursor-pointer">
+                                </div>
                                 <span class="ml-3">
-                                    <span class="block text-sm font-medium text-gray-900 dark:text-gray-200 group-hover:text-green-600 dark:group-hover:text-green-400 transition">Compartilhar com a Igreja</span>
-                                    <span class="block text-xs text-gray-500 dark:text-gray-400 mt-0.5">O pedido poderá ser compartilhado no painel de intercessão da comunidade.</span>
+                                    <span class="block text-sm font-medium text-white group-hover:text-green-400 transition">Compartilhar com a Igreja</span>
+                                    <span class="block text-xs text-gray-300 mt-1 font-light">O pedido poderá ser compartilhado no mural público de intercessão.</span>
                                 </span>
                             </label>
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-green-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex items-center justify-center gap-2 mt-4">
-                        Enviar Pedido
+                    <button type="submit" class="w-full bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-6 py-4 rounded-xl font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_4px_15px_0_rgba(22,163,74,0.4)] flex items-center justify-center gap-2 mt-6">
+                        Enviar Pedido 🙏
                     </button>
                 </form>
             </div>
@@ -150,7 +162,7 @@
     </main>
 
     <!-- 6. Rodapé (Footer) -->
-    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 relative z-10 border-t border-white/10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
@@ -230,7 +242,7 @@
         });
     </script>
 
-    <!-- 4. Script do Firebase -->
+    <!-- 4. Script do Firebase com SweetAlert2 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
@@ -253,41 +265,48 @@
             formOracao.addEventListener('submit', async (e) => {
                 e.preventDefault(); 
                 
-                // Pega os valores. Se o nome estiver vazio, envia como "Anônimo"
                 let nome = document.getElementById('nome').value.trim();
                 if (nome === "") {
                     nome = "Anônimo";
                 }
                 
                 const motivo = document.getElementById('motivo').value;
+                const telefone = document.getElementById('telefone').value;
                 
-                // Verifica qual botão de rádio está selecionado
                 const privacidadeSelecionada = document.querySelector('input[name="privacidade"]:checked').value;
                 const pedidoPublico = (privacidadeSelecionada === "publico");
 
                 const botaoSubmit = formOracao.querySelector('button');
                 const textoOriginal = botaoSubmit.innerText;
                 
-                botaoSubmit.innerText = "Enviando pedido...";
+                botaoSubmit.innerHTML = '<span class="animate-spin">⏳</span> Enviando pedido...';
                 botaoSubmit.disabled = true;
                 botaoSubmit.classList.add('opacity-75');
 
                 try {
                     await addDoc(collection(db, "pedidos_oracao"), {
                         nome_solicitante: nome,
+                        telefone: telefone,
                         motivo: motivo,
                         pedido_publico: pedidoPublico,
                         data_envio: new Date().toISOString(),
                         status: "recebido"
                     });
                     
-                    alert("Seu pedido foi recebido. Estaremos orando por você!");
-                    formOracao.reset();
+                    Swal.fire({
+                        title: 'Pedido Recebido!',
+                        text: 'Seu pedido foi recebido com sucesso. Estaremos orando por você!',
+                        icon: 'success',
+                        confirmButtonColor: '#16a34a'
+                    }).then(() => {
+                        formOracao.reset();
+                    });
+                    
                 } catch (error) {
                     console.error("Erro ao salvar: ", error);
-                    alert("Houve um erro ao enviar seu pedido. Por favor, tente novamente.");
+                    Swal.fire('Erro!', 'Houve um erro ao enviar seu pedido. Por favor, tente novamente.', 'error');
                 } finally {
-                    botaoSubmit.innerText = textoOriginal;
+                    botaoSubmit.innerHTML = textoOriginal;
                     botaoSubmit.disabled = false;
                     botaoSubmit.classList.remove('opacity-75');
                 }
@@ -296,4 +315,3 @@
     </script>
 </body>
 </html>
-hth

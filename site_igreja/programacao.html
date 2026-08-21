@@ -53,7 +53,7 @@
                     </button>
 
                     <div class="hidden md:block">
-                        <a href="/login/index.html"class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
+                        <a href="/login/index.html" class="bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Login</a>
                     </div>
 
                     <div class="md:hidden flex items-center">
@@ -79,84 +79,98 @@
         </div>
     </header>
 
-    <main class="flex-grow">
-        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
-            </div>
-            <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <span class="text-green-400 font-bold tracking-widest uppercase text-sm mb-4 block">Nossa Agenda</span>
-                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Programe-se</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">Reunir a igreja é um dos maiores privilégios. Confira nossos horários e junte-se a nós durante a semana.</p>
-            </div>
-        </section>
+    <!-- Imagem de Fundo Fixa (Parallax effect e base para o Glassmorphism) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto" class="w-full h-full object-cover">
+        <!-- O Gradiente dá destaque ao texto e funde a imagem -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95"></div>
+    </div>
 
-        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto -mt-16 relative z-20">
+    <!-- 2. Conteúdo Principal (Glassmorphism) -->
+    <main class="flex-grow relative z-10 pt-32 pb-24 min-h-screen">
+        
+        <!-- Hero Interno -->
+        <div class="max-w-4xl mx-auto text-center px-4 mb-16 pt-10">
+            <span class="text-green-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Nossa Agenda</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm">
+                Programe-se
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 font-light tracking-wide drop-shadow max-w-2xl mx-auto">
+                Reunir a igreja é um dos maiores privilégios. Confira nossos horários e junte-se a nós durante a semana.
+            </p>
+        </div>
+
+        <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Cultos Semanais</h2>
-                <p class="text-gray-600 dark:text-gray-400 mt-2">Encontros fixos que acontecem toda semana.</p>
+                <h2 class="text-3xl font-bold text-white drop-shadow-sm">Cultos Semanais</h2>
+                <p class="text-gray-300 font-light mt-2 tracking-wide">Encontros fixos que acontecem toda semana.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Segunda-Feira</span>
-                        <span class="text-2xl">🌅</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">GM -- Grupos de Mesa</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Uma extensão de nossa igreja, onde os membros se reúnem para estudo bíblico e comunhão.</p>
-                    <div class="space-y-3">
-                        <div class="flex items-center text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
-                            <span class="font-bold mr-2">🕕 19:30</span> 
+                <!-- Culto 1 -->
+                <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold text-green-400 uppercase tracking-widest bg-green-500/20 backdrop-blur-md border border-green-500/30 px-3 py-1.5 rounded-full shadow-sm">Segunda-Feira</span>
+                            <span class="text-2xl drop-shadow-md">🌅</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 drop-shadow-sm">GM -- Grupos de Mesa</h3>
+                        <p class="text-gray-300 font-light mb-6 text-sm leading-relaxed">Uma extensão de nossa igreja, onde os membros se reúnem para estudo bíblico e comunhão.</p>
+                        <div class="flex items-center text-white bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 shadow-inner">
+                            <span class="font-bold tracking-wide">🕕 19:30 Horas</span> 
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-bold text-gray-500 dark:text-gray-300 uppercase tracking-wider bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Quarta-Feira</span>
-                        <span class="text-2xl">📖</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Celebração Profética</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Um ambiente focado no estudo profundo da palavra e no fortalecimento da fé.</p>
-                    <div class="space-y-3">
-                        <div class="flex items-center text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
-                            <span class="font-bold mr-2">🕗 19h30</span>
+                <!-- Culto 2 -->
+                <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold text-gray-200 uppercase tracking-widest bg-white/20 backdrop-blur-md border border-white/30 px-3 py-1.5 rounded-full shadow-sm">Quarta-Feira</span>
+                            <span class="text-2xl drop-shadow-md">📖</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 drop-shadow-sm">Celebração Profética</h3>
+                        <p class="text-gray-300 font-light mb-6 text-sm leading-relaxed">Um ambiente focado no estudo profundo da palavra e no fortalecimento da fé.</p>
+                        <div class="flex items-center text-white bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 shadow-inner">
+                            <span class="font-bold tracking-wide">🕗 19:30 Horas</span>
                         </div>
                     </div>
                 </div>
 
-                 <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-xl border-t-4 border-green-600 hover:-translate-y-1 transition duration-300">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-bold text-green-600 dark:text-green-400 uppercase tracking-wider bg-green-50 dark:bg-green-900/40 px-3 py-1 rounded-full">Domingo</span>
-                        <span class="text-2xl">🌅</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Culto de Celebração</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm">Nosso encontro principal para toda a família, com louvor, palavra e espaço Kids.</p>
-                    <div class="space-y-3">
-                        <div class="flex items-center text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
-                            <span class="font-bold mr-2">🕕 18h00</span> 
+                 <!-- Culto 3 -->
+                 <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-xs font-bold text-green-400 uppercase tracking-widest bg-green-500/20 backdrop-blur-md border border-green-500/30 px-3 py-1.5 rounded-full shadow-sm">Domingo</span>
+                            <span class="text-2xl drop-shadow-md">🙌</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 drop-shadow-sm">Culto de Celebração</h3>
+                        <p class="text-gray-300 font-light mb-6 text-sm leading-relaxed">Nosso encontro principal para toda a família, com louvor, palavra e espaço Kids.</p>
+                        <div class="flex items-center text-white bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 shadow-inner">
+                            <span class="font-bold tracking-wide">🕕 18:00 Horas</span> 
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
 
-        <section class="py-24 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 transition-colors duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Próximos Eventos</h2>
-                    <p class="text-gray-600 dark:text-gray-400 mt-2">Fique por dentro da programação desta semana.</p>
-                </div>
+        <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-10 border-t border-white/10">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-3xl font-bold text-white drop-shadow-sm">Próximos Eventos</h2>
+                <p class="text-gray-300 font-light mt-2 tracking-wide">Fique por dentro da programação especial desta semana.</p>
+            </div>
 
-                <div id="container-eventos-dinamicos" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <p class="text-gray-400 dark:text-gray-500">Carregando eventos...</p>
-                </div>
+            <div id="container-eventos-dinamicos" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <p class="text-gray-300 font-light animate-pulse">Carregando eventos...</p>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 relative z-10 border-t border-white/10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
@@ -236,7 +250,6 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        // IMPORTANTE: Adicionado o "where" aqui na linha abaixo
         import { getFirestore, collection, query, where, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -276,31 +289,38 @@
         );
         
         onSnapshot(q, (snapshot) => {
-            container.innerHTML = ''; // Limpa o "Carregando..."
+            container.innerHTML = ''; 
             
             if (snapshot.empty) {
-                container.innerHTML = '<p class="text-gray-500 dark:text-gray-400 italic">Nenhum evento especial agendado para esta semana.</p>';
+                container.innerHTML = '<p class="text-gray-300 font-light italic">Nenhum evento especial agendado para esta semana.</p>';
                 return;
             }
 
             snapshot.forEach((doc) => {
                 const evento = doc.data();
-                // Criando o HTML do card dinamicamente COM CLASSES DARK MODE
+                
+                // CARTÃO DINÂMICO MODIFICADO PARA O ESTILO GLASSMORPHISM
                 const card = `
-                    <div class="flex flex-col sm:flex-row bg-gray-50 dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
-                        <div class="sm:w-2/5 bg-gray-900 relative min-h-[200px]">
-                            <img src="${evento.imagem_url || 'https://via.placeholder.com/400x300'}" class="w-full h-full object-cover opacity-80">
+                    <div class="flex flex-col sm:flex-row bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-all duration-300 hover:bg-white/20 group">
+                        
+                        <div class="sm:w-2/5 relative min-h-[200px] overflow-hidden">
+                            <img src="${evento.imagem_url || 'https://via.placeholder.com/400x300'}" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent"></div>
                             
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <span class="bg-green-600 text-xs font-bold px-2 py-1 rounded-md uppercase">${evento.data_texto}</span>
+                            <div class="absolute bottom-4 left-4 text-white z-10">
+                                <span class="bg-green-500/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-lg border border-green-400/50 uppercase shadow-sm">${evento.data_texto}</span>
                             </div>
                         </div>
-                        <div class="p-6 sm:w-3/5 flex flex-col justify-center">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${evento.titulo}</h3>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${evento.descricao}</p>
-                            <span class="text-gray-900 dark:text-gray-300 font-bold text-sm">📍 ${evento.local} • ${evento.horario}</span>
+                        
+                        <div class="p-6 sm:w-3/5 flex flex-col justify-center relative z-10">
+                            <h3 class="text-2xl font-bold text-white mb-2 drop-shadow-sm">${evento.titulo}</h3>
+                            <p class="text-gray-300 font-light text-sm mb-4 leading-relaxed">${evento.descricao}</p>
+                            <div class="flex items-center text-green-400 font-bold text-sm tracking-wide gap-2">
+                                <span>📍</span>
+                                <span>${evento.local} • ${evento.horario}</span>
+                            </div>
                         </div>
+                        
                     </div>
                 `;
                 container.innerHTML += card;

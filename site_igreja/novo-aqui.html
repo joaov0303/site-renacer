@@ -6,7 +6,7 @@
     <title>Cadastro de Membro - Igreja Renascer</title>
     <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS e SweetAlert2 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -83,8 +83,15 @@
         </div>
     </header>
 
-    <!-- 2. Conteúdo Principal: Cadastro Dividido em 2 Colunas -->
-    <main class="flex-grow pt-32 pb-20">
+    <!-- Imagem de Fundo Fixa (Parallax effect e base para o Glassmorphism) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Igreja Família" class="w-full h-full object-cover">
+        <!-- O Gradiente dá destaque ao texto e funde a imagem -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95"></div>
+    </div>
+
+    <!-- 2. Conteúdo Principal: Cadastro Dividido em 2 Colunas (Glassmorphism) -->
+    <main class="flex-grow relative z-10 pt-32 pb-20 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
@@ -92,26 +99,26 @@
                 <!-- COLUNA ESQUERDA: Texto e Frase -->
                 <div class="lg:col-span-5 relative">
                     <div class="lg:sticky lg:top-32">
-                        <span class="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 px-4 py-1.5 rounded-full text-sm font-bold tracking-widest uppercase mb-6 inline-block">Faça Parte</span>
+                        <span class="bg-green-500/20 backdrop-blur-md border border-green-500/30 text-green-400 px-4 py-1.5 rounded-full text-sm font-bold tracking-widest uppercase mb-6 inline-block shadow-sm">Faça Parte</span>
                         
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-6 leading-tight">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6 leading-tight drop-shadow-sm">
                             Mais que uma igreja, <br>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-green-700">uma família.</span>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">uma família.</span>
                         </h1>
                         
-                        <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                        <p class="text-lg text-gray-300 mb-8 leading-relaxed font-light drop-shadow-sm">
                             Preencha a sua ficha de membro e oficialize a sua caminhada connosco. Queremos conhecer os seus dons e integrá-lo(a) na nossa comunidade.
                         </p>
                         
-                        <!-- Cartão decorativo de Versículo -->
-                        <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 hidden md:block">
-                            <p class="italic text-gray-600 dark:text-gray-400 mb-4">
+                        <!-- Cartão decorativo de Versículo (Glass) -->
+                        <div class="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hidden md:block">
+                            <p class="italic text-gray-200 mb-4 font-light leading-relaxed">
                                 "Assim, já não sois estrangeiros nem forasteiros, mas concidadãos dos santos, e da família de Deus."
                             </p>
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 font-bold text-lg">📖</div>
+                                <div class="w-10 h-10 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-inner border border-white/10">📖</div>
                                 <div>
-                                    <p class="font-bold text-gray-900 dark:text-white text-sm">Efésios 2:19</p>
+                                    <p class="font-bold text-white text-sm tracking-wide">Efésios 2:19</p>
                                 </div>
                             </div>
                         </div>
@@ -120,168 +127,168 @@
 
                 <!-- COLUNA DIREITA: Ficha de Preenchimento -->
                 <div class="lg:col-span-7">
-                    <form id="form-novo-aqui" class="space-y-8">
+                    <form id="form-novo-aqui" class="space-y-8 relative z-20">
                         
                         <!-- CARTÃO 1: DADOS PESSOAIS -->
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center gap-4 mb-8 border-b border-gray-100 dark:border-gray-700 pb-4">
-                                <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center text-2xl">👤</div>
-                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Dados Pessoais</h3>
+                        <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+                            <div class="flex items-center gap-4 mb-8 border-b border-white/20 pb-4">
+                                <div class="w-12 h-12 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center text-2xl border border-white/10 shadow-inner">👤</div>
+                                <h3 class="text-xl font-bold text-white drop-shadow-sm">Dados Pessoais</h3>
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Nome Completo <span class="text-red-500">*</span></label>
-                                    <input type="text" id="nome" required class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Nome Completo <span class="text-red-400">*</span></label>
+                                    <input type="text" id="nome" required class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Data de Nascimento</label>
-                                    <input type="date" id="data_nascimento" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Data de Nascimento</label>
+                                    <input type="date" id="data_nascimento" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition [color-scheme:dark]">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Gênero</label>
-                                    <select id="genero" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
-                                        <option value="" disabled selected>Selecione...</option>
-                                        <option value="Masculino">Masculino</option>
-                                        <option value="Feminino">Feminino</option>
+                                    <label class="block text-sm font-medium text-white mb-2">Gênero</label>
+                                    <select id="genero" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition appearance-none cursor-pointer">
+                                        <option value="" disabled selected class="text-gray-900">Selecione...</option>
+                                        <option value="Masculino" class="text-gray-900">Masculino</option>
+                                        <option value="Feminino" class="text-gray-900">Feminino</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Estado Civil</label>
-                                    <select id="estado_civil" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
-                                        <option value="" disabled selected>Selecione...</option>
-                                        <option value="Solteiro(a)">Solteiro(a)</option>
-                                        <option value="Casado(a)">Casado(a)</option>
-                                        <option value="Divorciado(a)">Divorciado(a)</option>
-                                        <option value="Viúvo(a)">Viúvo(a)</option>
-                                        <option value="Noivo(a)">Noivo(a)</option>
+                                    <label class="block text-sm font-medium text-white mb-2">Estado Civil</label>
+                                    <select id="estado_civil" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition appearance-none cursor-pointer">
+                                        <option value="" disabled selected class="text-gray-900">Selecione...</option>
+                                        <option value="Solteiro(a)" class="text-gray-900">Solteiro(a)</option>
+                                        <option value="Casado(a)" class="text-gray-900">Casado(a)</option>
+                                        <option value="Divorciado(a)" class="text-gray-900">Divorciado(a)</option>
+                                        <option value="Viúvo(a)" class="text-gray-900">Viúvo(a)</option>
+                                        <option value="Noivo(a)" class="text-gray-900">Noivo(a)</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Nome do Cônjuge <span class="font-normal text-gray-400">(Opcional)</span></label>
-                                    <input type="text" id="conjuge" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Nome do Cônjuge <span class="font-light text-gray-400">(Opcional)</span></label>
+                                    <input type="text" id="conjuge" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Nome dos Filhos e Idades <span class="font-normal text-gray-400">(Opcional)</span></label>
-                                    <input type="text" id="filhos" placeholder="Ex: João (12), Maria (8)" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Nome dos Filhos e Idades <span class="font-light text-gray-400">(Opcional)</span></label>
+                                    <input type="text" id="filhos" placeholder="Ex: João (12), Maria (8)" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                             </div>
                         </div>
 
                         <!-- CARTÃO 2: CONTATO -->
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center gap-4 mb-8 border-b border-gray-100 dark:border-gray-700 pb-4">
-                                <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center text-2xl">📍</div>
-                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Endereço e Contato</h3>
+                        <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+                            <div class="flex items-center gap-4 mb-8 border-b border-white/20 pb-4">
+                                <div class="w-12 h-12 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center text-2xl border border-white/10 shadow-inner">📍</div>
+                                <h3 class="text-xl font-bold text-white drop-shadow-sm">Endereço e Contato</h3>
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Endereço Completo</label>
-                                    <input type="text" id="endereco" placeholder="Rua, Número, Complemento..." class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Endereço Completo</label>
+                                    <input type="text" id="endereco" placeholder="Rua, Número, Complemento..." class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Bairro</label>
-                                    <input type="text" id="bairro" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Bairro</label>
+                                    <input type="text" id="bairro" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Cidade / Estado</label>
-                                    <input type="text" id="cidade" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Cidade / Estado</label>
+                                    <input type="text" id="cidade" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">WhatsApp / Celular <span class="text-red-500">*</span></label>
-                                    <input type="tel" id="telefone" required placeholder="(00) 00000-0000" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">WhatsApp / Celular <span class="text-red-400">*</span></label>
+                                    <input type="tel" id="telefone" required placeholder="(00) 00000-0000" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">E-mail</label>
-                                    <input type="email" id="email" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">E-mail</label>
+                                    <input type="email" id="email" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                             </div>
                         </div>
 
                         <!-- CARTÃO 3: VIDA ESPIRITUAL -->
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center gap-4 mb-8 border-b border-gray-100 dark:border-gray-700 pb-4">
-                                <div class="w-12 h-12 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-xl flex items-center justify-center text-2xl">✨</div>
-                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Vida Espiritual</h3>
+                        <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+                            <div class="flex items-center gap-4 mb-8 border-b border-white/20 pb-4">
+                                <div class="w-12 h-12 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center text-2xl border border-white/10 shadow-inner">✨</div>
+                                <h3 class="text-xl font-bold text-white drop-shadow-sm">Vida Espiritual</h3>
                             </div>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Data de Conversão <span class="font-normal text-gray-400">(Aproximada)</span></label>
-                                    <input type="text" id="data_conversao" placeholder="Ex: Março de 2018" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Data de Conversão <span class="font-light text-gray-400">(Aproximada)</span></label>
+                                    <input type="text" id="data_conversao" placeholder="Ex: Março de 2018" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Já foi batizado(a)?</label>
-                                    <select id="batizado" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
-                                        <option value="" disabled selected>Selecione...</option>
-                                        <option value="Sim">Sim</option>
-                                        <option value="Não">Não</option>
+                                    <label class="block text-sm font-medium text-white mb-2">Já foi batizado(a)?</label>
+                                    <select id="batizado" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition appearance-none cursor-pointer">
+                                        <option value="" disabled selected class="text-gray-900">Selecione...</option>
+                                        <option value="Sim" class="text-gray-900">Sim</option>
+                                        <option value="Não" class="text-gray-900">Não</option>
                                     </select>
                                 </div>
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Se sim, em qual data e igreja foi batizado(a)?</label>
-                                    <input type="text" id="detalhes_batismo" placeholder="Ex: 10/05/2019 - Assembleia de Deus" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Se sim, em qual data e igreja foi batizado(a)?</label>
+                                    <input type="text" id="detalhes_batismo" placeholder="Ex: 10/05/2019 - Assembleia de Deus" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Faz parte de um Pequeno Grupo?</label>
-                                    <select id="grupo_pequeno" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
-                                        <option value="" disabled selected>Selecione...</option>
-                                        <option value="Sim">Sim</option>
-                                        <option value="Não">Não</option>
+                                    <label class="block text-sm font-medium text-white mb-2">Faz parte de um Pequeno Grupo?</label>
+                                    <select id="grupo_pequeno" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition appearance-none cursor-pointer">
+                                        <option value="" disabled selected class="text-gray-900">Selecione...</option>
+                                        <option value="Sim" class="text-gray-900">Sim</option>
+                                        <option value="Não" class="text-gray-900">Não</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">É dizimista?</label>
-                                    <select id="dizimista" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
-                                        <option value="" disabled selected>Selecione...</option>
-                                        <option value="Sim">Sim</option>
-                                        <option value="Não">Não</option>
+                                    <label class="block text-sm font-medium text-white mb-2">É dizimista?</label>
+                                    <select id="dizimista" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition appearance-none cursor-pointer">
+                                        <option value="" disabled selected class="text-gray-900">Selecione...</option>
+                                        <option value="Sim" class="text-gray-900">Sim</option>
+                                        <option value="Não" class="text-gray-900">Não</option>
                                     </select>
                                 </div>
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Já participou de algum ministério? Qual?</label>
-                                    <input type="text" id="ministerio_participou" placeholder="Ex: Louvor, Recepção, etc." class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Já participou de algum ministério? Qual?</label>
+                                    <input type="text" id="ministerio_participou" placeholder="Ex: Louvor, Recepção, etc." class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Gostaria de servir em qual área?</label>
-                                    <input type="text" id="ministerio_deseja" placeholder="Ex: Mídia, Crianças, Louvor" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Gostaria de servir em qual área?</label>
+                                    <input type="text" id="ministerio_deseja" placeholder="Ex: Mídia, Crianças, Louvor" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div class="md:col-span-2">
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Tem algum dom ou talento especial?</label>
-                                    <input type="text" id="dons" placeholder="Toco violão, gosto de fotografia..." class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Tem algum dom ou talento especial?</label>
+                                    <input type="text" id="dons" placeholder="Toco violão, gosto de fotografia..." class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                             </div>
                         </div>
 
                         <!-- CARTÃO 4: EXTRAS E TERMOS -->
-                        <div class="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-sm border border-gray-200 dark:border-gray-700">
-                            <div class="flex items-center gap-4 mb-8 border-b border-gray-100 dark:border-gray-700 pb-4">
-                                <div class="w-12 h-12 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-xl flex items-center justify-center text-2xl">📝</div>
-                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Informações Adicionais</h3>
+                        <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+                            <div class="flex items-center gap-4 mb-8 border-b border-white/20 pb-4">
+                                <div class="w-12 h-12 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center text-2xl border border-white/10 shadow-inner">📝</div>
+                                <h3 class="text-xl font-bold text-white drop-shadow-sm">Informações Adicionais</h3>
                             </div>
 
                             <div class="grid grid-cols-1 gap-6 mb-8">
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Possui alguma necessidade especial ou restrição de saúde?</label>
-                                    <input type="text" id="necessidade_especial" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Possui alguma necessidade especial ou restrição de saúde?</label>
+                                    <input type="text" id="necessidade_especial" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Tem algum curso teológico ou treinamento ministerial?</label>
-                                    <input type="text" id="curso_teologico" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-600 rounded-xl text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition hover:bg-white dark:hover:bg-gray-800">
+                                    <label class="block text-sm font-medium text-white mb-2">Tem algum curso teológico ou treinamento ministerial?</label>
+                                    <input type="text" id="curso_teologico" class="w-full px-4 py-3 bg-gray-900/50 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition">
                                 </div>
                             </div>
 
-                            <!-- Bloco de Aceite -->
-                            <div class="bg-green-50 dark:bg-gray-700/50 p-6 rounded-2xl border border-green-100 dark:border-gray-600 mt-8">
-                                <h4 class="font-bold text-green-800 dark:text-green-400 mb-3 flex items-center gap-2">
+                            <!-- Bloco de Aceite (Glassmorphism) -->
+                            <div class="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 mt-8">
+                                <h4 class="font-bold text-green-400 mb-3 flex items-center gap-2">
                                     <span>✅</span> Autorização e Compromisso
                                 </h4>
                                 <label class="flex items-start gap-4 cursor-pointer group">
                                     <div class="relative flex items-center mt-1">
-                                        <input type="checkbox" id="termo_aceite" required class="w-6 h-6 border-2 border-gray-300 rounded-md bg-white text-green-600 focus:ring-green-500 transition cursor-pointer">
+                                        <input type="checkbox" id="termo_aceite" required class="w-6 h-6 border-2 border-white/30 rounded-md bg-gray-900/50 text-green-500 focus:ring-green-500 transition cursor-pointer">
                                     </div>
-                                    <span class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed group-hover:text-gray-900 dark:group-hover:text-white transition">
+                                    <span class="text-sm text-gray-300 leading-relaxed group-hover:text-white transition">
                                         Declaro que as informações acima são verdadeiras e me comprometo a caminhar em comunhão com esta igreja, seguindo seus princípios e ensinamentos baseados na Palavra de Deus.
                                     </span>
                                 </label>
@@ -289,7 +296,7 @@
                         </div>
 
                         <div class="pt-4">
-                            <button type="submit" class="w-full bg-green-600 text-white px-6 py-5 rounded-2xl font-bold text-xl hover:bg-green-700 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-green-600/30 flex items-center justify-center gap-3">
+                            <button type="submit" class="w-full bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-6 py-5 rounded-2xl font-bold text-xl hover:bg-green-500 hover:-translate-y-1 transition-all duration-300 shadow-[0_4px_20px_0_rgba(22,163,74,0.4)] flex items-center justify-center gap-3">
                                 <span>📤</span> Finalizar e Enviar Ficha
                             </button>
                         </div>
@@ -301,7 +308,7 @@
     </main>
 
     <!-- 6. Rodapé (Footer) -->
-    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 relative z-10 border-t border-white/10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
@@ -372,7 +379,7 @@
         });
     </script>
 
-    <!-- Script do Firebase Integrado -->
+    <!-- Script do Firebase Integrado (Mantém o SweetAlert2) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
@@ -398,7 +405,7 @@
                 const botaoSubmit = formNovoAqui.querySelector('button[type="submit"]');
                 const textoOriginal = botaoSubmit.innerHTML;
                 
-                botaoSubmit.innerHTML = "⏳ A Enviar Ficha...";
+                botaoSubmit.innerHTML = "<span>⏳</span> A Enviar Ficha...";
                 botaoSubmit.disabled = true;
                 botaoSubmit.classList.add('opacity-75');
 

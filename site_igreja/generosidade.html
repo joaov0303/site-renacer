@@ -87,75 +87,86 @@
         </div>
     </header>
 
-    <!-- 2. Conteúdo Principal -->
-    <main class="flex-grow">
+    <!-- Imagem de Fundo Fixa (Parallax effect e base para o Glassmorphism) -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Adoração" class="w-full h-full object-cover">
+        <!-- O Gradiente dá destaque ao texto e funde a imagem -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/70 to-gray-900/95"></div>
+    </div>
+
+    <!-- 2. Conteúdo Principal (Glassmorphism) -->
+    <main class="flex-grow relative z-10 pt-32 pb-24 min-h-screen flex flex-col items-center">
+        
         <!-- Hero Interno -->
-        <section class="relative bg-gray-900 py-32 px-4 sm:px-6 lg:px-8 overflow-hidden pt-40">
-            <div class="absolute inset-0 z-0">
-                <!-- Imagem reflexiva sobre adoração e entrega -->
-                <img src="/img/cruz.png" alt="Adoração" class="w-full h-full object-cover opacity-20 mix-blend-overlay">
-            </div>
-            <div class="relative z-10 max-w-4xl mx-auto text-center">
-                <span class="text-green-400 font-bold tracking-widest uppercase text-sm mb-4 block">Adoração através da generosidade</span>
-                <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Dízimos e Ofertas</h1>
-                <p class="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">"Cada um dê conforme determinou em seu coração, não com pesar ou por obrigação, pois Deus ama quem dá com alegria." – 2 Coríntios 9:7</p>
-            </div>
-        </section>
+        <div class="max-w-4xl mx-auto text-center px-4 mb-16 pt-10">
+            <span class="text-green-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Adoração através da generosidade</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm">
+                Dízimos e Ofertas
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-10 font-light tracking-wide drop-shadow max-w-2xl mx-auto italic">
+                "Cada um dê conforme determinou em seu coração, não com pesar ou por obrigação, pois Deus ama quem dá com alegria." <br><span class="text-green-400 font-bold not-italic text-lg mt-2 block">– 2 Coríntios 9:7</span>
+            </p>
+        </div>
 
         <!-- Formas de Contribuição -->
-        <section class="py-20 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto -mt-16 relative z-20">
+        <section class="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
                 <!-- Bloco PIX -->
-                <div class="bg-white dark:bg-gray-800 p-8 md:p-10 rounded-3xl shadow-2xl border-t-4 border-green-600 flex flex-col items-center text-center transition-colors duration-300">
-                    <div class="w-16 h-16 bg-green-50 dark:bg-green-900/40 text-green-600 dark:text-green-400 rounded-2xl flex items-center justify-center mb-6 text-3xl">
-                        <!-- Ícone do PIX -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z" /></svg>
-                    </div>
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Via PIX</h2>
-                    <p class="text-gray-500 dark:text-gray-400 mb-8">Escaneie o QR Code ou copie a chave abaixo no aplicativo do seu banco.</p>
+                <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-10 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
                     
-                    <!-- QR Code (Mantido com fundo branco para sempre poder ser escaneado) -->
-                    <div class="bg-white p-4 rounded-2xl mb-6 inline-block border border-gray-200 dark:border-gray-600 shadow-sm">
+                    <div class="relative z-10 w-16 h-16 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center mb-6 border border-white/10 shadow-inner">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 drop-shadow-md"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z" /></svg>
+                    </div>
+                    
+                    <h2 class="text-3xl font-bold text-white mb-2 drop-shadow-sm relative z-10">Via PIX</h2>
+                    <p class="text-gray-300 mb-8 font-light tracking-wide relative z-10">Escaneie o QR Code ou copie a chave abaixo no aplicativo do seu banco.</p>
+                    
+                    <!-- QR Code (Fundo branco mantido para leitura) -->
+                    <div class="bg-white p-4 rounded-2xl mb-6 inline-block border border-gray-200 shadow-sm relative z-10">
                         <img src="/img/qrcode.png" alt="QR Code PIX" class="w-40 h-40">
                     </div>
 
-                    <div class="w-full">
-                        <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 text-left">Chave CNPJ / E-mail</label>
-                        <div class="flex">
-                            <input type="text" id="chave-pix" value="00.668.914/0001-25" readonly class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-l-xl text-gray-900 dark:text-white font-mono focus:outline-none transition-colors">
-                            <button onclick="copiarPix()" class="bg-gray-900 dark:bg-black text-white px-6 py-3 rounded-r-xl font-bold hover:bg-gray-800 dark:hover:bg-gray-900 transition flex items-center gap-2">
+                    <div class="w-full relative z-10">
+                        <label class="block text-sm font-medium text-white mb-2 text-left">Chave CNPJ / E-mail</label>
+                        <div class="flex shadow-lg rounded-xl overflow-hidden">
+                            <input type="text" id="chave-pix" value="00.668.914/0001-25" readonly class="w-full px-4 py-3 bg-gray-900/50 border-y border-l border-white/20 text-white font-mono focus:outline-none transition-colors">
+                            <button onclick="copiarPix()" class="bg-green-600/80 backdrop-blur-md border-y border-r border-green-500/50 text-white px-6 py-3 font-bold hover:bg-green-500 transition flex items-center gap-2">
                                 Copiar
                             </button>
                         </div>
-                        <p id="msg-copiado" class="text-green-600 dark:text-green-400 font-bold text-sm mt-2 opacity-0 transition-opacity">Chave copiada com sucesso!</p>
+                        <p id="msg-copiado" class="text-green-400 font-bold text-sm mt-3 opacity-0 transition-opacity">Chave copiada com sucesso!</p>
                     </div>
                 </div>
 
                 <!-- Bloco Transferência Bancária -->
-                <div class="bg-white dark:bg-gray-800 p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 flex flex-col justify-center transition-colors duration-300">
-                    <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-2xl flex items-center justify-center mb-6 text-3xl">
-                        🏦
-                    </div>
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Transferência</h2>
-                    <p class="text-gray-500 dark:text-gray-400 mb-8">Utilize os dados abaixo para TED ou DOC.</p>
+                <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-10 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] flex flex-col justify-center transition-all duration-500 hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none"></div>
                     
-                    <div class="space-y-4 w-full">
-                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-xl border border-gray-100 dark:border-gray-600 flex justify-between items-center transition-colors">
-                            <span class="text-sm text-gray-500 dark:text-gray-400 font-medium">Banco</span>
-                            <span class="font-bold text-gray-900 dark:text-white text-right">Bradesco (237)</span>
+                    <div class="relative z-10 w-16 h-16 bg-white/20 backdrop-blur-md text-white rounded-2xl flex items-center justify-center mb-6 border border-white/10 shadow-inner text-3xl">
+                        <span class="drop-shadow-md">🏦</span>
+                    </div>
+                    
+                    <h2 class="text-3xl font-bold text-white mb-2 drop-shadow-sm relative z-10">Transferência</h2>
+                    <p class="text-gray-300 mb-8 font-light tracking-wide relative z-10">Utilize os dados abaixo para TED ou DOC.</p>
+                    
+                    <div class="space-y-4 w-full relative z-10">
+                        <div class="bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 flex justify-between items-center transition-colors shadow-inner">
+                            <span class="text-sm text-gray-300 font-light">Banco</span>
+                            <span class="font-bold text-white text-right">Bradesco (237)</span>
                         </div>
-                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-xl border border-gray-100 dark:border-gray-600 flex justify-between items-center transition-colors">
-                            <span class="text-sm text-gray-500 dark:text-gray-400 font-medium">Agência</span>
-                            <span class="font-bold text-gray-900 dark:text-white text-right">0987</span>
+                        <div class="bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 flex justify-between items-center transition-colors shadow-inner">
+                            <span class="text-sm text-gray-300 font-light">Agência</span>
+                            <span class="font-bold text-white text-right">0987</span>
                         </div>
-                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-xl border border-gray-100 dark:border-gray-600 flex justify-between items-center transition-colors">
-                            <span class="text-sm text-gray-500 dark:text-gray-400 font-medium">Conta Corrente</span>
-                            <span class="font-bold text-gray-900 dark:text-white text-right">54911-8</span>
+                        <div class="bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 flex justify-between items-center transition-colors shadow-inner">
+                            <span class="text-sm text-gray-300 font-light">Conta Corrente</span>
+                            <span class="font-bold text-white text-right">54911-8</span>
                         </div>
-                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-xl border border-gray-100 dark:border-gray-600 flex flex-col sm:flex-row justify-between sm:items-center transition-colors">
-                            <span class="text-sm text-gray-500 dark:text-gray-400 font-medium mb-1 sm:mb-0">Titular</span>
-                            <span class="font-bold text-gray-900 dark:text-white text-right text-sm">Igreja Renascer - CNPJ: 00.668.914/0001-25</span>
+                        <div class="bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 flex flex-col sm:flex-row justify-between sm:items-center transition-colors shadow-inner">
+                            <span class="text-sm text-gray-300 font-light mb-1 sm:mb-0">Titular</span>
+                            <span class="font-bold text-white text-right text-sm">Igreja Renascer - CNPJ: 00.668.914/0001-25</span>
                         </div>
                     </div>
                 </div>
@@ -165,7 +176,7 @@
     </main>
 
     <!-- 6. Rodapé (Footer) -->
-    <footer class="bg-gray-900 dark:bg-black text-white py-16 transition-colors duration-300">
+    <footer class="bg-gray-900 dark:bg-black text-white py-16 relative z-10 border-t border-white/10 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                <a href="/index.html" class="font-bold text-2xl tracking-tighter text-white">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
