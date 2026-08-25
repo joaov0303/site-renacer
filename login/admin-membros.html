@@ -439,13 +439,23 @@
             <p class="text-sm text-gray-500 mb-6">Envie recados para todos os membros <span class="text-green-600 font-bold">Ativos</span>. Use <b>{nome}</b> para personalizar a mensagem.</p>
             
             <div id="etapa-1-escrever">
-                <label class="block font-bold text-xs text-gray-700 mb-1">Sua Mensagem</label>
-                <textarea id="texto-mensagem" rows="5" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-green-500 transition resize-y mb-4" placeholder="Olá {nome}! Temos Culto de Celebração hoje às 19h..."></textarea>
-                
-                <button onclick="prepararEnvios()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg">
-                    Gerar Lista de Envio
-                </button>
+            <!-- NOVO: Filtro de Gênero -->
+            <div class="mb-4">
+                <label class="block font-bold text-xs text-gray-700 mb-1">Público-Alvo (Gênero)</label>
+                <select id="filtro-genero-envio" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-green-500 transition font-medium">
+                    <option value="Todos">Todos os Membros Ativos</option>
+                    <option value="Masculino">Apenas Homens (Masculino)</option>
+                    <option value="Feminino">Apenas Mulheres (Feminino)</option>
+                </select>
             </div>
+
+            <label class="block font-bold text-xs text-gray-700 mb-1">Sua Mensagem</label>
+            <textarea id="texto-mensagem" rows="5" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-green-500 transition resize-y mb-4" placeholder="Olá {nome}! Temos Culto de Celebração hoje às 19h..."></textarea>
+            
+            <button onclick="prepararEnvios()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg">
+                Gerar Lista de Envio
+            </button>
+        </div>
 
             <div id="etapa-2-envio" class="hidden">
                 <div class="bg-green-50 border border-green-200 p-4 rounded-xl mb-4 text-center">
@@ -506,6 +516,8 @@
 
         window.prepararEnvios = function() {
             const texto = document.getElementById('texto-mensagem').value;
+            const filtroGenero = document.getElementById('filtro-genero-envio').value; // Pega o gênero escolhido
+
             if (!texto.trim()) {
                 Swal.fire('Aviso', 'Digite uma mensagem antes de continuar.', 'warning');
                 return;
@@ -514,17 +526,27 @@
             window.mensagemAtual = texto;
             window.filaDeEnvios = [];
 
+            // Vasculha todos os membros carregados na tabela
             for (let id in window.membrosAtuais) {
                 let membro = window.membrosAtuais[id];
                 
+                // Só pega quem está ativo e tem telefone preenchido
                 if (membro.status === 'Ativo' && membro.telefone) {
+                    
+                    // NOVO: Verifica o filtro de gênero
+                    if (filtroGenero !== 'Todos' && membro.genero !== filtroGenero) {
+                        continue; // Pula para o próximo membro se o gênero não bater
+                    }
+
+                    // Limpa o telefone deixando só números
                     let telefoneLimpo = membro.telefone.replace(/\D/g, '');
                     
+                    // Verifica se tem o DDI do Brasil (55), se não tiver, adiciona
                     if (telefoneLimpo.length === 10 || telefoneLimpo.length === 11) {
                         telefoneLimpo = '55' + telefoneLimpo;
                     }
 
-                    if (telefoneLimpo.length >= 12) {
+                    if (telefoneLimpo.length >= 12) { // Validação simples de tamanho
                         window.filaDeEnvios.push({
                             nome: membro.nome || 'Irmão(ã)',
                             telefone: telefoneLimpo
@@ -532,6 +554,17 @@
                     }
                 }
             }
+
+            if (window.filaDeEnvios.length === 0) {
+                Swal.fire('Poxa...', 'Nenhum membro ativo encontrado para este filtro.', 'error');
+                return;
+            }
+
+            document.getElementById('qtd-envios').innerText = window.filaDeEnvios.length;
+            document.getElementById('etapa-1-escrever').classList.add('hidden');
+            document.getElementById('etapa-2-envio').classList.remove('hidden');
+            
+            window.atualizarTelaEnvio();
 
             if (window.filaDeEnvios.length === 0) {
                 Swal.fire('Poxa...', 'Nenhum membro ativo com telefone válido encontrado.', 'error');
