@@ -44,7 +44,19 @@
             <button id="btn-menu-mobile" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
+            <nav class="hidden md:flex space-x-8 font-medium text-sm">
+                <!-- Seus links do menu... -->
+            </nav>
+            
+            <!-- COLOQUE O BOTÃO AQUI -->
+            <button onclick="abrirModalComunicacao()" class="hidden md:flex bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition shadow-md items-center gap-2">
+                📱 Nova Mensagem
+            </button>
+            <!-- FIM DO BOTÃO -->
+
+            <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
         </div>
+        
 
         <div id="menu-mobile" class="hidden md:hidden bg-gray-800 border-t border-gray-700 absolute w-full left-0 shadow-2xl">
             <nav class="flex flex-col px-6 py-4 space-y-5 font-medium text-base">
@@ -413,7 +425,44 @@
                 </button>
             </div>
         </div>
+<!-- ... Fim do modal-carteirinha ... -->
     </div>
+
+    <!-- COLOQUE O MODAL DE COMUNICAÇÃO AQUI -->
+    <div id="modal-comunicacao" class="fixed inset-0 bg-black bg-opacity-70 hidden flex justify-center items-center z-[100] p-4 no-print">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-xl relative">
+            <button onclick="fecharModalComunicacao()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 font-bold text-2xl leading-none">&times;</button>
+            
+            <h2 class="text-xl font-bold mb-2 text-gray-800 flex items-center gap-2">
+                📣 Disparo de Mensagens
+            </h2>
+            <p class="text-sm text-gray-500 mb-6">Envie recados para todos os membros <span class="text-green-600 font-bold">Ativos</span>. Use <b>{nome}</b> para personalizar a mensagem.</p>
+            
+            <div id="etapa-1-escrever">
+                <label class="block font-bold text-xs text-gray-700 mb-1">Sua Mensagem</label>
+                <textarea id="texto-mensagem" rows="5" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-green-500 transition resize-y mb-4" placeholder="Olá {nome}! Temos Culto de Celebração hoje às 19h..."></textarea>
+                
+                <button onclick="prepararEnvios()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg">
+                    Gerar Lista de Envio
+                </button>
+            </div>
+
+            <div id="etapa-2-envio" class="hidden">
+                <div class="bg-green-50 border border-green-200 p-4 rounded-xl mb-4 text-center">
+                    <p class="te    xt-sm text-green-800 font-bold">Membros Ativos encontrados: <span id="qtd-envios" class="text-lg">0</span></p>
+                    <p class="text-xs text-green-600 mt-1">O WhatsApp Web será aberto um por um. Clique em enviar lá, e volte aqui para o próximo.</p>
+                </div>
+                
+                <div class="flex flex-col items-center gap-4">
+                    <p id="nome-membro-atual" class="font-bold text-gray-800 text-lg uppercase"></p>
+                    <button onclick="enviarProximaMensagem()" id="btn-enviar-proximo" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex justify-center items-center gap-2">
+                        Abrir WhatsApp e Enviar 🚀
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIM DO MODAL DE COMUNICAÇÃO -->
 
     <script>
         document.getElementById('btn-menu-mobile')?.addEventListener('click', function() {
@@ -436,6 +485,99 @@
                 }
             });
         }
+        window.pesquisarMembro = function() {
+            // ... código original de pesquisa ...
+        }
+
+        // COLOQUE A LÓGICA DE COMUNICAÇÃO AQUI
+        window.filaDeEnvios = [];
+        window.mensagemAtual = "";
+
+        window.abrirModalComunicacao = function() {
+            document.getElementById('etapa-1-escrever').classList.remove('hidden');
+            document.getElementById('etapa-2-envio').classList.add('hidden');
+            document.getElementById('texto-mensagem').value = "";
+            document.getElementById('modal-comunicacao').classList.remove('hidden');
+        }
+
+        window.fecharModalComunicacao = function() {
+            document.getElementById('modal-comunicacao').classList.add('hidden');
+        }
+
+        window.prepararEnvios = function() {
+            const texto = document.getElementById('texto-mensagem').value;
+            if (!texto.trim()) {
+                Swal.fire('Aviso', 'Digite uma mensagem antes de continuar.', 'warning');
+                return;
+            }
+
+            window.mensagemAtual = texto;
+            window.filaDeEnvios = [];
+
+            for (let id in window.membrosAtuais) {
+                let membro = window.membrosAtuais[id];
+                
+                if (membro.status === 'Ativo' && membro.telefone) {
+                    let telefoneLimpo = membro.telefone.replace(/\D/g, '');
+                    
+                    if (telefoneLimpo.length === 10 || telefoneLimpo.length === 11) {
+                        telefoneLimpo = '55' + telefoneLimpo;
+                    }
+
+                    if (telefoneLimpo.length >= 12) {
+                        window.filaDeEnvios.push({
+                            nome: membro.nome || 'Irmão(ã)',
+                            telefone: telefoneLimpo
+                        });
+                    }
+                }
+            }
+
+            if (window.filaDeEnvios.length === 0) {
+                Swal.fire('Poxa...', 'Nenhum membro ativo com telefone válido encontrado.', 'error');
+                return;
+            }
+
+            document.getElementById('qtd-envios').innerText = window.filaDeEnvios.length;
+            document.getElementById('etapa-1-escrever').classList.add('hidden');
+            document.getElementById('etapa-2-envio').classList.remove('hidden');
+            
+            window.atualizarTelaEnvio();
+        }
+
+        window.atualizarTelaEnvio = function() {
+            const btn = document.getElementById('btn-enviar-proximo');
+            const labelNome = document.getElementById('nome-membro-atual');
+
+            if (window.filaDeEnvios.length === 0) {
+                labelNome.innerText = "🎉 Todos os envios foram concluídos!";
+                btn.innerText = "Fechar";
+                btn.onclick = window.fecharModalComunicacao;
+                btn.classList.replace('bg-green-600', 'bg-gray-600');
+                return;
+            }
+
+            const proximo = window.filaDeEnvios[0];
+            labelNome.innerText = "Próximo: " + proximo.nome;
+            
+            btn.innerText = `Enviar para o próximo (${window.filaDeEnvios.length} restantes) 🚀`;
+            btn.classList.replace('bg-gray-600', 'bg-green-600');
+            btn.onclick = window.enviarProximaMensagem;
+        }
+
+        window.enviarProximaMensagem = function() {
+            const proximo = window.filaDeEnvios.shift(); 
+            
+            const primeiroNome = proximo.nome.split(' ')[0];
+            const mensagemFinal = window.mensagemAtual.replace(/{nome}/gi, primeiroNome);
+            
+            const url = `https://api.whatsapp.com/send?phone=${proximo.telefone}&text=${encodeURIComponent(mensagemFinal)}`;
+            
+            window.open(url, '_blank');
+            
+            window.atualizarTelaEnvio();
+        }
+        // FIM DA LÓGICA DE COMUNICAÇÃO
     </script>
 
     <script type="module">
