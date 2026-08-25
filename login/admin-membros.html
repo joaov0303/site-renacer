@@ -599,15 +599,20 @@
         }
 
         window.enviarProximaMensagem = function() {
-            const proximo = window.filaDeEnvios.shift(); 
+            const proximo = window.filaDeEnvios.shift(); // Tira o primeiro da fila
             
-            const primeiroNome = proximo.nome.split(' ')[0];
-            const mensagemFinal = window.mensagemAtual.replace(/{nome}/gi, primeiroNome);
+            // AGORA USA O NOME COMPLETO:
+            // Removemos o .split(' ')[0] que cortava o nome
+            const nomeCompleto = proximo.nome; 
+            const mensagemFinal = window.mensagemAtual.replace(/{nome}/gi, nomeCompleto);
             
+            // Cria o link do WhatsApp
             const url = `https://api.whatsapp.com/send?phone=${proximo.telefone}&text=${encodeURIComponent(mensagemFinal)}`;
             
+            // Abre em uma nova aba
             window.open(url, '_blank');
             
+            // Atualiza a tela para o próximo da fila
             window.atualizarTelaEnvio();
         }
         // FIM DA LÓGICA DE COMUNICAÇÃO
