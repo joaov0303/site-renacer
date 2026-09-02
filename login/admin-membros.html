@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" type="image/x-icon" href="/img/logo_branca.png ">
     
-    
     <style>
         body { font-family: 'Inter', sans-serif; }
         .hide-scrollbar::-webkit-scrollbar { width: 4px; }
@@ -39,25 +38,17 @@
                 <a href="admin-perfil.html" class="text-gray-300 hover:text-white transition">Meu Perfil</a>
             </nav>
             
-            <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
-
             <button id="btn-menu-mobile" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
-            <nav class="hidden md:flex space-x-8 font-medium text-sm">
-                <!-- Seus links do menu... -->
-            </nav>
             
-            <!-- COLOQUE O BOTÃO AQUI -->
             <button onclick="abrirModalComunicacao()" class="hidden md:flex bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition shadow-md items-center gap-2">
                 📱 Nova Mensagem
             </button>
-            <!-- FIM DO BOTÃO -->
 
             <a href="/index.html" target="_blank" class="hidden md:block text-sm bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Ver Site</a>
         </div>
         
-
         <div id="menu-mobile" class="hidden md:hidden bg-gray-800 border-t border-gray-700 absolute w-full left-0 shadow-2xl">
             <nav class="flex flex-col px-6 py-4 space-y-5 font-medium text-base">
                 <a href="admin-dashboard.html" class="block text-gray-300 hover:text-white transition">Dashboard</a>
@@ -88,6 +79,21 @@
                                 <label class="block font-bold text-xs text-gray-700 mb-1">Nome Completo</label>
                                 <input type="text" id="membro_nome" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-green-500 transition" required>
                             </div>
+
+                            <!-- CAMPO DE FOTO COM COMPRESSÃO BASE64 -->
+                            <div class="md:col-span-2 mt-2">
+                                <label class="block font-bold text-xs text-gray-700 mb-2">Foto da Carteirinha</label>
+                                <div class="flex items-center gap-4 bg-gray-50 p-3 rounded-xl border border-gray-200">
+                                    <div class="w-16 h-16 rounded-full bg-white border border-gray-300 overflow-hidden flex-shrink-0 relative shadow-sm">
+                                        <img id="preview-foto" src="" class="w-full h-full object-cover hidden absolute inset-0 z-10">
+                                        <span id="preview-placeholder" class="text-gray-400 text-[9px] uppercase font-bold tracking-widest flex items-center justify-center h-full w-full text-center p-1 relative z-0">Sem Foto</span>
+                                    </div>
+                                    <div class="flex-grow overflow-hidden">
+                                        <input type="file" id="membro_foto_file" accept="image/*" class="w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-green-100 file:text-green-700 hover:file:bg-green-200 transition cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block font-bold text-xs text-gray-700 mb-1">Status na Igreja</label>
@@ -425,58 +431,97 @@
                 </button>
             </div>
         </div>
-<!-- ... Fim do modal-carteirinha ... -->
     </div>
 
-    <!-- COLOQUE O MODAL DE COMUNICAÇÃO AQUI -->
+    <!-- Modal Comunicação (Mantido como estava) -->
     <div id="modal-comunicacao" class="fixed inset-0 bg-black bg-opacity-70 hidden flex justify-center items-center z-[100] p-4 no-print">
         <div class="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-xl relative">
             <button onclick="fecharModalComunicacao()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 font-bold text-2xl leading-none">&times;</button>
-            
-            <h2 class="text-xl font-bold mb-2 text-gray-800 flex items-center gap-2">
-                📣 Disparo de Mensagens
-            </h2>
-            <p class="text-sm text-gray-500 mb-6">Envie recados para todos os membros <span class="text-green-600 font-bold">Ativos</span>. Use <b>{nome}</b> para personalizar a mensagem.</p>
+            <h2 class="text-xl font-bold mb-2 text-gray-800 flex items-center gap-2">📣 Disparo de Mensagens</h2>
+            <p class="text-sm text-gray-500 mb-6">Envie recados para todos os membros <span class="text-green-600 font-bold">Ativos</span>.</p>
             
             <div id="etapa-1-escrever">
-            <!-- NOVO: Filtro de Gênero -->
-            <div class="mb-4">
-                <label class="block font-bold text-xs text-gray-700 mb-1">Público-Alvo (Gênero)</label>
-                <select id="filtro-genero-envio" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-green-500 transition font-medium">
-                    <option value="Todos">Todos os Membros Ativos</option>
-                    <option value="Masculino">Apenas Homens (Masculino)</option>
-                    <option value="Feminino">Apenas Mulheres (Feminino)</option>
-                </select>
+                <div class="mb-4">
+                    <label class="block font-bold text-xs text-gray-700 mb-1">Público-Alvo (Gênero)</label>
+                    <select id="filtro-genero-envio" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-green-500 transition font-medium">
+                        <option value="Todos">Todos os Membros Ativos</option>
+                        <option value="Masculino">Apenas Homens (Masculino)</option>
+                        <option value="Feminino">Apenas Mulheres (Feminino)</option>
+                    </select>
+                </div>
+                <label class="block font-bold text-xs text-gray-700 mb-1">Sua Mensagem</label>
+                <textarea id="texto-mensagem" rows="5" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-green-500 transition resize-y mb-4" placeholder="Olá {nome}! Temos Culto de Celebração hoje às 19h..."></textarea>
+                <button onclick="prepararEnvios()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg">Gerar Lista de Envio</button>
             </div>
-
-            <label class="block font-bold text-xs text-gray-700 mb-1">Sua Mensagem</label>
-            <textarea id="texto-mensagem" rows="5" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:border-green-500 transition resize-y mb-4" placeholder="Olá {nome}! Temos Culto de Celebração hoje às 19h..."></textarea>
-            
-            <button onclick="prepararEnvios()" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg">
-                Gerar Lista de Envio
-            </button>
-        </div>
 
             <div id="etapa-2-envio" class="hidden">
                 <div class="bg-green-50 border border-green-200 p-4 rounded-xl mb-4 text-center">
-                    <p class="te    xt-sm text-green-800 font-bold">Membros Ativos encontrados: <span id="qtd-envios" class="text-lg">0</span></p>
-                    <p class="text-xs text-green-600 mt-1">O WhatsApp Web será aberto um por um. Clique em enviar lá, e volte aqui para o próximo.</p>
+                    <p class="text-sm text-green-800 font-bold">Membros Ativos encontrados: <span id="qtd-envios" class="text-lg">0</span></p>
+                    <p class="text-xs text-green-600 mt-1">O WhatsApp Web será aberto um por um.</p>
                 </div>
-                
                 <div class="flex flex-col items-center gap-4">
                     <p id="nome-membro-atual" class="font-bold text-gray-800 text-lg uppercase"></p>
-                    <button onclick="enviarProximaMensagem()" id="btn-enviar-proximo" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex justify-center items-center gap-2">
-                        Abrir WhatsApp e Enviar 🚀
-                    </button>
+                    <button onclick="enviarProximaMensagem()" id="btn-enviar-proximo" class="w-full bg-green-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-green-700 transition shadow-lg flex justify-center items-center gap-2">Abrir WhatsApp e Enviar 🚀</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- FIM DO MODAL DE COMUNICAÇÃO -->
 
+    <!-- SCRIPT DE FOTO COM COMPRESSÃO (SEM STORAGE) -->
     <script>
         document.getElementById('btn-menu-mobile')?.addEventListener('click', function() {
             document.getElementById('menu-mobile').classList.toggle('hidden');
+        });
+
+        // Variável global para guardar a imagem pronta para salvar no Firestore
+        window.fotoBase64Atual = "";
+
+        // Sistema de Compressão e conversão da imagem
+        document.getElementById('membro_foto_file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('preview-foto');
+            const placeholder = document.getElementById('preview-placeholder');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        // Limitar o tamanho da foto para no máximo 300px (ideal para banco de dados/carteirinha)
+                        const max_size = 300;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height && width > max_size) {
+                            height *= max_size / width;
+                            width = max_size;
+                        } else if (height > max_size) {
+                            width *= max_size / height;
+                            height = max_size;
+                        }
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        // Converte para JPG comprimido (70% de qualidade) em Base64
+                        window.fotoBase64Atual = canvas.toDataURL('image/jpeg', 0.7);
+                        
+                        preview.src = window.fotoBase64Atual;
+                        preview.classList.remove('hidden');
+                        placeholder.classList.add('hidden');
+                    }
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                window.fotoBase64Atual = "";
+                preview.src = '';
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+            }
         });
 
         window.pesquisarMembro = function() {
@@ -487,94 +532,50 @@
                 const nomeMembro = linha.querySelector('.nome-membro');
                 if (nomeMembro) {
                     const texto = nomeMembro.innerText.toLowerCase();
-                    if (texto.includes(input)) {
-                        linha.style.display = '';
-                    } else {
-                        linha.style.display = 'none';
-                    }
+                    if (texto.includes(input)) { linha.style.display = ''; } 
+                    else { linha.style.display = 'none'; }
                 }
             });
         }
-        window.pesquisarMembro = function() {
-            // ... código original de pesquisa ...
-        }
 
-        // COLOQUE A LÓGICA DE COMUNICAÇÃO AQUI
+        // --- Logica de Disparo de Mensagens Mantida ---
         window.filaDeEnvios = [];
         window.mensagemAtual = "";
-
         window.abrirModalComunicacao = function() {
             document.getElementById('etapa-1-escrever').classList.remove('hidden');
             document.getElementById('etapa-2-envio').classList.add('hidden');
             document.getElementById('texto-mensagem').value = "";
             document.getElementById('modal-comunicacao').classList.remove('hidden');
         }
-
-        window.fecharModalComunicacao = function() {
-            document.getElementById('modal-comunicacao').classList.add('hidden');
-        }
-
+        window.fecharModalComunicacao = function() { document.getElementById('modal-comunicacao').classList.add('hidden'); }
+        
         window.prepararEnvios = function() {
             const texto = document.getElementById('texto-mensagem').value;
-            const filtroGenero = document.getElementById('filtro-genero-envio').value; // Pega o gênero escolhido
-
-            if (!texto.trim()) {
-                Swal.fire('Aviso', 'Digite uma mensagem antes de continuar.', 'warning');
-                return;
-            }
+            const filtroGenero = document.getElementById('filtro-genero-envio').value; 
+            if (!texto.trim()) { Swal.fire('Aviso', 'Digite uma mensagem antes de continuar.', 'warning'); return; }
 
             window.mensagemAtual = texto;
             window.filaDeEnvios = [];
 
-            // Vasculha todos os membros carregados na tabela
             for (let id in window.membrosAtuais) {
                 let membro = window.membrosAtuais[id];
-                
-                // Só pega quem está ativo e tem telefone preenchido
                 if (membro.status === 'Ativo' && membro.telefone) {
-                    
-                    // NOVO: Verifica o filtro de gênero
-                    if (filtroGenero !== 'Todos' && membro.genero !== filtroGenero) {
-                        continue; // Pula para o próximo membro se o gênero não bater
-                    }
-
-                    // Limpa o telefone deixando só números
+                    if (filtroGenero !== 'Todos' && membro.genero !== filtroGenero) continue;
                     let telefoneLimpo = membro.telefone.replace(/\D/g, '');
-                    
-                    // Verifica se tem o DDI do Brasil (55), se não tiver, adiciona
-                    if (telefoneLimpo.length === 10 || telefoneLimpo.length === 11) {
-                        telefoneLimpo = '55' + telefoneLimpo;
-                    }
-
-                    if (telefoneLimpo.length >= 12) { // Validação simples de tamanho
-                        window.filaDeEnvios.push({
-                            nome: membro.nome || 'Irmão(ã)',
-                            telefone: telefoneLimpo
-                        });
+                    if (telefoneLimpo.length === 10 || telefoneLimpo.length === 11) { telefoneLimpo = '55' + telefoneLimpo; }
+                    if (telefoneLimpo.length >= 12) { 
+                        window.filaDeEnvios.push({ nome: membro.nome || 'Irmão(ã)', telefone: telefoneLimpo });
                     }
                 }
             }
 
             if (window.filaDeEnvios.length === 0) {
-                Swal.fire('Poxa...', 'Nenhum membro ativo encontrado para este filtro.', 'error');
-                return;
+                Swal.fire('Poxa...', 'Nenhum membro ativo encontrado para este filtro com telefone válido.', 'error'); return;
             }
 
             document.getElementById('qtd-envios').innerText = window.filaDeEnvios.length;
             document.getElementById('etapa-1-escrever').classList.add('hidden');
             document.getElementById('etapa-2-envio').classList.remove('hidden');
-            
-            window.atualizarTelaEnvio();
-
-            if (window.filaDeEnvios.length === 0) {
-                Swal.fire('Poxa...', 'Nenhum membro ativo com telefone válido encontrado.', 'error');
-                return;
-            }
-
-            document.getElementById('qtd-envios').innerText = window.filaDeEnvios.length;
-            document.getElementById('etapa-1-escrever').classList.add('hidden');
-            document.getElementById('etapa-2-envio').classList.remove('hidden');
-            
             window.atualizarTelaEnvio();
         }
 
@@ -592,32 +593,22 @@
 
             const proximo = window.filaDeEnvios[0];
             labelNome.innerText = "Próximo: " + proximo.nome;
-            
             btn.innerText = `Enviar para o próximo (${window.filaDeEnvios.length} restantes) 🚀`;
             btn.classList.replace('bg-gray-600', 'bg-green-600');
             btn.onclick = window.enviarProximaMensagem;
         }
 
         window.enviarProximaMensagem = function() {
-            const proximo = window.filaDeEnvios.shift(); // Tira o primeiro da fila
-            
-            // AGORA USA O NOME COMPLETO:
-            // Removemos o .split(' ')[0] que cortava o nome
+            const proximo = window.filaDeEnvios.shift(); 
             const nomeCompleto = proximo.nome; 
             const mensagemFinal = window.mensagemAtual.replace(/{nome}/gi, nomeCompleto);
-            
-            // Cria o link do WhatsApp
             const url = `https://api.whatsapp.com/send?phone=${proximo.telefone}&text=${encodeURIComponent(mensagemFinal)}`;
-            
-            // Abre em uma nova aba
             window.open(url, '_blank');
-            
-            // Atualiza a tela para o próximo da fila
             window.atualizarTelaEnvio();
         }
-        // FIM DA LÓGICA DE COMUNICAÇÃO
     </script>
 
+    <!-- SCRIPT DO FIREBASE (SÓ COM FIRESTORE) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, query, orderBy, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
@@ -649,7 +640,6 @@
                 const data = doc.data();
                 window.membrosAtuais[doc.id] = data;
                 
-                // Converte o ID alfanumérico do Firebase em um número de 6 dígitos único
                 let numHash = 0;
                 for (let i = 0; i < doc.id.length; i++) {
                     numHash = (numHash * 31 + doc.id.charCodeAt(i)) % 1000000;
@@ -662,13 +652,17 @@
                 const dicaStatus = status === 'Ativo' ? 'Marcar como Inativo' : 'Marcar como Ativo';
                 const classeOpacidade = status === 'Inativo' ? 'opacity-60 grayscale' : '';
                 
-                const fotoTabela = `<img src="https://ui-avatars.com/api/?name=${encodeURIComponent(data.nome)}&background=eff6ff&color=3b82f6" class="w-10 h-10 rounded-full object-cover border border-gray-200">`;
+                // Puxando a foto direto do banco de dados em formato Base64
+                const fotoParaTabela = data.foto_base64 && data.foto_base64 !== '' 
+                    ? data.foto_base64 
+                    : `https://ui-avatars.com/api/?name=${encodeURIComponent(data.nome || 'A')}&background=eff6ff&color=3b82f6`;
 
-                // O ID de Matrícula foi adicionado à div com a classe 'nome-membro' para permitir a busca
+                const fotoHtml = `<img src="${fotoParaTabela}" class="w-10 h-10 rounded-full object-cover border border-gray-200">`;
+
                 body.innerHTML += `
                 <tr class="hover:bg-gray-50 transition border-b border-gray-50 ${classeOpacidade}">
                     <td class="p-4 flex items-center gap-3">
-                        ${fotoTabela}
+                        ${fotoHtml}
                         <div>
                             <div class="font-bold text-gray-900 nome-membro">${data.nome || 'Sem Nome'} <span class="text-xs text-gray-400 font-mono font-normal ml-1">#${matricula}</span></div>
                             <div class="flex items-center gap-2 mt-1">
@@ -697,12 +691,7 @@
 
         window.alternarStatus = async function(id, statusAtual) {
             const novoStatus = statusAtual === 'Ativo' ? 'Inativo' : 'Ativo';
-            try {
-                await updateDoc(doc(db, "membros_oficiais", id), { status: novoStatus });
-            } catch (error) {
-                console.error("Erro ao atualizar status:", error);
-                Swal.fire('Erro!', 'Não foi possível alterar o status.', 'error');
-            }
+            try { await updateDoc(doc(db, "membros_oficiais", id), { status: novoStatus }); } catch (error) { Swal.fire('Erro!', 'Não foi possível alterar.', 'error'); }
         }
 
         window.excluirMembro = function(id) {
@@ -710,22 +699,14 @@
             if(!membro) return;
 
             Swal.fire({
-                title: 'Tem certeza?',
-                text: `Deseja excluir permanentemente ${membro.nome}?`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ef4444',
-                cancelButtonColor: '#6b7280',
-                confirmButtonText: 'Sim, excluir!',
-                cancelButtonText: 'Cancelar'
+                title: 'Tem certeza?', text: `Deseja excluir permanentemente ${membro.nome}?`, icon: 'warning',
+                showCancelButton: true, confirmButtonColor: '#ef4444', cancelButtonColor: '#6b7280', confirmButtonText: 'Sim, excluir!', cancelButtonText: 'Cancelar'
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
                         await deleteDoc(doc(db, "membros_oficiais", id));
                         Swal.fire('Excluído!', 'Removido com sucesso.', 'success');
-                    } catch (error) {
-                        Swal.fire('Erro!', 'Não foi possível excluir.', 'error');
-                    }
+                    } catch (error) { Swal.fire('Erro!', 'Não foi possível excluir.', 'error'); }
                 }
             });
         }
@@ -743,8 +724,23 @@
             document.getElementById('btn-submit').classList.replace('hover:bg-green-700', 'hover:bg-yellow-700');
             document.getElementById('btn-cancelar').classList.remove('hidden');
 
-            // Preenchimento Seguro
             document.getElementById('membro_nome').value = membro.nome || '';
+            
+            // PREENCHENDO A FOTO AO EDITAR (BASE 64)
+            window.fotoBase64Atual = membro.foto_base64 || '';
+            const preview = document.getElementById('preview-foto');
+            const placeholder = document.getElementById('preview-placeholder');
+            if(window.fotoBase64Atual) {
+                preview.src = window.fotoBase64Atual;
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            } else {
+                preview.src = '';
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+            }
+            document.getElementById('membro_foto_file').value = "";
+            
             document.getElementById('membro_status').value = membro.status || 'Ativo';
             document.getElementById('membro_nascimento').value = membro.data_nascimento || '';
             document.getElementById('membro_genero').value = membro.genero || '';
@@ -752,13 +748,11 @@
             document.getElementById('membro_conjuge').value = membro.conjuge || '';
             document.getElementById('membro_filhos').value = membro.filhos || '';
             document.getElementById('membro_profissao').value = membro.profissao || '';
-            
             document.getElementById('membro_telefone').value = membro.telefone || '';
             document.getElementById('membro_email').value = membro.email || '';
             document.getElementById('membro_endereco').value = membro.endereco || '';
             document.getElementById('membro_bairro').value = membro.bairro || '';
             document.getElementById('membro_cidade').value = membro.cidade || '';
-
             document.getElementById('membro_data_conversao').value = membro.data_conversao || '';
             document.getElementById('membro_batizado').value = membro.batizado || '';
             document.getElementById('membro_detalhes_batismo').value = membro.detalhes_batismo || membro.data_batismo || '';
@@ -767,7 +761,6 @@
             document.getElementById('membro_ministerio_participou').value = membro.ministerio_participou || '';
             document.getElementById('membro_ministerio_deseja').value = membro.ministerio_deseja || membro.ministerio || '';
             document.getElementById('membro_dons').value = membro.dons || '';
-
             document.getElementById('membro_necessidade_especial').value = membro.necessidade_especial || '';
             document.getElementById('membro_curso_teologico').value = membro.curso_teologico || '';
             document.getElementById('membro_obs').value = membro.observacoes || '';
@@ -784,6 +777,12 @@
             document.getElementById('btn-submit').classList.replace('hover:bg-yellow-700', 'hover:bg-green-700');
             document.getElementById('btn-cancelar').classList.add('hidden');
             document.getElementById('form-admin-membro').reset();
+            
+            window.fotoBase64Atual = "";
+            document.getElementById('membro_foto_file').value = '';
+            document.getElementById('preview-foto').classList.add('hidden');
+            document.getElementById('preview-placeholder').classList.remove('hidden');
+
             document.getElementById('membro_status').value = 'Ativo';
         }
 
@@ -791,25 +790,21 @@
             const membro = window.membrosAtuais[id];
             if(!membro) return;
             
-            // Textos padrão se vazio
             const f = (val) => val && val.trim() !== '' ? val : '-';
 
             document.getElementById('ficha-nome').innerText = f(membro.nome);
             document.getElementById('ficha-ministerio').innerText = "Deseja servir em: " + f(membro.ministerio_deseja || membro.ministerio);
-            
             document.getElementById('ficha-nascimento').innerText = membro.data_nascimento ? new Date(membro.data_nascimento + 'T12:00:00').toLocaleDateString('pt-BR') : '-';
             document.getElementById('ficha-genero').innerText = f(membro.genero);
             document.getElementById('ficha-civil').innerText = f(membro.estado_civil);
             document.getElementById('ficha-conjuge').innerText = f(membro.conjuge);
             document.getElementById('ficha-filhos').innerText = f(membro.filhos);
             document.getElementById('ficha-profissao').innerText = f(membro.profissao);
-
             document.getElementById('ficha-telefone').innerText = f(membro.telefone);
             document.getElementById('ficha-email').innerText = f(membro.email);
             document.getElementById('ficha-endereco').innerText = f(membro.endereco);
             document.getElementById('ficha-bairro').innerText = f(membro.bairro);
             document.getElementById('ficha-cidade').innerText = f(membro.cidade);
-
             document.getElementById('ficha-conversao').innerText = f(membro.data_conversao);
             document.getElementById('ficha-batizado').innerText = f(membro.batizado);
             document.getElementById('ficha-detalhes-batismo').innerText = f(membro.detalhes_batismo || membro.data_batismo);
@@ -817,10 +812,8 @@
             document.getElementById('ficha-dizimista').innerText = f(membro.dizimista);
             document.getElementById('ficha-atuou').innerText = f(membro.ministerio_participou);
             document.getElementById('ficha-dons').innerText = f(membro.dons);
-
             document.getElementById('ficha-saude').innerText = f(membro.necessidade_especial);
             document.getElementById('ficha-cursos').innerText = f(membro.curso_teologico);
-
             document.getElementById('ficha-obs').innerText = membro.observacoes || 'Nenhuma observação interna registrada.';
 
             const status = membro.status || 'Ativo';
@@ -830,19 +823,21 @@
                 ? "text-[10px] px-2 py-0.5 rounded-full font-bold bg-white text-green-600 ml-2"
                 : "text-[10px] px-2 py-0.5 rounded-full font-bold bg-white text-red-600 ml-2";
 
-            document.getElementById('ficha-foto').src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(membro.nome || 'A') + "&background=E5E7EB&color=9CA3AF&size=150";
+            if (membro.foto_base64 && membro.foto_base64.trim() !== '') {
+                document.getElementById('ficha-foto').src = membro.foto_base64;
+            } else {
+                document.getElementById('ficha-foto').src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(membro.nome || 'A') + "&background=E5E7EB&color=9CA3AF&size=150";
+            }
+            
             document.getElementById('modal-ficha').classList.remove('hidden');
         }
 
-        window.fecharFicha = function() {
-            document.getElementById('modal-ficha').classList.add('hidden');
-        }
+        window.fecharFicha = function() { document.getElementById('modal-ficha').classList.add('hidden'); }
 
         window.abrirCarteirinha = function(id) {
             const membro = window.membrosAtuais[id];
             if(!membro) return;
             
-            // Converte o ID alfanumérico do Firebase em um número de 6 dígitos único
             let numHash = 0;
             for (let i = 0; i < id.length; i++) {
                 numHash = (numHash * 31 + id.charCodeAt(i)) % 1000000;
@@ -852,56 +847,59 @@
             document.getElementById('cart-nome').innerText = (membro.nome || 'Sem Nome').toUpperCase();
             document.getElementById('cart-ministerio').innerText = membro.ministerio_deseja || membro.ministerio || 'Membro';
             document.getElementById('cart-entrada').innerText = membro.criado_em ? new Date(membro.criado_em).getFullYear() : '2026';
-            document.getElementById('cart-foto').src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(membro.nome || 'A') + "&background=E5E7EB&color=9CA3AF&size=150";
             
-            // Injeta o ID numérico na carteirinha
+            if (membro.foto_base64 && membro.foto_base64.trim() !== '') {
+                document.getElementById('cart-foto').src = membro.foto_base64;
+            } else {
+                document.getElementById('cart-foto').src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(membro.nome || 'A') + "&background=E5E7EB&color=9CA3AF&size=150";
+            }
+            
             document.getElementById('cart-id').innerText = idCarteirinha;
             
             document.getElementById('modal-carteirinha').classList.remove('hidden');
         }
 
-        window.fecharCarteirinha = function() {
-            document.getElementById('modal-carteirinha').classList.add('hidden');
-        }
+        window.fecharCarteirinha = function() { document.getElementById('modal-carteirinha').classList.add('hidden'); }
 
         const form = document.getElementById('form-admin-membro');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = form.querySelector('button[type="submit"]');
-            btn.innerText = "Gravando...";
             btn.disabled = true;
-
-            const dados = {
-                nome: document.getElementById('membro_nome').value,
-                status: document.getElementById('membro_status').value,
-                data_nascimento: document.getElementById('membro_nascimento').value,
-                genero: document.getElementById('membro_genero').value,
-                estado_civil: document.getElementById('membro_estado_civil').value,
-                conjuge: document.getElementById('membro_conjuge').value,
-                filhos: document.getElementById('membro_filhos').value,
-                profissao: document.getElementById('membro_profissao').value,
-                
-                telefone: document.getElementById('membro_telefone').value,
-                email: document.getElementById('membro_email').value,
-                endereco: document.getElementById('membro_endereco').value,
-                bairro: document.getElementById('membro_bairro').value,
-                cidade: document.getElementById('membro_cidade').value,
-                
-                data_conversao: document.getElementById('membro_data_conversao').value,
-                batizado: document.getElementById('membro_batizado').value,
-                detalhes_batismo: document.getElementById('membro_detalhes_batismo').value,
-                grupo_pequeno: document.getElementById('membro_grupo_pequeno').value,
-                dizimista: document.getElementById('membro_dizimista').value,
-                ministerio_participou: document.getElementById('membro_ministerio_participou').value,
-                ministerio_deseja: document.getElementById('membro_ministerio_deseja').value,
-                dons: document.getElementById('membro_dons').value,
-                
-                necessidade_especial: document.getElementById('membro_necessidade_especial').value,
-                curso_teologico: document.getElementById('membro_curso_teologico').value,
-                observacoes: document.getElementById('membro_obs').value
-            };
+            btn.innerText = "Gravando Ficha... ⏳";
 
             try {
+                const dados = {
+                    nome: document.getElementById('membro_nome').value,
+                    foto_base64: window.fotoBase64Atual, // <--- SALVANDO O TEXTO DA FOTO
+                    status: document.getElementById('membro_status').value,
+                    data_nascimento: document.getElementById('membro_nascimento').value,
+                    genero: document.getElementById('membro_genero').value,
+                    estado_civil: document.getElementById('membro_estado_civil').value,
+                    conjuge: document.getElementById('membro_conjuge').value,
+                    filhos: document.getElementById('membro_filhos').value,
+                    profissao: document.getElementById('membro_profissao').value,
+                    
+                    telefone: document.getElementById('membro_telefone').value,
+                    email: document.getElementById('membro_email').value,
+                    endereco: document.getElementById('membro_endereco').value,
+                    bairro: document.getElementById('membro_bairro').value,
+                    cidade: document.getElementById('membro_cidade').value,
+                    
+                    data_conversao: document.getElementById('membro_data_conversao').value,
+                    batizado: document.getElementById('membro_batizado').value,
+                    detalhes_batismo: document.getElementById('membro_detalhes_batismo').value,
+                    grupo_pequeno: document.getElementById('membro_grupo_pequeno').value,
+                    dizimista: document.getElementById('membro_dizimista').value,
+                    ministerio_participou: document.getElementById('membro_ministerio_participou').value,
+                    ministerio_deseja: document.getElementById('membro_ministerio_deseja').value,
+                    dons: document.getElementById('membro_dons').value,
+                    
+                    necessidade_especial: document.getElementById('membro_necessidade_especial').value,
+                    curso_teologico: document.getElementById('membro_curso_teologico').value,
+                    observacoes: document.getElementById('membro_obs').value
+                };
+
                 if (window.membroEditandoId) {
                     await updateDoc(doc(db, "membros_oficiais", window.membroEditandoId), dados);
                     Swal.fire({ title: 'Sucesso!', text: 'Ficha atualizada com sucesso!', icon: 'success', timer: 2000, showConfirmButton: false });
@@ -911,9 +909,10 @@
                     Swal.fire({ title: 'Sucesso!', text: 'Membro cadastrado com sucesso!', icon: 'success', timer: 2000, showConfirmButton: false });
                 }
                 cancelarEdicao();
+                
             } catch (err) {
                 console.error("Erro ao salvar:", err);
-                Swal.fire('Erro!', 'Não foi possível salvar a ficha. Verifique sua conexão.', 'error');
+                Swal.fire('Erro!', 'Não foi possível salvar no Banco de Dados.', 'error');
             } finally {
                 btn.disabled = false;
                 btn.innerText = window.membroEditandoId ? "Atualizar Ficha" : "Finalizar Cadastro";
