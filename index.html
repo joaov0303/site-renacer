@@ -30,8 +30,16 @@
             <div class="flex justify-between items-center h-20">
                 
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="/index.html" class="font-bold text-xl sm:text-2xl tracking-tighter text-gray-900 dark:text-white mr-2">IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span></a>
-                    <img src="/img/logo.png" alt="Igreja Renascer" class="h-10 sm:h-12 w-auto">
+                    <a href="/index.html" class="flex items-center gap-3">
+                        <!-- Logo Modo Claro -->
+                        <img src="/img/logo.png" alt="Igreja Renascer" class="h-10 sm:h-12 w-auto block dark:hidden">
+                        <!-- Logo Modo Escuro (Branca) -->
+                        <img src="/img/logo_branca.png" alt="Igreja Renascer" class="h-10 sm:h-12 w-auto hidden dark:block">
+                        
+                        <span class="font-bold text-xl sm:text-2xl tracking-tighter text-gray-900 dark:text-white">
+                            IGREJA <span class="text-green-600 dark:text-green-500">RENASCER</span>
+                        </span>
+                    </a>
                 </div>
 
                 <nav class="hidden md:flex space-x-8">
@@ -92,10 +100,9 @@
         
         <!-- Imagem de Fundo em Tela Cheia -->
         <div class="absolute inset-0 z-0">
-            <!-- Imagem original mantida -->
             <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Culto Renascer" class="w-full h-full object-cover">
             
-            <!-- Overlay com Gradiente: Escuro no topo para ler o menu, claro no meio, escuro embaixo -->
+            <!-- Overlay com Gradiente -->
             <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/60 to-gray-900/95"></div>
         </div>
 
@@ -103,22 +110,18 @@
         <div class="relative z-10 text-center px-4 max-w-4xl mb-16">
             <span class="text-green-400 font-bold tracking-[0.3em] uppercase text-sm mb-4 block drop-shadow-md">Bem-vindo à sua casa</span>
             
-            <!-- Título com efeito gradiente sutil -->
-           <!-- Título com efeito gradiente sutil -->
-<h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm pb-3">
-    Igreja Renascer
-</h1>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-6 tracking-tight drop-shadow-sm pb-3">
+                Igreja Renascer
+            </h1>
             
             <p class="text-xl md:text-2xl text-gray-200 mb-10 font-light tracking-wide drop-shadow">
                 Somos família. Um lugar para você recomeçar.
             </p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-5">
-                <!-- Botão Glassmorphism -->
                 <a href="/site_igreja/nossos-grupos.html" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 hover:border-white/40 transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
                     Grupos de Mesa
                 </a>
-                <!-- Botão Primário Translúcido -->
                 <a href="/site_igreja/novo-aqui.html" class="bg-green-600/80 backdrop-blur-md border border-green-500/50 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-500 transition-all duration-300 shadow-[0_8px_32px_0_rgba(22,163,74,0.4)]">
                     Sou Novo Aqui
                 </a>
@@ -132,7 +135,6 @@
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 
-                <!-- Cartão 1: Batismo -->
                 <a href="/site_igreja/quero-batizar.html" class="block group">
                     <div class="h-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
@@ -143,7 +145,6 @@
                     </div>
                 </a>
 
-                <!-- Cartão 2: Voluntário -->
                 <a href="/site_igreja/seja-voluntario.html" class="block group">
                     <div class="h-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
@@ -154,7 +155,6 @@
                     </div>
                 </a>
 
-                <!-- Cartão 3: Oração -->
                 <a href="/site_igreja/pedidos-oracao.html" class="block group">
                     <div class="h-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
@@ -165,7 +165,6 @@
                     </div>
                 </a>
 
-                <!-- Cartão 4: Grupos -->
                 <a href="/site_igreja/encontre-um-grupo.html" class="block group">
                     <div class="h-full bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:-translate-y-2 hover:bg-white/20 hover:border-white/40 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition duration-500"></div>
