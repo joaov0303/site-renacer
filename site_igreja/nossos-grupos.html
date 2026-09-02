@@ -103,6 +103,9 @@
             <div class="pt-2">
                 <a href="/site_igreja/generosidade.html" class="inline-block bg-green-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-700 transition shadow-lg">Contribua</a>
             </div>
+            <div class="pt-2 border-t dark:border-gray-800 mt-2">
+                <a href="/login/index.html" class="inline-block text-green-600 dark:text-green-500 font-semibold hover:text-green-700 dark:hover:text-green-400 transition">Login (Admin)</a>
+            </div>
         </div>
     </header>
 
@@ -362,51 +365,49 @@
             }
         });
 
-        // ----------------------------------------
-        // Lógica do Carrossel de Grupos com Auto-Scroll
+  // ----------------------------------------
+        // Lógica do Carrossel de Grupos com Auto-Scroll Suave
         // ----------------------------------------
         document.addEventListener("DOMContentLoaded", function() {
             const carousel = document.getElementById('carousel-container');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
 
-            // Define a quantidade de pixels a rolar por clique. 
-            const scrollAmount = 574; 
             let autoScrollTimer;
 
-            // Função para avançar (usada no botão e no automático)
+            // Função para avançar suavemente
             function scrollNext() {
                 const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
                 
-                // Se chegou no final (com margem de 10px), volta suavemente para o começo
-                if (carousel.scrollLeft >= maxScrollLeft - 10) {
+                // Se chegou no final (com margem de 10px), volta para o começo
+                if (Math.ceil(carousel.scrollLeft) >= maxScrollLeft - 10) {
                     carousel.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
-                    carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    const cardWidth = carousel.querySelector('.snap-center').offsetWidth;
+                    // O SEGREDO: Rolamos apenas 80% da largura. 
+                    // O CSS "snap-mandatory" faz o resto e centraliza perfeitamente sem pular.
+                    carousel.scrollBy({ left: cardWidth * 0.8, behavior: 'smooth' });
                 }
             }
 
-            // Função para voltar (usada apenas no botão manual)
+            // Função para voltar suavemente
             function scrollPrev() {
-                // Se está no começo, vai para o final
                 if (carousel.scrollLeft <= 10) {
                     carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
                 } else {
-                    carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    const cardWidth = carousel.querySelector('.snap-center').offsetWidth;
+                    carousel.scrollBy({ left: -(cardWidth * 0.8), behavior: 'smooth' });
                 }
             }
 
-            // Inicia o timer para passar de lado a cada 3,5 segundos
             function startAutoScroll() {
-                autoScrollTimer = setInterval(scrollNext, 3500); 
+                autoScrollTimer = setInterval(scrollNext, 4000); 
             }
 
-            // Para o timer
             function stopAutoScroll() {
                 clearInterval(autoScrollTimer);
             }
 
-            // Reseta o timer (usado quando o usuário clica nas setinhas para não conflitar)
             function resetAutoScroll() {
                 stopAutoScroll();
                 startAutoScroll();
@@ -423,14 +424,13 @@
                 resetAutoScroll();
             });
 
-            // Pausa a rolagem automática quando o mouse (ou dedo) encosta no carrossel
-            // Isso evita que o card "fuja" enquanto o usuário tenta ler ou clicar no botão
+            // Pausa a rolagem para leitura confortável ao passar o mouse ou tocar na tela
             carousel.addEventListener('mouseenter', stopAutoScroll);
             carousel.addEventListener('mouseleave', startAutoScroll);
-            carousel.addEventListener('touchstart', stopAutoScroll);
+            carousel.addEventListener('touchstart', stopAutoScroll, {passive: true});
             carousel.addEventListener('touchend', startAutoScroll);
 
-            // Inicia a rolagem automática quando a página carrega
+            // Inicia automaticamente
             startAutoScroll();
         });
     </script>
