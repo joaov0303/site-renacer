@@ -195,7 +195,7 @@
                     </button>
 
                     <!-- Lista de Cards (Scroll Horizontal) -->
-                    <div id="carouselContainer" class="flex overflow-x-auto gap-8 pb-8 px-8 md:px-0 scroll-smooth scrollbar-hide snap-x">
+                    <div id="carouselContainer" class="flex overflow-x-auto gap-8 pb-8 px-8 md:px-0 scroll-smooth scrollbar-hide snap-x snap-mandatory">
                         
                         <!-- Card 1 -->
                         <div class="min-w-[280px] md:min-w-[300px] bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] overflow-hidden snap-start text-left">
@@ -260,6 +260,8 @@
                             </div>
                         </div>
 
+                        <!-- Espaço extra para não colar no final -->
+                        <div class="shrink-0 w-4 sm:w-8"></div>
                     </div>
                     
                     <!-- Botão Direito (Glass) -->
@@ -310,9 +312,7 @@
 
     <!-- Scripts unificados -->
     <script>
-        // ----------------------------------------
         // Lógica do Menu Mobile
-        // ----------------------------------------
         const btnMenu = document.getElementById('btn-menu');
         const menuMobile = document.getElementById('menu-mobile');
 
@@ -320,9 +320,7 @@
             menuMobile.classList.toggle('hidden');
         });
 
-        // ----------------------------------------
         // Lógica do Theme Toggle (Claro / Escuro)
-        // ----------------------------------------
         var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
         var themeToggleBtn = document.getElementById('theme-toggle');
@@ -357,15 +355,80 @@
         });
 
         // ----------------------------------------
-        // Lógica do Carrossel de Liderança
+        // Lógica do Carrossel de Liderança com Auto-Scroll Suave
         // ----------------------------------------
-        const container = document.getElementById('carouselContainer');
-        // Define o salto de rolagem baseado no tamanho aproximado do card
-        document.getElementById('nextBtn').addEventListener('click', () => { 
-            container.scrollBy({ left: 320, behavior: 'smooth' }); 
-        });
-        document.getElementById('prevBtn').addEventListener('click', () => { 
-            container.scrollBy({ left: -320, behavior: 'smooth' }); 
+        document.addEventListener("DOMContentLoaded", function() {
+            const carousel = document.getElementById('carouselContainer');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            let autoScrollTimer;
+
+            // Função para avançar suavemente
+            function scrollNext() {
+                const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+                const cardElement = carousel.querySelector('.snap-start');
+                if(!cardElement) return;
+                
+                const cardWidth = cardElement.offsetWidth;
+                
+                // Se a distância para o final for menor que a metade de um cartão (celular e desktop friendly)
+                // volta para o início.
+                if (Math.ceil(carousel.scrollLeft) >= maxScrollLeft - (cardWidth / 2)) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    // Rola 80% do tamanho da imagem, deixando o CSS (snap-mandatory) centralizar automaticamente
+                    carousel.scrollBy({ left: cardWidth * 0.8, behavior: 'smooth' });
+                }
+            }
+
+            // Função para voltar suavemente
+            function scrollPrev() {
+                const cardElement = carousel.querySelector('.snap-start');
+                if(!cardElement) return;
+                
+                const cardWidth = cardElement.offsetWidth;
+
+                // Se está perto do começo, volta para o final
+                if (carousel.scrollLeft <= 10) {
+                    carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: -(cardWidth * 0.8), behavior: 'smooth' });
+                }
+            }
+
+            function startAutoScroll() {
+                autoScrollTimer = setInterval(scrollNext, 4000); 
+            }
+
+            function stopAutoScroll() {
+                clearInterval(autoScrollTimer);
+            }
+
+            function resetAutoScroll() {
+                stopAutoScroll();
+                startAutoScroll();
+            }
+
+            // Eventos dos botões manuais
+            nextBtn.addEventListener('click', () => {
+                scrollNext();
+                resetAutoScroll();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                scrollPrev();
+                resetAutoScroll();
+            });
+
+            // Pausa a rolagem para leitura confortável ao passar o mouse ou tocar na tela
+            carousel.addEventListener('mouseenter', stopAutoScroll);
+            carousel.addEventListener('mouseleave', startAutoScroll);
+            carousel.addEventListener('touchstart', stopAutoScroll, {passive: true});
+            carousel.addEventListener('touchend', startAutoScroll);
+
+            // Inicia automaticamente
+            startAutoScroll();
         });
     </script>
 </body>
