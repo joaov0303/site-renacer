@@ -364,8 +364,7 @@
                 }
             }
         });
-
-  // ----------------------------------------
+// ----------------------------------------
         // Lógica do Carrossel de Grupos com Auto-Scroll Suave
         // ----------------------------------------
         document.addEventListener("DOMContentLoaded", function() {
@@ -378,24 +377,26 @@
             // Função para avançar suavemente
             function scrollNext() {
                 const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+                const cardWidth = carousel.querySelector('.snap-center').offsetWidth;
                 
-                // Se chegou no final (com margem de 10px), volta para o começo
-                if (Math.ceil(carousel.scrollLeft) >= maxScrollLeft - 10) {
+                // O AJUSTE PARA CELULAR: Aumentamos a margem de leitura do final.
+                // Se a distância para o final for menor que a metade do cartão, 
+                // ele entende que chegou no último e volta para o início.
+                if (Math.ceil(carousel.scrollLeft) >= maxScrollLeft - (cardWidth / 2)) {
                     carousel.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
-                    const cardWidth = carousel.querySelector('.snap-center').offsetWidth;
-                    // O SEGREDO: Rolamos apenas 80% da largura. 
-                    // O CSS "snap-mandatory" faz o resto e centraliza perfeitamente sem pular.
+                    // Rola 80% da largura do cartão, deixando o CSS centralizar o resto suavemente
                     carousel.scrollBy({ left: cardWidth * 0.8, behavior: 'smooth' });
                 }
             }
 
             // Função para voltar suavemente
             function scrollPrev() {
+                const cardWidth = carousel.querySelector('.snap-center').offsetWidth;
+
                 if (carousel.scrollLeft <= 10) {
                     carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
                 } else {
-                    const cardWidth = carousel.querySelector('.snap-center').offsetWidth;
                     carousel.scrollBy({ left: -(cardWidth * 0.8), behavior: 'smooth' });
                 }
             }
