@@ -363,7 +363,7 @@
         });
 
         // ----------------------------------------
-        // Lógica do Carrossel de Grupos
+        // Lógica do Carrossel de Grupos com Auto-Scroll
         // ----------------------------------------
         document.addEventListener("DOMContentLoaded", function() {
             const carousel = document.getElementById('carousel-container');
@@ -371,16 +371,67 @@
             const nextBtn = document.getElementById('nextBtn');
 
             // Define a quantidade de pixels a rolar por clique. 
-            // 550 é a largura de cada card no desktop, ajustado para mais as margens (gap).
             const scrollAmount = 574; 
+            let autoScrollTimer;
 
+            // Função para avançar (usada no botão e no automático)
+            function scrollNext() {
+                const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+                
+                // Se chegou no final (com margem de 10px), volta suavemente para o começo
+                if (carousel.scrollLeft >= maxScrollLeft - 10) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            }
+
+            // Função para voltar (usada apenas no botão manual)
+            function scrollPrev() {
+                // Se está no começo, vai para o final
+                if (carousel.scrollLeft <= 10) {
+                    carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
+            }
+
+            // Inicia o timer para passar de lado a cada 3,5 segundos
+            function startAutoScroll() {
+                autoScrollTimer = setInterval(scrollNext, 3500); 
+            }
+
+            // Para o timer
+            function stopAutoScroll() {
+                clearInterval(autoScrollTimer);
+            }
+
+            // Reseta o timer (usado quando o usuário clica nas setinhas para não conflitar)
+            function resetAutoScroll() {
+                stopAutoScroll();
+                startAutoScroll();
+            }
+
+            // Eventos dos botões manuais
             nextBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                scrollNext();
+                resetAutoScroll();
             });
 
             prevBtn.addEventListener('click', () => {
-                carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                scrollPrev();
+                resetAutoScroll();
             });
+
+            // Pausa a rolagem automática quando o mouse (ou dedo) encosta no carrossel
+            // Isso evita que o card "fuja" enquanto o usuário tenta ler ou clicar no botão
+            carousel.addEventListener('mouseenter', stopAutoScroll);
+            carousel.addEventListener('mouseleave', startAutoScroll);
+            carousel.addEventListener('touchstart', stopAutoScroll);
+            carousel.addEventListener('touchend', startAutoScroll);
+
+            // Inicia a rolagem automática quando a página carrega
+            startAutoScroll();
         });
     </script>
 </body>
